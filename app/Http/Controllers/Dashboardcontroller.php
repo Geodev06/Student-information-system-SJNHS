@@ -21,22 +21,39 @@ class Dashboardcontroller extends Controller
 
     public function index()
     {
-        $n_students = Studentinfo::count();
-        $n_students_acads = Record::count();
+        if (Auth::user()->role === 0) {
+            $n_students = Studentinfo::count();
+            $n_students_acads = Record::count();
 
-        $release = Release::all()->values()->reverse()->take(5);
+            $release = Release::all()->values()->reverse()->take(5);
 
-        $data = [
-            'student' => $n_students,
-            'acads' => $n_students_acads,
-            'releases' => $release
-        ];
-        return view('partials.dashboard_content', compact('data'));
+            $data = [
+                'student' => $n_students,
+                'acads' => $n_students_acads,
+                'releases' => $release
+            ];
+            return view('partials.dashboard_content', compact('data'));
+        }
+
+        if (Auth::user()->role === 1) {
+
+            return view('user-teacher.index');
+        }
     }
 
     public function dataManagement()
     {
         return view('partials.data_management');
+    }
+
+    public function manageUser()
+    {
+        return view('partials.manage_user');
+    }
+
+    public function reports()
+    {
+        return view('partials.reports');
     }
 
     public function subjectManage()

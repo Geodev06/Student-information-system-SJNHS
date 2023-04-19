@@ -71,6 +71,8 @@
       </a>
       <hr>
       <ul class="nav nav-pills flex-column mb-auto">
+
+        @if(Auth::user()->role === 0)
         <li class="nav-item">
           <a href="{{ route('dashboard') }}" class="nav-link {{ request()->path() === 'dashboard' ? 'active' : 'link-dark' }}" aria-current="page">
             <span class="bx bx-home"></span>
@@ -91,14 +93,43 @@
             Release
           </a>
         </li>
+        <li>
+          <a href="{{ route('manage.user') }}" class="nav-link {{ request()->path() === 'manage-user' ? 'active' : 'link-dark' }}">
+            <span class="bx bx-user"></span>
+            Users
+          </a>
+        </li>
+        <li>
+          <a href="{{ route('report') }}" class="nav-link {{ request()->path() === 'reports' ? 'active' : 'link-dark' }}">
+            <span class="bx bx-receipt"></span>
+            Reports
+          </a>
+        </li>
+        @endif
 
+
+        @if(Auth::user()->role === 1)
+        <li class="nav-item">
+          <a href="{{ route('dashboard') }}" class="nav-link {{ request()->path() === 'dashboard' ? 'active' : 'link-dark' }}" aria-current="page">
+            <span class="bx bx-home"></span>
+            Home
+          </a>
+        </li>
+        @endif
       </ul>
       <hr>
       <div class="dropdown">
         <a href="#" class="d-flex align-items-center link-dark text-decoration-none dropdown-toggle" data-bs-toggle="dropdown" aria-expanded="false">
           <!-- <img src="https://github.com/mdo.png" alt="" width="32" height="32" class="rounded-circle me-2"> -->
           <div class="d-flex flex-column">
+            @if(Auth::user()->role === 0)
             <strong style="margin: 0;">Administrator</strong>
+            @endif
+
+            @if(Auth::user()->role === 1)
+            <strong style="margin: 0;">Teacher</strong>
+            @endif
+
             <span style="margin: 0; font-size: 10px" class="text-uppercase">{{ Auth::user()->firstname .' '. Auth::user()->lastname }}</span>
           </div>
         </a>

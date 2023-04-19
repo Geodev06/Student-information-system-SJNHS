@@ -27,6 +27,12 @@ Route::controller(Usercontroller::class)->group(function () {
     Route::post('register/submit', 'userStore')->name('user.store');
     Route::get('login', 'showLogin')->name('login');
     Route::post('user/auth', 'authenticateUser')->name('user.auth');
+
+    Route::post('user/add', 'addUser')->name('user.add');
+    Route::post('user/update/{id}', 'editUser')->name('user.update');
+    Route::get('show-users', 'showUsers')->name('users.show');
+    Route::get('user/destroy/{id}', 'destroy')->name('user.destroy');
+    Route::get('user/default/password/{id}', 'default')->name('user.default.password');
 });
 
 Route::controller(Dashboardcontroller::class)->group(function () {
@@ -38,6 +44,8 @@ Route::controller(Dashboardcontroller::class)->group(function () {
     Route::post('settings/basicinfo/update', 'basicInfo')->name('basicinfo.update');
     Route::post('settings/passwordInfo/update', 'passwordInfo')->name('passwordinfo.update');
     Route::post('settings/resetInfo/update', 'resetInfo')->name('resetinfo.update');
+    Route::get('manage-user', 'manageUser')->name('manage.user');
+    Route::get('reports', 'reports')->name('report');
 });
 
 Route::controller(ReleaseController::class)

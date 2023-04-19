@@ -18,11 +18,13 @@ class StudentinfoController extends Controller
 
     public function __construct()
     {
-        $this->middleware('auth');
+        $this->middleware(['auth', 'isAdmin']);
     }
 
     public function index(Request $request)
     {
+
+
         if ($request->ajax()) {
             $data = Studentinfo::select('lrn', 'firstname', 'lastname', 'middlename', 'sex')
                 ->orderBy('created_at', 'desc');

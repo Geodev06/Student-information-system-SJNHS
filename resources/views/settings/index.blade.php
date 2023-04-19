@@ -81,6 +81,7 @@
         </div>
     </div>
 
+    @if(Auth::user()->role === 0)
     <div class="card mb-3">
         <div class="card-body">
             <p class="fw-bold">Reset Password</p>
@@ -129,7 +130,9 @@
             </form>
         </div>
     </div>
+    @endif
 
+    @if(Auth::user()->role === 0)
     <div class="card mb-3">
         <div class="card-body">
             <p class="fw-bold">Others</p>
@@ -153,6 +156,7 @@
             </form>
         </div>
     </div>
+    @endif
 </div>
 
 <x-message-alert />

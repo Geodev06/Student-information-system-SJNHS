@@ -13,6 +13,11 @@ use Validator;
 
 class ResetPasswordController extends Controller
 {
+
+    function __construct()
+    {
+        $this->middleware(['auth', 'isAdmin']);
+    }
     public function check_email(Request $request)
     {
         $user = User::where('email', $request->email)->get();
