@@ -87,6 +87,16 @@
             Data management
           </a>
         </li>
+
+        <li>
+          <a href="{{ route('class.management') }}" class="nav-link {{ request()->path() === 'class-management' 
+            || Request::is('class-management/*') ? 'active' : 'link-dark'
+          }}">
+            <span class="bx bx-category"></span>
+            Class management
+          </a>
+        </li>
+
         <li>
           <a href="{{ route('release') }}" class="nav-link {{ request()->path() === 'release' ? 'active' : 'link-dark' }}">
             <span class="bx bx-printer"></span>

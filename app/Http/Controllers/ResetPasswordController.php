@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Otherinformation;
 use App\Models\User;
 use Carbon\Carbon;
 use Illuminate\Http\Request;
@@ -113,5 +114,52 @@ class ResetPasswordController extends Controller
         ]);
 
         return response()->json(['status' => 200, 'msg' => 'Your changes has been successfully changed!']);
+    }
+
+    public function otherInformation(Request $request)
+    {
+        $otherinformation = Otherinformation::get();
+
+        $validator = Validator::make(
+            $request->all(),
+            [
+                'school_name' => 'required',
+                'school_id' => 'required',
+                'school_district' => 'required',
+                'school_division' => 'required',
+                'school_region' => 'required'
+            ]
+        );
+
+        if (!$validator->passes()) {
+            return response()->json(['status' => 0, 'error' => $validator->errors()->toArray()]);
+        }
+
+        if (count($otherinformation) > 0) {
+            // update
+            Otherinformation::where('id', $otherinformation[0]->id)->update(
+                [
+                    'school_name' => $request->school_name,
+                    'school_id' => $request->school_id,
+                    'district' => $request->school_district,
+                    'division' => $request->school_division,
+                    'region' => $request->school_region
+                ]
+            );
+
+            return response()->json(['status' => 200, 'msg' => 'Your changes has been successfully changed!']);
+        } else {
+            // insert
+            Otherinformation::create(
+                [
+                    'school_name' => $request->school_name,
+                    'school_id' => $request->school_id,
+                    'district' => $request->school_district,
+                    'division' => $request->school_division,
+                    'region' => $request->school_region
+                ]
+            );
+            return response()->json(['status' => 200, 'msg' => 'Your changes has been successfully changed!']);
+        }
     }
 }

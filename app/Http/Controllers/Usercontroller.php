@@ -179,7 +179,8 @@ class Usercontroller extends Controller
         if ($request->ajax()) {
             $data = User::select('id', 'firstname', 'lastname', 'middlename', 'email')
                 ->where('role', 1)
-                ->orderBy('created_at', 'desc');
+                ->orderBy('created_at', 'desc')
+                ->get();
             return DataTables::of($data)
                 ->addColumn('firstname', function ($data) {
                     return $data->firstname;

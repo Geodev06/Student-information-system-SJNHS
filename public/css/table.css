@@ -8,6 +8,16 @@
        font-size: 13px;
    }
 
+   #table-section tbody tr td {
+       padding: 10px;
+       font-size: 13px;
+   }
+
+   #table-users tbody tr td {
+       padding: 10px;
+       font-size: 13px;
+   }
+
    table.dataTable tbody tr:hover {
        transition: all .3s;
        cursor: pointer;

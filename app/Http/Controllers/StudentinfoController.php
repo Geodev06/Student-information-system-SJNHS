@@ -23,11 +23,9 @@ class StudentinfoController extends Controller
 
     public function index(Request $request)
     {
-
-
         if ($request->ajax()) {
             $data = Studentinfo::select('lrn', 'firstname', 'lastname', 'middlename', 'sex')
-                ->orderBy('created_at', 'desc');
+                ->orderBy('created_at', 'desc')->get();
             return Datatables::of($data)
                 ->addColumn('fullname', function ($data) {
                     $fullname = $data->lastname . ', ' . $data->firstname . ' ' . $data->middlename . '.';

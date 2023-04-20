@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Otherinformation;
 use App\Models\Record;
 use App\Models\Release;
 use App\Models\Studentinfo;
@@ -73,7 +74,8 @@ class Dashboardcontroller extends Controller
     public function settings()
     {
         $user = Auth::user();
-        return view('settings.index', compact('user'));
+        $otherinformation = Otherinformation::get();
+        return view('settings.index', compact('user', 'otherinformation'));
     }
 
     public function basicInfo(Request $request)

@@ -12,8 +12,6 @@ function showErrorAlert(msg) {
 
 function saveChanges(data, form, route) {
 
-    console.log(form)
-
     $.ajax({
         url: route,
         type: 'post',
@@ -56,6 +54,7 @@ function saveChanges(data, form, route) {
             }
         },
         error: (err) => {
+            $(`${form} :input`).prop("disabled", false)
             showErrorAlert('Connection to server error')
         }
     })

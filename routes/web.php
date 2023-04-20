@@ -4,6 +4,7 @@ use App\Http\Controllers\Dashboardcontroller;
 use App\Http\Controllers\RecordController;
 use App\Http\Controllers\ReleaseController;
 use App\Http\Controllers\ResetPasswordController;
+use App\Http\Controllers\SectionController;
 use App\Http\Controllers\StudentinfoController;
 use App\Http\Controllers\SubjectController;
 use App\Http\Controllers\Usercontroller;
@@ -92,5 +93,17 @@ Route::controller(ResetPasswordController::class)
         Route::post('verify/submit', 'verify_submit')->name('submit.verify');
         Route::get('showForm/{token}', 'EditPassword')->name('password.reset.show');
         Route::post('saved/password', 'saved_new_password')->name('password.saved');
-        Route::post('save/other', 'other')->name('other.save');
+        Route::post('save/other', 'other')->name('other.save'); //  admin name
+        Route::post('save/other-information', 'otherInformation')->name('otherinformation.save'); // school information
+    });
+
+Route::controller(SectionController::class)
+    ->prefix('class-management')
+    ->group(function () {
+
+        Route::get('/', 'index')->name('class.management');
+        Route::get('/class/get', 'show')->name('class.get');
+        Route::post('/class/store', 'store')->name('class.store');
+        Route::post('/class/update/{id}', 'update')->name('class.update');
+        Route::get('/class/destroy/{id}', 'destroy')->name('class.destroy');
     });

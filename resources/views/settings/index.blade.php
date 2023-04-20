@@ -157,6 +157,64 @@
         </div>
     </div>
     @endif
+
+    @if(Auth::user()->role === 0)
+    <div class="card mb-3">
+        <div class="card-body">
+            <p class="fw-bold">School information</p>
+
+            <form id="formOtherinformation">
+                <div class="row">
+                    @csrf
+                    <p class="text-danger fw-bold m-0" style="font-size: 12px;">Without this information you can't create class</p>
+                    <div class="col-lg-4">
+                        <div class="form-floating mb-3">
+                            <input type="text" class="form-control" autocomplete="off" placeholder="x" name="school_name" value="{{ $otherinformation[0]->school_name ?? '' }}" />
+                            <label for="">School name</label>
+                            <span class="error_school_name text-danger error-text"></span>
+                        </div>
+                    </div>
+
+                    <div class="col-lg-4">
+                        <div class="form-floating mb-3">
+                            <input type="text" class="form-control" autocomplete="off" placeholder="x" name="school_id" value="{{ $otherinformation[0]->school_id ?? '' }}" />
+                            <label for="">School id</label>
+                            <span class="error_school_id text-danger error-text"></span>
+                        </div>
+                    </div>
+
+                    <div class="col-lg-4">
+                        <div class="form-floating mb-3">
+                            <input type="text" class="form-control" autocomplete="off" placeholder="x" name="school_district" value="{{ $otherinformation[0]->district ?? '' }}" />
+                            <label for="">School district</label>
+                            <span class="error_school_district text-danger error-text"></span>
+                        </div>
+                    </div>
+
+                    <div class="col-lg-4">
+                        <div class="form-floating mb-3">
+                            <input type="text" class="form-control" autocomplete="off" placeholder="x" name="school_division" value="{{ $otherinformation[0]->division ?? '' }}" />
+                            <label for="">School division</label>
+                            <span class="error_school_division text-danger error-text"></span>
+                        </div>
+                    </div>
+
+                    <div class="col-lg-4">
+                        <div class="form-floating mb-3">
+                            <input type="text" class="form-control" autocomplete="off" placeholder="x" name="school_region" value="{{ $otherinformation[0]->region ?? '' }}" />
+                            <label for="">School region</label>
+                            <span class="error_school_region text-danger error-text"></span>
+                        </div>
+                    </div>
+
+                    <div class="col-lg-12">
+                        <button type="submit" class="btn btn-primary btn-sm float-end"><i class="bx bx-save"></i>Save</button>
+                    </div>
+                </div>
+            </form>
+        </div>
+    </div>
+    @endif
 </div>
 
 <x-message-alert />
@@ -186,6 +244,11 @@
     $('#formOther').on('submit', function(e) {
         e.preventDefault()
         saveChanges($(this).serialize(), '#formOther', "{{ route('other.save') }}")
+    })
+
+    $('#formOtherinformation').on('submit', function(e) {
+        e.preventDefault()
+        saveChanges($(this).serialize(), '#formOtherinformation', "{{ route('otherinformation.save') }}")
     })
 </script>
 @endsection

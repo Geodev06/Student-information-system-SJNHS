@@ -13,13 +13,16 @@ return new class extends Migration
      */
     public function up()
     {
-        Schema::create('sets', function (Blueprint $table) {
+        Schema::create('sections', function (Blueprint $table) {
             $table->id();
-            $table->string('section_name');
-            $table->string('adviser_id');
-            $table->string('adviser_name');
+            $table->string('teacher_id');
+            $table->string('teacher_name');
+            $table->string('section');
             $table->string('school_year');
-            $table->string('subjects');
+            $table->string('grade_level');
+            $table->text('subjects')->nullable(true);
+            $table->text('students')->nullable(true);
+            $table->boolean('editable')->default(true);
             $table->timestamps();
         });
     }
@@ -31,6 +34,6 @@ return new class extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('sets');
+        Schema::dropIfExists('sections');
     }
 };
