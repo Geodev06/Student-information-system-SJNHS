@@ -30,7 +30,6 @@
             <table class="display nowrap w-100 table-striped " id="table-section">
                 <thead>
                     <tr>
-                        <th>Id</th>
                         <th>Section</th>
                         <th>Adviser</th>
                         <th>Grade level</th>
@@ -87,12 +86,12 @@
                             <div class="form-floating mb-3">
                                 <select name="grade_level" id="select-grade-level" class="form-control">
                                     <option value="">Choose one</option>
-                                    <option value="Grade 7">Grade 7</option>
-                                    <option value="Grade 8">Grade 8</option>
-                                    <option value="Grade 9">Grade 9</option>
-                                    <option value="Grade 10">Grade 10</option>
-                                    <option value="Grade 11">Grade 11</option>
-                                    <option value="Grade 12">Grade 12</option>
+                                    <option value="7">Grade 7</option>
+                                    <option value="8">Grade 8</option>
+                                    <option value="9">Grade 9</option>
+                                    <option value="10">Grade 10</option>
+                                    <option value="11">Grade 11</option>
+                                    <option value="12">Grade 12</option>
                                 </select>
                                 <label for="">Grade level</label>
                             </div>
@@ -162,12 +161,12 @@
                             <div class="form-floating mb-3">
                                 <select name="e_grade_level" id="select-grade-level" class="form-control">
                                     <option value="" id="e-grade-default">Choose one</option>
-                                    <option value="Grade 7">Grade 7</option>
-                                    <option value="Grade 8">Grade 8</option>
-                                    <option value="Grade 9">Grade 9</option>
-                                    <option value="Grade 10">Grade 10</option>
-                                    <option value="Grade 11">Grade 11</option>
-                                    <option value="Grade 12">Grade 12</option>
+                                    <option value="7">Grade 7</option>
+                                    <option value="8">Grade 8</option>
+                                    <option value="9">Grade 9</option>
+                                    <option value="10">Grade 10</option>
+                                    <option value="11">Grade 11</option>
+                                    <option value="12">Grade 12</option>
                                 </select>
                                 <label for="">Grade level</label>
                             </div>
@@ -222,11 +221,127 @@
     </div>
 </div>
 
+<!-- add subjects modal -->
+<div class="modal fade" id="addSubjectModal" data-bs-backdrop="static" tabindex="-1" aria-labelledby="x" aria-hidden="true">
+    <div class="modal-dialog modal-lg">
+        <div class="modal-content">
+            <div class="modal-body p-5">
+                <h4 class="">Add subject</h4>
+                <div class="mb-2">
+                    <button id="useDefaultSubject" class="btn btn-info text-white btn-sm">use Default subjects</button>
+                    <button id="deleteAllSubject" class="btn btn-danger text-white btn-sm">Delete all</button>
+                </div>
+                <form id="subjForm">
+                    @csrf
+                    <div class="row">
+                        <input type="hidden" name="section_id" id="subj-section-id">
+                        <div class="col-lg-12 mb-2">
+                            <div class="form-floating mb-3">
+                                <select name="subject_code" class="form-control">
+                                    <option value="">Choose one</option>
+                                    @foreach($subjects as $subject)
+                                    <option value="{{$subject->code}}" class="text-uppercase">{{ $subject->code .'-'.$subject->description }}</option>
+                                    @endforeach
+                                </select>
+                                <label for="">Subject</label>
+                                <span class="error_subject_code text-danger error-text"></span>
+                            </div>
+
+                        </div>
+
+                        <div class="col-lg-12 mb-3">
+                            <table class="display nowrap w-100 table-striped" id="table-section-subjects">
+                                <thead>
+                                    <tr>
+                                        <th>Code</th>
+                                        <th>Description</th>
+                                        <th>Action</th>
+                                    </tr>
+                                </thead>
+                                <tbody></tbody>
+                            </table>
+                        </div>
+                    </div>
+                    <div class="d-flex float-end">
+                        <button type="submit" class="btn btn-primary btn-sm m-2"> <i class="bx bx-save"></i> Add</button>
+                        <button type="button" class="btn btn-default btn-sm m-2" onclick="$('#addSubjectModal').modal('hide')">Close</button>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
+<!-- end modal -->
+
+<!-- add subjects modal -->
+<div class="modal fade" id="addStudentModal" data-bs-backdrop="static" tabindex="-1" aria-labelledby="x" aria-hidden="true">
+    <div class="modal-dialog modal-lg">
+        <div class="modal-content">
+            <div class="modal-body p-5">
+                <h4 class="">Add Students</h4>
+                <div class="mb-2">
+                    <button id="deleteAllStudent" class="btn btn-danger text-white btn-sm">Delete all</button>
+                </div>
+                <form id="studentForm">
+                    @csrf
+                    <div class="row">
+                        <input type="hidden" name="lrn" id="student-lrn">
+                        <input type="hidden" name="section_id" id="student-section-id">
+
+                        <div class="col-lg-12 mb-2">
+                            <div class="form-floating mb-3">
+                                <select name="student_lrn" class="form-control" id="select-student">
+                                    <option value="">Choose one</option>
+                                    @foreach($students as $student)
+                                    <option value="{{$student->lrn}}" class="text-uppercase">{{$student->lrn .'-'. $student->lastname .', '.$student->firstname  }} {{ $student[0]->middlename ?? '' }}</option>
+                                    @endforeach
+                                </select>
+                                <label for="">Student LRN - Name</label>
+                                <span class="error_lrn text-danger error-text"></span>
+                            </div>
+
+                        </div>
+
+                        <div class="col-lg-12 mb-3">
+                            <table class="display nowrap w-100 table-striped" id="table-section-students">
+                                <thead>
+                                    <tr>
+                                        <th>LRN</th>
+                                        <th>Lastname</th>
+                                        <th>Action</th>
+                                    </tr>
+                                </thead>
+                                <tbody></tbody>
+                            </table>
+                        </div>
+                    </div>
+                    <div class="d-flex float-end">
+                        <button type="submit" class="btn btn-primary btn-sm m-2"> <i class="bx bx-save"></i> Add</button>
+                        <button type="button" class="btn btn-default btn-sm m-2" onclick="$('#addStudentModal').modal('hide')">Close</button>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
+<!-- end modal -->
 <x-message-alert />
 
 <script src="{{ asset('./js/partials/settings.js')}}"></script>
 
 <script>
+    function showAlert(msg) {
+        $('#msgAlert').modal('show')
+        $('#msgAlert-msg').text(msg)
+        $('#msgAlert-btn').css('display', 'inherit')
+    }
+
+    function showErrorAlert(msg) {
+        $('#msgAlert').modal('show')
+        $('#msgAlert-msg').text(msg)
+        $('#msgAlert-icon').addClass('bx bx-error-circle text-danger')
+    }
+
     function loadData() {
         var table = $('#table-section').DataTable({
             destroy: true,
@@ -235,9 +350,6 @@
             filter: true,
             ajax: "{{ route('class.get') }}",
             columns: [{
-                    data: 'id',
-                    name: 'id'
-                }, {
                     data: 'section',
                     name: 'section'
                 },
@@ -268,16 +380,85 @@
 
     loadData()
 
-    function showAlert(msg) {
-        $('#msgAlert').modal('show')
-        $('#msgAlert-msg').text(msg)
-        $('#msgAlert-btn').css('display', 'inherit')
+    var table = $('#table-section-subjects').DataTable({
+
+        'lengthMenu': [
+            [5, 10, 15, 20, 50, -1],
+            [5, 10, 15, 20, 50, 'All'],
+        ]
+    })
+
+    var table_students = $('#table-section-students').DataTable({
+
+        'lengthMenu': [
+            [5, 10, 15, 20, 50, -1],
+            [5, 10, 15, 20, 50, 'All'],
+        ]
+    })
+
+    function loadSectionSubject(section_id) {
+
+        let route = "{{ route('class.subject.get',':id') }}"
+        $.ajax({
+            url: route.replace(':id', section_id),
+            type: 'get',
+            dataType: 'json',
+            beforeSend: function() {
+                $('.btn-remove-subject').css('display', 'none')
+            },
+            success: function(data) {
+                $('.btn-remove-subject').css('display', 'block')
+                if (data.status === 200) {
+                    table.clear().draw()
+                    for (let i = 0; i < data.subject.length; i++) {
+                        var btn = '<span data-id="' + data.subject[i].id + '" class="btn-remove-subject btn btn-sm btn-danger">remove</span>'
+                        table.row.add([data.subject[i].subject_code, data.subject[i].subject, btn]).draw()
+                    }
+                }
+
+                if (table.row().length > 0) {
+                    $('#deleteAllSubject').removeAttr('disabled')
+                } else {
+                    $('#deleteAllSubject').attr('disabled', 'disabled')
+                }
+            },
+            error: function() {
+                showErrorAlert('Connection to server error.')
+            }
+        })
     }
 
-    function showErrorAlert(msg) {
-        $('#msgAlert').modal('show')
-        $('#msgAlert-msg').text(msg)
-        $('#msgAlert-icon').addClass('bx bx-error-circle text-danger')
+    function loadSectionStudent(section_id) {
+
+        let route = "{{ route('class.student.get',':id') }}"
+        $.ajax({
+            url: route.replace(':id', section_id),
+            type: 'get',
+            dataType: 'json',
+            beforeSend: function() {
+                $('.btn-remove-student').css('display', 'none')
+            },
+            success: function(data) {
+                $('.btn-remove-student').css('display', 'block')
+                if (data.status === 200) {
+                    table_students.clear().draw()
+                    for (let i = 0; i < data.student.length; i++) {
+
+                        var btn = '<span data-id="' + data.student[i].id + '" class="btn-remove-student btn btn-sm btn-danger">remove</span>'
+                        table_students.row.add([data.student[i].lrn, data.student[i].fullname, btn]).draw()
+                    }
+                }
+
+                if (table_students.row().length > 0) {
+                    $('#deleteAllStudent').removeAttr('disabled')
+                } else {
+                    $('#deleteAllStudent').attr('disabled', 'disabled')
+                }
+            },
+            error: function() {
+                showErrorAlert('Connection to server error.')
+            }
+        })
     }
 
     for (let i = 1900; i < 2050; i++) {
@@ -291,6 +472,15 @@
         })
         .on('select.editable-select', function(e, li) {
             $('#teacher-id').val(li.attr('value'))
+        })
+
+
+    $('#select-student')
+        .editableSelect({
+            effects: 'slide'
+        })
+        .on('select.editable-select', function(e, li) {
+            $('#student-lrn').val(li.attr('value'))
         })
 
 
@@ -362,6 +552,91 @@
         $('#dialog').modal('show')
     })
 
+    $('#table-section').on('click', 'td .btn-add-subject', function() {
+        $('#subj-section-id').val($(this)[0].dataset.id)
+        loadSectionSubject($(this)[0].dataset.id)
+
+        $('.error_subject_code').text('');
+
+        $("select[name=subject_code]").removeClass('is-invalid')
+        $('#addSubjectModal').modal('show')
+    })
+
+    $('#table-section').on('click', 'td .btn-add-student', function() {
+        $('#student-section-id').val($(this)[0].dataset.id)
+        loadSectionStudent($(this)[0].dataset.id)
+
+        $('.error_lrn').text('');
+        $("#select-student").removeClass('is-invalid')
+        $('#addStudentModal').modal('show')
+    })
+
+    $('#table-section-subjects').on('click', 'td .btn-remove-subject', function(e) {
+
+        let route = "{{ route('class.subject.destroy',':id') }}"
+        e.preventDefault()
+
+        $.ajax({
+            url: route.replace(':id', $(this)[0].dataset.id),
+            type: 'get',
+            dataType: 'json',
+            beforeSend: function() {},
+            success: function(data) {
+                loadSectionSubject($('#subj-section-id').val())
+            },
+            error: function() {
+                showErrorAlert('Connection to server error.')
+            }
+        })
+    })
+
+    $('#subjForm').on('submit', function(e) {
+        e.preventDefault()
+
+        $.ajax({
+            url: "{{ route('class.subject.store') }}",
+            type: 'post',
+            dataType: 'json',
+            data: $(this).serialize(),
+            beforeSend: () => {
+                $("#subjForm :input").each(function() {
+                    $(this).removeClass('is-invalid')
+                })
+                $("select[name=subject_code]").removeClass('is-invalid')
+                $('.error-text').text('')
+                $("#subjForm :input").prop("disabled", true)
+            },
+            success: (data) => {
+                $("#subjForm :input").prop("disabled", false)
+
+                if (data.status === 0) {
+                    $.each(data.error, function(prefix, val) {
+
+                        $('.error_' + prefix).text(val[0]);
+
+                        $("select[name=" + prefix + "]").addClass('is-invalid')
+                    })
+                }
+
+                if (data.status === 200) {
+                    showAlert(data.msg)
+                    $('#subjForm')[0].reset()
+                    loadSectionSubject($('#subj-section-id').val())
+                }
+
+                if (data.status === 500) {
+                    $('.error_subject_code').text(data.msg);
+
+                    $("select[name=subject_code]").addClass('is-invalid')
+                }
+            },
+            error: (err) => {
+                $("#subjForm :input").prop("disabled", false)
+                showErrorAlert('Connection to server error')
+            }
+        })
+    })
+
     $('#editclassForm').on('submit', function(e) {
         e.preventDefault()
 
@@ -429,6 +704,144 @@
             error: (err) => {
                 $("#classForm :input").prop("disabled", false)
                 showErrorAlert('Connection to server error')
+            }
+        })
+    })
+
+    $('#useDefaultSubject').on('click', function(e) {
+
+        let route = "{{ route('class.usedefault',':id') }}"
+        e.preventDefault()
+        $.ajax({
+            url: route.replace(':id', $('#subj-section-id').val()),
+            type: 'get',
+            dataType: 'json',
+            beforeSend: function() {
+                $('#useDefaultSubject').attr('disabled', 'disabled')
+            },
+            success: function(data) {
+                $('#useDefaultSubject').removeAttr('disabled')
+                if (data.status === 200) {
+                    showAlert(data.msg)
+                    loadSectionSubject($('#subj-section-id').val())
+                }
+            },
+            error: function() {
+                $('#useDefaultSubject').removeAttr('disabled')
+                showErrorAlert('Connection to server error.')
+            }
+        })
+    })
+
+    $('#deleteAllSubject').on('click', function() {
+        let route = "{{ route('class.subject.destroy.all',':id') }}"
+        $.ajax({
+            url: route.replace(':id', $('#subj-section-id').val()),
+            type: 'get',
+            dataType: 'json',
+            beforeSend: function() {
+                $('#deleteAllSubject').attr('disabled', 'disabled')
+            },
+            success: function(data) {
+                $('#deleteAllSubject').removeAttr('disabled')
+                if (data.status === 200) {
+                    showAlert(data.msg)
+                    loadSectionSubject($('#subj-section-id').val())
+                }
+            },
+            error: function() {
+                $('#deleteAllSubject').removeAttr('disabled')
+                showErrorAlert('Connection to server error.')
+            }
+        })
+    })
+
+    $('#studentForm').on('submit', function(e) {
+        e.preventDefault()
+
+        e.preventDefault()
+
+        $.ajax({
+            url: "{{ route('class.student.store') }}",
+            type: 'post',
+            dataType: 'json',
+            data: $(this).serialize(),
+            beforeSend: () => {
+                $("#studentForm :input").each(function() {
+                    $(this).removeClass('is-invalid')
+                })
+                $('.error-text').text('')
+                $("#studentForm :input").prop("disabled", true)
+            },
+            success: (data) => {
+                $("#studentForm :input").prop("disabled", false)
+
+                if (data.status === 0) {
+                    $.each(data.error, function(prefix, val) {
+
+                        $('.error_' + prefix).text(val[0]);
+
+                        $("#select-student").addClass('is-invalid')
+                    })
+                }
+
+                if (data.status === 200) {
+                    showAlert(data.msg)
+                    $('#studentForm')[0].reset()
+                    loadSectionStudent($('#student-section-id').val())
+                    $('#student-lrn').val('')
+                }
+
+                if (data.status === 500) {
+                    $('.error_lrn').text(data.msg);
+                    $("#select-student").addClass('is-invalid')
+                }
+            },
+            error: (err) => {
+                $("#studentForm :input").prop("disabled", false)
+                showErrorAlert('Connection to server error')
+            }
+        })
+    })
+
+    $('#table-section-students').on('click', 'td .btn-remove-student', function(e) {
+
+        let route = "{{ route('class.student.destroy',':id') }}"
+        e.preventDefault()
+
+        $.ajax({
+            url: route.replace(':id', $(this)[0].dataset.id),
+            type: 'get',
+            dataType: 'json',
+            beforeSend: function() {},
+            success: function(data) {
+                loadSectionStudent($('#student-section-id').val())
+            },
+            error: function() {
+                showErrorAlert('Connection to server error.')
+            }
+        })
+    })
+
+    $('#deleteAllStudent').on('click', function() {
+        let route = "{{ route('class.student.destroy.all',':id') }}"
+        $.ajax({
+            url: route.replace(':id', $('#student-section-id').val()),
+            type: 'get',
+            dataType: 'json',
+            beforeSend: function() {
+                $('#deleteAllStudent').attr('disabled', 'disabled')
+            },
+            success: function(data) {
+                $('#deleteAllStudent').removeAttr('disabled')
+                if (data.status === 200) {
+                    showAlert(data.msg)
+                    loadSectionStudent($('#student-section-id').val())
+                }
+            },
+            error: function() {
+                $('#deleteAllStudent').removeAttr('disabled')
+                showErrorAlert('Connection to server error.')
             }
         })
     })

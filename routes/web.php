@@ -7,6 +7,7 @@ use App\Http\Controllers\ResetPasswordController;
 use App\Http\Controllers\SectionController;
 use App\Http\Controllers\StudentinfoController;
 use App\Http\Controllers\SubjectController;
+use App\Http\Controllers\TeacherController;
 use App\Http\Controllers\Usercontroller;
 use Illuminate\Support\Facades\Route;
 
@@ -105,5 +106,22 @@ Route::controller(SectionController::class)
         Route::get('/class/get', 'show')->name('class.get');
         Route::post('/class/store', 'store')->name('class.store');
         Route::post('/class/update/{id}', 'update')->name('class.update');
+        Route::post('/class/subject/store', 'storeSubject')->name('class.subject.store');
         Route::get('/class/destroy/{id}', 'destroy')->name('class.destroy');
+        Route::get('/class/subject/get/{id}', 'getSubjects')->name('class.subject.get');
+        Route::get('/class/subject/destroy/{id}', 'destroySubjects')->name('class.subject.destroy');
+        Route::get('/class/subject/destroy/all/{id}', 'destroySubjectsAll')->name('class.subject.destroy.all');
+
+        Route::get('/class/subject/usedefault/{id}', 'useDefaultSubjects')->name('class.usedefault');
+        Route::post('/class/student/store', 'storeStudent')->name('class.student.store');
+        Route::get('/class/student/get/{id}', 'getStudents')->name('class.student.get');
+        Route::get('/class/student/destroy/{id}', 'destroyStudents')->name('class.student.destroy');
+        Route::get('/class/student/destroy/all/{id}', 'destroyStudentAll')->name('class.student.destroy.all');
+    });
+
+Route::controller(TeacherController::class)
+    ->prefix('my-class')
+    ->group(function () {
+        Route::get('/class-info/{id}', 'index')->name('teacher.class.index');
+        Route::get('/{id}', 'show')->name('teacher.class.get');
     });

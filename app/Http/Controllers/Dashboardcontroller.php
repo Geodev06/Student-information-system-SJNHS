@@ -5,6 +5,8 @@ namespace App\Http\Controllers;
 use App\Models\Otherinformation;
 use App\Models\Record;
 use App\Models\Release;
+use App\Models\Section;
+use App\Models\SectionStudent;
 use App\Models\Studentinfo;
 use App\Models\User;
 use Illuminate\Http\Request;
@@ -37,8 +39,22 @@ class Dashboardcontroller extends Controller
         }
 
         if (Auth::user()->role === 1) {
+            $data = Section::where('teacher_id', Auth::user()->id)->get();
 
-            return view('user-teacher.index');
+            $sections = [];
+            for ($i = 0; $i < count($data); $i++) {
+                array_push(
+                    $sections,
+                    [
+                        'id' => $data[$i]->id,
+                        'section' => $data[$i]->section,
+                        'grade_level' => $data[$i]->grade_level,
+                        'school_year' => $data[$i]->school_year,
+                        'student_count' => SectionStudent::where('section_id', $data[$i]->id)->count()
+                    ]
+                );
+            }
+            return view('user-teacher.index', compact('sections'));
         }
     }
 

@@ -15,26 +15,6 @@ class Section extends Model
         'teacher_name',
         'section',
         'grade_level',
-        'school_year',
-        'subjects',
-        'students'
-
+        'school_year'
     ];
-
-
-    protected function subjects(): Attribute
-    {
-        return Attribute::make(
-            get: fn ($value) => json_decode($value, true),
-            set: fn ($value) => json_encode($value)
-        );
-    }
-
-    protected function students(): Attribute
-    {
-        return Attribute::make(
-            get: fn ($value) => json_decode($value, true),
-            set: fn ($value) => json_encode($value)
-        );
-    }
 }

@@ -13,15 +13,11 @@ return new class extends Migration
      */
     public function up()
     {
-        Schema::create('sections', function (Blueprint $table) {
+        Schema::create('section_subjects', function (Blueprint $table) {
             $table->id();
-            $table->string('teacher_id');
-            $table->string('teacher_name');
-            $table->string('section');
-            $table->string('school_year');
-            $table->string('grade_level');
-            $table->boolean('editable')->default(true);
-            $table->boolean('using_default_subjects')->default(false);
+            $table->string('section_id');
+            $table->string('subject_code');
+            $table->string('subject');
             $table->timestamps();
         });
     }
@@ -33,6 +29,6 @@ return new class extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('sections');
+        Schema::dropIfExists('section_subjects');
     }
 };
