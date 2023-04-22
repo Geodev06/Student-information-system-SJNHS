@@ -62,7 +62,7 @@
 
                         <div class="col-lg-12">
                             <div class="form-floating mb-3">
-                                <input type="text" class="form-control" autocomplete="off" placeholder="x" name="section" />
+                                <input type="text" class="form-control text-uppercase" autocomplete="off" placeholder="x" name="section" />
                                 <label for="">Section name</label>
                                 <span class="error_section text-danger error-text"></span>
                             </div>
@@ -138,7 +138,7 @@
 
                         <div class="col-lg-12">
                             <div class="form-floating mb-3">
-                                <input type="text" class="form-control" autocomplete="off" placeholder="x" name="e_section" id="e-section" />
+                                <input type="text" class="form-control text-uppercase" autocomplete="off" placeholder="x" name="e_section" id="e-section" />
                                 <label for="">Section name</label>
                                 <span class="error_e_section text-danger error-text"></span>
                             </div>

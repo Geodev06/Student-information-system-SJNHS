@@ -35,6 +35,18 @@ class RecordController extends Controller
         return response()->json($list_view, 200);
     }
 
+    public function randomString($length)
+    {
+        $characters = '1234567890QWERTYUIOPASDFGHJKLZXCVBNM';
+        $RANDOMG_STRING = '';
+
+        for ($i = 0; $i < $length; $i++) {
+            $RANDOMG_STRING .= $characters[random_int(0, strlen($characters) - 1)];
+        }
+
+        return $RANDOMG_STRING;
+    }
+
     /**
      * Store a newly created resource in storage.
      */
@@ -110,7 +122,7 @@ class RecordController extends Controller
                     'quarter_2' => $request->quarter_2[$i],
                     'quarter_3' => $request->quarter_3[$i],
                     'quarter_4' => $request->quarter_4[$i],
-                    'final' => $final_rating,
+                    'final' => number_format((float)$final_rating, 2, '.', ''),
                     'remark' => $final_rating >= 75 ? 'PASSED' : 'FAILED'
                 ]
             ]);
@@ -145,6 +157,7 @@ class RecordController extends Controller
             'region' => $request->region,
             'classified_grade' => $request->classified_grade,
             'section' => $request->section,
+            'section_id' => $this->randomString(4),
             'school_year' => $request->school_year,
             'adviser' => $request->adviser,
             'data' => $learning_areas,
@@ -262,7 +275,7 @@ class RecordController extends Controller
                     'quarter_2' => $request->quarter_2[$i],
                     'quarter_3' => $request->quarter_3[$i],
                     'quarter_4' => $request->quarter_4[$i],
-                    'final' => $final_rating,
+                    'final' => number_format((float)$final_rating, 2, '.', ''),
                     'remark' => $final_rating >= 75 ? 'PASSED' : 'FAILED'
                 ]
             ]);

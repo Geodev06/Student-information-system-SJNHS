@@ -124,4 +124,7 @@ Route::controller(TeacherController::class)
     ->group(function () {
         Route::get('/class-info/{id}', 'index')->name('teacher.class.index');
         Route::get('/{id}', 'show')->name('teacher.class.get');
+
+        Route::get('/student-data/{lrn}/{section_id}', 'showRecord')->name('student.showRecord');
+        Route::post('/student-data/store', 'store')->name('teacher.record.store');
     });

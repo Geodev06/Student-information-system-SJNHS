@@ -21,6 +21,7 @@ return new class extends Migration
             $table->string('region');
             $table->string('classified_grade');
             $table->string('section');
+            $table->string('section_id');
             $table->string('school_year');
             $table->string('adviser');
             $table->json('data')->nullable();

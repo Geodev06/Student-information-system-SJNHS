@@ -18,6 +18,7 @@ class Record extends Model
         'region',
         'classified_grade',
         'section',
+        'section_id',
         'school_year',
         'adviser',
         'data',

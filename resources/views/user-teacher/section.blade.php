@@ -10,7 +10,7 @@
 <div class="p-5">
     <div class="d-flex justify-content-between mb-3">
         <div class="d-flex flex-column">
-            <h4 class="fw-bold ">{{ $section[0]->section}}</span></h4>
+            <h4 class="fw-bold text-uppercase">{{ $section[0]->section}}</span></h4>
             <p class="m-0 text-muted" style="font-size: 12px;">Grade {{$section[0]->grade_level }}</p>
         </div>
 
@@ -28,7 +28,7 @@
                     </tr>
                 </thead>
                 <tbody>
-
+                    <tr></tr>
                 </tbody>
             </table>
         </div>
