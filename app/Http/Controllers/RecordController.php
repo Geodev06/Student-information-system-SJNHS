@@ -148,8 +148,11 @@ class RecordController extends Controller
             }
         }
 
+        $gender = Studentinfo::select('sex')->where('lrn', $request->lrn)->get();
+
         $data = [
             'lrn' => $request->lrn,
+            'sex' => $gender[0]->sex,
             'school' => $request->school,
             'school_id' => $request->school_id,
             'district' => $request->district,
@@ -301,8 +304,11 @@ class RecordController extends Controller
             }
         }
 
+        $gender = Studentinfo::select('sex')->where('lrn', $request->lrn)->get();
+
         $data = [
             'lrn' => $request->lrn,
+            'sex' => $gender[0]->sex,
             'school' => $request->school,
             'school_id' => $request->school_id,
             'district' => $request->district,

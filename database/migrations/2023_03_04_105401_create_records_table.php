@@ -14,6 +14,7 @@ return new class extends Migration
         Schema::create('records', function (Blueprint $table) {
             $table->id();
             $table->string('lrn')->reference('lrn')->on('studentinfos');
+            $table->integer('sex'); // 0 - male 1- female
             $table->string('school');
             $table->string('school_id');
             $table->string('district');

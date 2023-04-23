@@ -11,6 +11,7 @@ class Record extends Model
     use HasFactory;
     protected $fillable = [
         'lrn',
+        'sex',
         'school',
         'school_id',
         'division',

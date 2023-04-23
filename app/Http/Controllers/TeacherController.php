@@ -170,8 +170,11 @@ class TeacherController extends Controller
             }
         }
 
+        $gender = Studentinfo::select('sex')->where('lrn', $request->lrn)->get();
+
         $data = [
             'lrn' => $request->lrn,
+            'sex' => $gender[0]->sex,
             'school' => $schoolinfo[0]->school_name,
             'school_id' => $schoolinfo[0]->school_id,
             'district' => $schoolinfo[0]->district,

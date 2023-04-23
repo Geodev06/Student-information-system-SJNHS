@@ -3,6 +3,7 @@
 use App\Http\Controllers\Dashboardcontroller;
 use App\Http\Controllers\RecordController;
 use App\Http\Controllers\ReleaseController;
+use App\Http\Controllers\ReportController;
 use App\Http\Controllers\ResetPasswordController;
 use App\Http\Controllers\SectionController;
 use App\Http\Controllers\StudentinfoController;
@@ -127,4 +128,11 @@ Route::controller(TeacherController::class)
 
         Route::get('/student-data/{lrn}/{section_id}', 'showRecord')->name('student.showRecord');
         Route::post('/student-data/store', 'store')->name('teacher.record.store');
+    });
+
+Route::controller(ReportController::class)
+    ->prefix('get')
+    ->group(function () {
+
+        Route::post('/report/data', 'index')->name('report.data.get');
     });
