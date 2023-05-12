@@ -18,6 +18,7 @@ return new class extends Migration
             $table->string('section_id');
             $table->string('subject_code');
             $table->string('subject');
+            $table->integer('default')->default(0);
             $table->timestamps();
         });
     }

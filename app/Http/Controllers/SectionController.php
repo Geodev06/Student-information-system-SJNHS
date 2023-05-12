@@ -59,13 +59,55 @@ class SectionController extends Controller
         $teacher = User::where('role', 1)
             ->where('id', $request->teacher_id)->get();
 
-        Section::create([
+
+
+        $section =  Section::create([
             'section' => $request->section,
             'teacher_id' => $request->teacher_id,
             'teacher_name' => $teacher[0]->firstname . ' ' . $teacher[0]->middlename . ' ' . $teacher[0]->lastname,
             'grade_level' => $request->grade_level,
-            'school_year' => $request->school_year
+            'school_year' => $request->school_year,
+            'using_default' => $request->default
         ]);
+
+        if ($request->default == 1) {
+            $DEFAULT_SUBJECTS = [
+                'FIlipino',
+                'English',
+                'Mathematics',
+                'Science',
+                'Araling Panlipunan (AP)',
+                'Edukasyon sa Pagpapakatao (ESP)',
+                'Technology and Livelihood Education (TLE)',
+                'Music',
+                'Arts',
+                'Physical Education',
+                'Health'
+
+            ];
+
+            $subjects = [];
+            // $grade_level = Section::where('id', $id)->select('grade_level')->get();
+
+            for ($i = 0; $i < count($DEFAULT_SUBJECTS); $i++) {
+
+                array_push(
+                    $subjects,
+                    [
+                        'section_id' => $section->id,
+                        'subject_code' => $this->randomString(4),
+                        'subject' => $DEFAULT_SUBJECTS[$i],
+                        'default' => 1
+                    ]
+                );
+            }
+
+            for ($i = 0; $i < count($subjects); $i++) {
+                SectionSubject::create($subjects[$i]);
+            }
+
+            return response()->json(['status' => 200, 'msg' => 'Subjects has been set!']);
+        }
 
         return response()->json(['status' => 200, 'msg' => 'Class has been created!']);
     }
@@ -111,7 +153,7 @@ class SectionController extends Controller
     {
 
         if ($request->ajax()) {
-            $data = Section::select('id', 'section', 'teacher_name', 'teacher_id', 'grade_level', 'school_year')
+            $data = Section::select('id', 'section', 'teacher_name', 'teacher_id', 'grade_level', 'school_year', 'using_default')
                 ->orderBy('created_at', 'desc')
                 ->get();
             return DataTables::of($data)
@@ -130,6 +172,9 @@ class SectionController extends Controller
                 ->addColumn('school_year', function ($data) {
                     return $data->school_year;
                 })
+                ->addColumn('using_default', function ($data) {
+                    return $data->using_default;
+                })
                 ->addColumn('action', function ($data) {
                     $btn = '<button class="text-white btn btn-success btn-edit" data-id="' . $data->id . '"
                       data-section="' . $data->section . '"
@@ -143,12 +188,13 @@ class SectionController extends Controller
                     ><i class="bx bx-trash"></i></button>
                       <button class="text-white btn btn-info btn-add-subject" data-id="' . $data->id . '"
                      data-section="' . $data->section . '"
+                    data-usingdefault="' . $data->using_default . '"
                     ><i class="bx bx-book-add"></i></button>
                      <button class="text-white btn btn-dark btn-add-student" data-id="' . $data->id . '"
                      data-section="' . $data->section . '"
                     ><i class="bx bx-male-female"></i></button>';
                     return $btn;
-                })->rawColumns(['action', 'section', 'teacher_name', 'grade_level', 'school_year'])
+                })->rawColumns(['action', 'section', 'teacher_name', 'grade_level', 'school_year', 'using_default'])
                 ->make(true);
         }
     }
@@ -199,7 +245,8 @@ class SectionController extends Controller
 
     public function getSubjects($id)
     {
-        $data = SectionSubject::where('section_id', $id)->orderBy('id', 'desc')->get();
+        $data = SectionSubject::where('section_id', $id)
+            ->orderBy('id', 'desc')->get();
         return response()->json(['status' => 200, 'subject' => $data]);
     }
 
@@ -226,22 +273,22 @@ class SectionController extends Controller
         SectionSubject::where('section_id', $id)->delete();
 
         $DEFAULT_SUBJECTS = [
-            'FILIPINO',
-            'ENGLISH',
-            'MATHEMATICS',
-            'SCIENCE',
-            'ARALING PANLIPUNAN (AP)',
-            'EDUKASYON SA PAGPAPAKATAO (ESP)',
-            'TECHNOLOGY AND LIVELIHOOD EDUCATION (TLE)',
-            'MUSIC',
-            'ARTS',
-            'PHYSICAL EDUCATION',
-            'HEALTH'
+            'FIlipino',
+            'English',
+            'Mathematics',
+            'Science',
+            'Araling Panlipunan (AP)',
+            'Edukasyon sa Pagpapakatao (ESP)',
+            'Technology and Livelihood Education (TLE)',
+            'Music',
+            'Arts',
+            'Physical Education',
+            'Health'
 
         ];
 
         $subjects = [];
-        $grade_level = Section::where('id', $id)->select('grade_level')->get();
+        // $grade_level = Section::where('id', $id)->select('grade_level')->get();
 
         for ($i = 0; $i < count($DEFAULT_SUBJECTS); $i++) {
 
@@ -250,7 +297,7 @@ class SectionController extends Controller
                 [
                     'section_id' => $id,
                     'subject_code' => $this->randomString(4),
-                    'subject' => $DEFAULT_SUBJECTS[$i] . ' ' . $grade_level[0]->grade_level
+                    'subject' => $DEFAULT_SUBJECTS[$i]
                 ]
             );
         }

@@ -11,6 +11,7 @@ class SectionSubject extends Model
     protected $fillable = [
         'section_id',
         'subject_code',
-        'subject'
+        'subject',
+        'default'
     ];
 }

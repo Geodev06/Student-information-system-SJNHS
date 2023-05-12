@@ -21,7 +21,7 @@ return new class extends Migration
             $table->string('school_year');
             $table->string('grade_level');
             $table->boolean('editable')->default(true);
-            $table->boolean('using_default_subjects')->default(false);
+            $table->integer('using_default')->default(0);
             $table->timestamps();
         });
     }

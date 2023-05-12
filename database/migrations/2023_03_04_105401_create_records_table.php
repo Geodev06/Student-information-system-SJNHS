@@ -29,7 +29,10 @@ return new class extends Migration
             $table->string('remedial_date_from')->nullable();
             $table->string('remedial_date_to')->nullable();
             $table->json('remedials')->nullable();
-            $table->decimal('gen_ave', 12, 2);
+            $table->string('gen_ave');
+            $table->integer('default')->default(0);
+            $table->json('attendance')->nullable(true);
+            $table->json('observed_values')->nullable(true);
             $table->timestamps();
         });
     }

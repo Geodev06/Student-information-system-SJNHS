@@ -27,7 +27,6 @@
 
     .table-data {
         font-family: arial, sans-serif;
-        border-collapse: collapse;
         width: 100%;
     }
 
@@ -35,8 +34,10 @@
     th {
         border: 1px solid black;
         text-align: left;
-        padding: 8px;
-        font-size: 12px;
+        padding: 2px;
+        font-weight: bold;
+        font-size: 10px;
+        height: 16px;
     }
 
     .table-data,
@@ -150,7 +151,7 @@
                     <p class="text-uppercase">SCHOLASTIC RECORD</p>
                 </div>
                 @foreach($student[0]->student_record as $record)
-                <div class="record-header mt-2 ">
+                <div class="record-header mt-2">
                     <div class="d-flex justify-content-between">
                         <span>School: <span class="text-decoration-underline">{{ $record->school }}</span></span>
                         <span>School ID: <span class="text-decoration-underline">{{ $record->school_id }}</span></span>
@@ -165,55 +166,96 @@
                         <span>Name of Adviser/teacher: <span class="text-decoration-underline text-uppercase">{{ $record->adviser }}</span></span>
                         <span>Signature: _______________</span>
                     </div>
-                    <table class="table-data">
-                        <thead>
-                            <tr>
-                                <th>Learning Areas</th>
-                                <th colspan="4">Quarterly Rating</th>
-                                <th>FINAL RATING</th>
-                                <th>REMARKS</th>
-                            </tr>
-                        </thead>
-                        @foreach($record->data as $data)
-                        <tbody>
-                            <tr>
-                                @foreach($data as $subject => $quarter)
-                                <td>{{$subject}}</td>
-                                <td> {{ $quarter['quarter_1']}}</td>
-                                <td> {{ $quarter['quarter_2']}}</td>
-                                <td> {{ $quarter['quarter_3']}}</td>
-                                <td>{{ $quarter['quarter_4']}}</td>
-                                <td> {{ $quarter['final']}}</td>
-                                <td>{{ $quarter['remark']}}</td>
-                                @endforeach
 
-                            </tr>
-
-                            @endforeach
-                            <tr class="f-12">
-                                <td></td>
-                                <td colspan="4"> General average : {{$record->gen_ave}}</td>
-                                <td colspan="2"></td>
-                            </tr>
-                            <tr>
-                                <td colspan="7 ">
-                                    <div class="d-flex justify-content-center">
-                                        <span class="fw-bold mx-2">Remedial Classes</span>
-                                        <span>Conducted from (mm/dd/yyyy): <span class="text-decoration-underlin">{{ $record->remedial_date_from }}</span></span>
-                                        <span class="mx-2">To: (mm/dd/yyyy): <span class="text-decoration-underlin">{{ $record->remedial_date_to }}</span></span>
-                                    </div>
-                                </td>
-                            </tr>
-                        </tbody>
-                    </table>
-                    <table class="table-data">
+                </div>
+                <table class="table-data" style="border: none">
+                    <thead>
                         <tr>
                             <th>Learning Areas</th>
-                            <th>Final rating</th>
-                            <th>Remedial class mark</th>
-                            <th>Final Recomputed grade</th>
-                            <th>Remarks</th>
+                            <th colspan="4">Quarterly Rating</th>
+                            <th>FINAL RATING</th>
+                            <th>REMARKS</th>
                         </tr>
+                    </thead>
+                    @foreach($record->data as $data)
+                    <tbody>
+                        <tr>
+                            @foreach($data as $subject => $quarter)
+                            <td class="{{ $subject == 'Music' ? 'fw-light px-2 fst-italic':''}} 
+                            {{ $subject == 'Arts' ? 'fw-light px-2 fst-italic':''}}
+                            {{ $subject == 'Physical Education' ? 'fw-light px-2 fst-italic':''}}
+                            {{ $subject == 'Health' ? 'fw-light px-2 fst-italic':''}}
+                            ">{{$subject}}</td>
+                            <td> {{ $quarter['quarter_1']}}</td>
+                            <td> {{ $quarter['quarter_2']}}</td>
+                            <td> {{ $quarter['quarter_3']}}</td>
+                            <td>{{ $quarter['quarter_4']}}</td>
+                            <td> {{ $quarter['final']}}</td>
+                            <td>{{ $quarter['remark']}}</td>
+                            @endforeach
+                        </tr>
+
+                        @endforeach
+                        <tr>
+                            <td></td>
+                            <td></td>
+                            <td></td>
+                            <td></td>
+                            <td></td>
+                            <td></td>
+                            <td></td>
+                        </tr>
+                        <tr>
+                            <td></td>
+                            <td></td>
+                            <td></td>
+                            <td></td>
+                            <td></td>
+                            <td></td>
+                            <td></td>
+                        </tr>
+                        <tr class="f-12">
+                            <td></td>
+                            <td colspan="4"> General average : {{$record->gen_ave}}</td>
+                            <td colspan="2"></td>
+                        </tr>
+                        <tr>
+                            <td colspan="7 ">
+                                <div class="d-flex justify-content-center">
+                                    <span class="fw-normal mx-2">Remedial Classes</span>
+                                    <span class="fw-normal mx-5">Conducted from (mm/dd/yyyy): <span class="text-decoration-underline">{{ $record->remedial_date_from }}</span></span>
+                                    <span class="fw-normal mx-5">To: (mm/dd/yyyy): <span class="text-decoration-underline">{{ $record->remedial_date_to }}</span></span>
+                                </div>
+                            </td>
+                        </tr>
+                    </tbody>
+                </table>
+                <table class="table-data">
+                    <tr>
+                        <th>Learning Areas</th>
+                        <th>Final rating</th>
+                        <th>Remedial class mark</th>
+                        <th>Final Recomputed grade</th>
+                        <th>Remarks</th>
+                    </tr>
+
+                    @if(count($record->remedials) <= 0) <tr>
+
+                        <td class="f-12 text-uppercase"></td>
+                        <td class="f-12 text-uppercase"></td>
+                        <td class="f-12 text-uppercase"></td>
+                        <td class="f-12 text-uppercase"></td>
+                        <td class="f-12 text-uppercase"></td>
+                        </tr>
+                        <tr>
+
+                            <td class="f-12 text-uppercase"></td>
+                            <td class="f-12 text-uppercase"></td>
+                            <td class="f-12 text-uppercase"></td>
+                            <td class="f-12 text-uppercase"></td>
+                            <td class="f-12 text-uppercase"></td>
+                        </tr>
+                        @else
                         @foreach($record->remedials as $data)
                         <tr>
                             @foreach($data as $dt)
@@ -221,8 +263,9 @@
                             @endforeach
                         </tr>
                         @endforeach
-                    </table>
-                </div>
+                        @endif
+
+                </table>
                 @endforeach
                 <div class="text-center info-header mt-2">
                     <p class="text-uppercase">CERTIFICATION</p>

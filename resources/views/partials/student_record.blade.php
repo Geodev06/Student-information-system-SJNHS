@@ -128,6 +128,7 @@
                                         <button class="btn btn-primary mb-2 btn-sm" type="button" id="btn-add-row"><i class="bx bx-plus-circle"></i> Add row</button>
                                         <div class="form-check mx-2 form-switch">
                                             <input type="checkbox" class="form-check-input" id="useDefault" role="switch">
+                                            <input type="hidden" name="default" id="default" value="0">
                                             <label for="useDefault" class="form-check-label" style="font-size: 12px;">(use default subjects)</label>
                                         </div>
                                     </div>
@@ -300,10 +301,10 @@
         @endforeach
         </select>
         </td>
-        <td><input type="text" class="form-control text-uppercase" name="quarter_1[]"></td>
-        <td><input type="text" class="form-control text-uppercase" name="quarter_2[]"></td>
-        <td><input type="text" class="form-control text-uppercase" name="quarter_3[]"></td>
-        <td><input type="text" class="form-control" name="quarter_4[]"></td>
+        <td><input type="number" class="form-control text-uppercase" name="quarter_1[]"></td>
+        <td><input type="number" class="form-control text-uppercase" name="quarter_2[]"></td>
+        <td><input type="number" class="form-control text-uppercase" name="quarter_3[]"></td>
+        <td><input type="number" class="form-control" name="quarter_4[]"></td>
         <td><span class="badge bg-info text-white text-uppercase" style="font-size:10px">(auto-generated)</span></td>
         <td><i class="bx bx-x-circle text-danger btn-remove-row" style="cursor:pointer"></i></td>
         </tr>`)

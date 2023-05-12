@@ -109,11 +109,12 @@
 
                     <div class="col-lg-12">
                         <div class="d-flex align-items-baseline bg-light p-2">
+                            @if($student[0]->default === 0)
                             <button class="btn btn-primary mb-2 btn-sm" type="button" id="btn-add-row"><i class="bx bx-plus-circle"></i> Add row</button>
-                            <div class="form-check mx-2 form-switch">
-                                <input type="checkbox" class="form-check-input" id="useDefault" role="switch">
-                                <label for="useDefault" class="form-check-label" style="font-size: 12px;">(use default subjects)</label>
-                            </div>
+                            @endif
+
+
+                            <input type="hidden" name="default" value="{{$student[0]->default}}" id="default">
                         </div>
                         <p class="text-danger f-12" id="grade_error"></p>
                         <table class="table" id="table-record">
@@ -134,6 +135,143 @@
                                 </tr>
                             </thead>
                             <tbody>
+
+                                @if($student[0]->default === 1)
+
+                                <tr class="f-12">
+                                    <td>
+                                        <span class="fw-bold">Filipino</span>
+                                        <input type="hidden" class="form-control" value="Filipino" name="filipino" />
+                                    </td>
+                                    <td> <input type="number" class="form-control text-uppercase" value="{{ $student[0]->data[0]['Filipino']['quarter_1']}}" name="filipino_q1" /></td>
+                                    <td> <input type="number" class="form-control text-uppercase" value="{{ $student[0]->data[0]['Filipino']['quarter_2']}}" name="filipino_q2" /></td>
+                                    <td> <input type="number" class="form-control text-uppercase" value="{{ $student[0]->data[0]['Filipino']['quarter_3']}}" name="filipino_q3" /></td>
+                                    <td> <input type="number" class="form-control text-uppercase" value="{{ $student[0]->data[0]['Filipino']['quarter_4']}}" name="filipino_q4" /></td>
+                                    <td> <span class="badge bg-info text-uppercase">(auto-generated)</span></td>
+                                </tr>
+
+                                <tr class="f-12">
+                                    <td>
+                                        <span class="fw-bold">English</span>
+                                        <input type="hidden" class="form-control" value="English" name="english" />
+                                    </td>
+                                    <td> <input type="number" class="form-control text-uppercase" value="{{ $student[0]->data[1]['English']['quarter_1']}}" name="english_q1" /></td>
+                                    <td> <input type="number" class="form-control text-uppercase" value="{{ $student[0]->data[1]['English']['quarter_2']}}" name="english_q2" /></td>
+                                    <td> <input type="number" class="form-control text-uppercase" value="{{ $student[0]->data[1]['English']['quarter_3']}}" name="english_q3" /></td>
+                                    <td> <input type="number" class="form-control text-uppercase" value="{{ $student[0]->data[1]['English']['quarter_4']}}" name="english_q4" /></td>
+                                    <td> <span class="badge bg-info text-uppercase">(auto-generated)</span></td>
+                                </tr>
+
+                                <tr class="f-12">
+                                    <td>
+                                        <span class="fw-bold">Mathematics</span>
+                                        <input type="hidden" class="form-control" value="Mathematics" name="mathematics" />
+                                    </td>
+                                    <td> <input type="number" class="form-control text-uppercase" value="{{ $student[0]->data[2]['Mathematics']['quarter_1']}}" name="mathematics_q1" /></td>
+                                    <td> <input type="number" class="form-control text-uppercase" value="{{ $student[0]->data[2]['Mathematics']['quarter_2']}}" name="mathematics_q2" /></td>
+                                    <td> <input type="number" class="form-control text-uppercase" value="{{ $student[0]->data[2]['Mathematics']['quarter_3']}}" name="mathematics_q3" /></td>
+                                    <td> <input type="number" class="form-control text-uppercase" value="{{ $student[0]->data[2]['Mathematics']['quarter_4']}}" name="mathematics_q4" /></td>
+                                    <td> <span class="badge bg-info text-uppercase">(auto-generated)</span></td>
+                                </tr>
+
+                                <tr class="f-12">
+                                    <td>
+                                        <span class="fw-bold">Science</span>
+                                        <input type="hidden" class="form-control" value="Science" name="science" />
+                                    </td>
+                                    <td> <input type="number" class="form-control text-uppercase" value="{{ $student[0]->data[3]['Science']['quarter_1']}}" name="science_q1" /></td>
+                                    <td> <input type="number" class="form-control text-uppercase" value="{{ $student[0]->data[3]['Science']['quarter_2']}}" name="science_q2" /></td>
+                                    <td> <input type="number" class="form-control text-uppercase" value="{{ $student[0]->data[3]['Science']['quarter_3']}}" name="science_q3" /></td>
+                                    <td> <input type="number" class="form-control text-uppercase" value="{{ $student[0]->data[3]['Science']['quarter_4']}}" name="science_q4" /></td>
+                                    <td> <span class="badge bg-info text-uppercase">(auto-generated)</span></td>
+                                </tr>
+
+                                <tr class="f-12">
+                                    <td>
+                                        <span class="fw-bold">Araling Panlipunan (AP)</span>
+                                        <input type="hidden" class="form-control" value="Araling Panlipunan (AP)" name="ap" />
+                                    </td>
+                                    <td> <input type="number" class="form-control text-uppercase" value="{{ $student[0]->data[4]['Araling Panlipunan (AP)']['quarter_1']}}" name="ap_q1" /></td>
+                                    <td> <input type="number" class="form-control text-uppercase" value="{{ $student[0]->data[4]['Araling Panlipunan (AP)']['quarter_2']}}" name="ap_q2" /></td>
+                                    <td> <input type="number" class="form-control text-uppercase" value="{{ $student[0]->data[4]['Araling Panlipunan (AP)']['quarter_3']}}" name="ap_q3" /></td>
+                                    <td> <input type="number" class="form-control text-uppercase" value="{{ $student[0]->data[4]['Araling Panlipunan (AP)']['quarter_4']}}" name="ap_q4" /></td>
+                                    <td> <span class="badge bg-info text-uppercase">(auto-generated)</span></td>
+                                </tr>
+
+                                <tr class="f-12">
+                                    <td>
+                                        <span class="fw-bold">Edukasyon sa Pagpapakatao (ESP)</span>
+                                        <input type="hidden" class="form-control " value="Edukasyon sa Pagpapakatao (ESP)" name="esp" />
+                                    </td>
+                                    <td> <input type="number" class="form-control text-uppercase" value="{{ $student[0]->data[5]['Edukasyon sa Pagpapakatao (ESP)']['quarter_1']}}" name="esp_q1" /></td>
+                                    <td> <input type="number" class="form-control text-uppercase" value="{{ $student[0]->data[5]['Edukasyon sa Pagpapakatao (ESP)']['quarter_2']}}" name="esp_q2" /></td>
+                                    <td> <input type="number" class="form-control text-uppercase" value="{{ $student[0]->data[5]['Edukasyon sa Pagpapakatao (ESP)']['quarter_3']}}" name="esp_q3" /></td>
+                                    <td> <input type="number" class="form-control text-uppercase" value="{{ $student[0]->data[5]['Edukasyon sa Pagpapakatao (ESP)']['quarter_4']}}" name="esp_q4" /></td>
+                                    <td> <span class="badge bg-info text-uppercase">(auto-generated)</span></td>
+                                </tr>
+
+                                <tr class="f-12">
+                                    <td>
+                                        <span class="fw-bold">Technology and Livelihood Education (TLE)</span>
+                                        <input type="hidden" class="form-control" value="Technology and Livelihood Education (TLE)" name="tle" />
+                                    </td>
+                                    <td> <input type="number" class="form-control text-uppercase" value="{{ $student[0]->data[6]['Technology and Livelihood Education (TLE)']['quarter_1']}}" name="tle_q1" /></td>
+                                    <td> <input type="number" class="form-control text-uppercase" value="{{ $student[0]->data[6]['Technology and Livelihood Education (TLE)']['quarter_2']}}" name="tle_q2" /></td>
+                                    <td> <input type="number" class="form-control text-uppercase" value="{{ $student[0]->data[6]['Technology and Livelihood Education (TLE)']['quarter_3']}}" name="tle_q3" /></td>
+                                    <td> <input type="number" class="form-control text-uppercase" value="{{ $student[0]->data[6]['Technology and Livelihood Education (TLE)']['quarter_4']}}" name="tle_q4" /></td>
+                                    <td> <span class="badge bg-info text-uppercase">(auto-generated)</span></td>
+                                </tr>
+
+                                <tr class="f-12">
+                                    <td>
+                                        <span class="fw-bold">Music</span>
+                                        <input type="hidden" class="form-control" value="Music" name="music" />
+                                    </td>
+                                    <td> <input type="number" class="form-control text-uppercase" value="{{ $student[0]->data[8]['Music']['quarter_1']}}" name="music_q1" /></td>
+                                    <td> <input type="number" class="form-control text-uppercase" value="{{ $student[0]->data[8]['Music']['quarter_2']}}" name="music_q2" /></td>
+                                    <td> <input type="number" class="form-control text-uppercase" value="{{ $student[0]->data[8]['Music']['quarter_3']}}" name="music_q3" /></td>
+                                    <td> <input type="number" class="form-control text-uppercase" value="{{ $student[0]->data[8]['Music']['quarter_4']}}" name="music_q4" /></td>
+                                    <td> <span class="badge bg-info text-uppercase">(auto-generated)</span></td>
+                                </tr>
+
+                                <tr class="f-12">
+                                    <td>
+                                        <span class="fw-bold">Arts</span>
+                                        <input type="hidden" class="form-control" value="Arts" name="arts" />
+                                    </td>
+                                    <td> <input type="number" class="form-control text-uppercase" value="{{ $student[0]->data[9]['Arts']['quarter_1']}}" name="arts_q1" /></td>
+                                    <td> <input type="number" class="form-control text-uppercase" value="{{ $student[0]->data[9]['Arts']['quarter_2']}}" name="arts_q2" /></td>
+                                    <td> <input type="number" class="form-control text-uppercase" value="{{ $student[0]->data[9]['Arts']['quarter_3']}}" name="arts_q3" /></td>
+                                    <td> <input type="number" class="form-control text-uppercase" value="{{ $student[0]->data[9]['Arts']['quarter_4']}}" name="arts_q4" /></td>
+                                    <td> <span class="badge bg-info text-uppercase">(auto-generated)</span></td>
+                                </tr>
+
+                                <tr class="f-12">
+                                    <td>
+                                        <span class="fw-bold">Physical Education</span>
+                                        <input type="hidden" class="form-control" value="Physical Education" name="pe" />
+                                    </td>
+                                    <td> <input type="number" class="form-control text-uppercase" value="{{ $student[0]->data[10]['Physical Education']['quarter_1']}}" name="pe_q1" /></td>
+                                    <td> <input type="number" class="form-control text-uppercase" value="{{ $student[0]->data[10]['Physical Education']['quarter_2']}}" name="pe_q2" /></td>
+                                    <td> <input type="number" class="form-control text-uppercase" value="{{ $student[0]->data[10]['Physical Education']['quarter_3']}}" name="pe_q3" /></td>
+                                    <td> <input type="number" class="form-control text-uppercase" value="{{ $student[0]->data[10]['Physical Education']['quarter_4']}}" name="pe_q4" /></td>
+                                    <td> <span class="badge bg-info text-uppercase">(auto-generated)</span></td>
+                                </tr>
+
+                                <tr class="f-12">
+                                    <td>
+                                        <span class="fw-bold">Health</span>
+                                        <input type="hidden" class="form-control" value="Health" name="health" />
+                                    </td>
+                                    <td> <input type="number" class="form-control text-uppercase" value="{{ $student[0]->data[11]['Health']['quarter_1']}}" name="health_q1" /></td>
+                                    <td> <input type="number" class="form-control text-uppercase" value="{{ $student[0]->data[11]['Health']['quarter_2']}}" name="health_q2" /></td>
+                                    <td> <input type="number" class="form-control text-uppercase" value="{{ $student[0]->data[11]['Health']['quarter_3']}}" name="health_q3" /></td>
+                                    <td> <input type="number" class="form-control text-uppercase" value="{{ $student[0]->data[11]['Health']['quarter_4']}}" name="health_q4" /></td>
+                                    <td> <span class="badge bg-info text-uppercase">(auto-generated)</span></td>
+                                </tr>
+
+
+                                @else
                                 @foreach($student[0]->data as $data)
 
                                 <tr class="f-12">
@@ -150,6 +288,8 @@
                                 </tr>
 
                                 @endforeach
+                                @endif
+
                             </tbody>
                         </table>
                     </div>

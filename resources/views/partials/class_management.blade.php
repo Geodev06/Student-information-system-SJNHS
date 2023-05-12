@@ -34,6 +34,7 @@
                         <th>Adviser</th>
                         <th>Grade level</th>
                         <th>School year</th>
+                        <th>Using default</th>
                         <th>Action</th>
                     </tr>
                 </thead>
@@ -104,6 +105,14 @@
                                 </select>
                                 <label for="">School_year</label>
                                 <span class="error_school_year text-danger error-text"></span>
+                            </div>
+                        </div>
+
+                        <div class="col-lg-12 bg-dark p-2">
+                            <div class="form-check mx-2 form-switch">
+                                <input type="checkbox" class="form-check-input" id="useDefault" role="switch">
+                                <input type="hidden" name="default" id="default" value="0">
+                                <label for="useDefault" class="form-check-label text-white" style="font-size: 12px;">(this section uses default subjects)</label>
                             </div>
                         </div>
 
@@ -227,44 +236,50 @@
         <div class="modal-content">
             <div class="modal-body p-5">
                 <h4 class="">Add subject</h4>
-                <div class="mb-2">
-                    <button id="useDefaultSubject" class="btn btn-info text-white btn-sm">use Default subjects</button>
-                    <button id="deleteAllSubject" class="btn btn-danger text-white btn-sm">Delete all</button>
-                </div>
+
                 <form id="subjForm">
                     @csrf
                     <div class="row">
                         <input type="hidden" name="section_id" id="subj-section-id">
-                        <div class="col-lg-12 mb-2">
-                            <div class="form-floating mb-3">
-                                <select name="subject_code" class="form-control">
-                                    <option value="">Choose one</option>
-                                    @foreach($subjects as $subject)
-                                    <option value="{{$subject->code}}" class="text-uppercase">{{ $subject->code .'-'.$subject->description }}</option>
-                                    @endforeach
-                                </select>
-                                <label for="">Subject</label>
-                                <span class="error_subject_code text-danger error-text"></span>
+                        <div id="actions">
+                            <div class="mb-2">
+
+                                <button id="deleteAllSubject" class="btn btn-danger text-white btn-sm">Delete all</button>
                             </div>
+                            <div class="col-lg-12 mb-2">
+                                <div class="form-floating">
+                                    <select name="subject_code" class="form-control">
+                                        <option value="">Choose one</option>
+                                        @foreach($subjects as $subject)
+                                        <option value="{{$subject->code}}" class="text-uppercase">{{ $subject->code .'-'.$subject->description }}</option>
+                                        @endforeach
+                                    </select>
+                                    <label for="">Subject</label>
+                                    <span class="error_subject_code text-danger error-text"></span>
+                                </div>
 
-                        </div>
-
-                        <div class="col-lg-12 mb-3">
-                            <table class="display nowrap w-100 table-striped" id="table-section-subjects">
-                                <thead>
-                                    <tr>
-                                        <th>Code</th>
-                                        <th>Description</th>
-                                        <th>Action</th>
-                                    </tr>
-                                </thead>
-                                <tbody></tbody>
-                            </table>
+                            </div>
+                            <div class="col-lg-12">
+                                <div class="d-flex float-end">
+                                    <button type="submit" class="btn btn-primary btn-sm m-2"> <i class="bx bx-save"></i> Add</button>
+                                </div>
+                            </div>
                         </div>
                     </div>
-                    <div class="d-flex float-end">
-                        <button type="submit" class="btn btn-primary btn-sm m-2"> <i class="bx bx-save"></i> Add</button>
-                        <button type="button" class="btn btn-default btn-sm m-2" onclick="$('#addSubjectModal').modal('hide')">Close</button>
+
+
+                    <div class="col-lg-12 mb-3">
+                        <table class="display nowrap w-100 table-striped" id="table-section-subjects">
+                            <thead>
+                                <tr>
+                                    <th>Code</th>
+                                    <th>Description</th>
+                                    <th>Action</th>
+                                </tr>
+                            </thead>
+                            <tbody></tbody>
+                        </table>
+                        <button type="button" class="btn btn-danger btn-sm m-2" onclick="$('#addSubjectModal').modal('hide')">Close</button>
                     </div>
                 </form>
             </div>
@@ -330,6 +345,15 @@
 <script src="{{ asset('./js/partials/settings.js')}}"></script>
 
 <script>
+    $('#useDefault').click(function() {
+        if ($(this).prop('checked')) {
+            $('#default').val(1)
+        } else {
+            $('#default').val(0)
+        }
+    })
+
+
     function showAlert(msg) {
         $('#msgAlert').modal('show')
         $('#msgAlert-msg').text(msg)
@@ -364,6 +388,10 @@
                 {
                     data: 'school_year',
                     name: 'school_year'
+                },
+                {
+                    data: 'using_default',
+                    name: 'using_default'
                 },
                 {
                     data: 'action',
@@ -411,7 +439,7 @@
                 if (data.status === 200) {
                     table.clear().draw()
                     for (let i = 0; i < data.subject.length; i++) {
-                        var btn = '<span data-id="' + data.subject[i].id + '" class="btn-remove-subject btn btn-sm btn-danger">remove</span>'
+                        var btn = data.subject[i].default === 1 ? '' : '<span data-id="' + data.subject[i].id + '" class="btn-remove-subject btn btn-sm btn-danger">remove</span>'
                         table.row.add([data.subject[i].subject_code, data.subject[i].subject, btn]).draw()
                     }
                 }
@@ -559,6 +587,11 @@
         $('.error_subject_code').text('');
 
         $("select[name=subject_code]").removeClass('is-invalid')
+        if ($(this)[0].dataset.usingdefault == 1) {
+            $('#actions').css('display', 'none');
+        } else {
+            $('#actions').css('display', 'block');
+        }
         $('#addSubjectModal').modal('show')
     })
 

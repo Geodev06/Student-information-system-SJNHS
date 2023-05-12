@@ -26,11 +26,12 @@ class Record extends Model
         'remedial_date_from',
         'remedial_date_to',
         'remedials',
-        'gen_ave'
+        'gen_ave',
+        'default',
+        'attendance',
+        'observed_values'
 
     ];
-
-
 
     protected function data(): Attribute
     {
@@ -41,6 +42,22 @@ class Record extends Model
     }
 
     protected function remedials(): Attribute
+    {
+        return Attribute::make(
+            get: fn ($value) => json_decode($value, true),
+            set: fn ($value) => json_encode($value)
+        );
+    }
+
+    protected function attendance(): Attribute
+    {
+        return Attribute::make(
+            get: fn ($value) => json_decode($value, true),
+            set: fn ($value) => json_encode($value)
+        );
+    }
+
+    protected function observed_values(): Attribute
     {
         return Attribute::make(
             get: fn ($value) => json_decode($value, true),
