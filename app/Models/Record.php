@@ -33,6 +33,7 @@ class Record extends Model
 
     ];
 
+
     protected function data(): Attribute
     {
         return Attribute::make(

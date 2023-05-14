@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\Otherinformation;
+use App\Models\Record;
 use App\Models\Section;
 use App\Models\SectionStudent;
 use App\Models\SectionSubject;
@@ -339,7 +340,7 @@ class SectionController extends Controller
             return response()->json(['status' => 0, 'error' => $validator->errors()->toArray()]);
         }
 
-        $student = Studentinfo::where('lrn', $request->lrn)->select('lastname', 'middlename', 'firstname')->get();
+        $student = Studentinfo::where('lrn', $request->lrn)->select('lastname', 'middlename', 'firstname', 'sex')->get();
 
         $data = [
             'section_id' => $request->section_id,

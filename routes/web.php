@@ -128,6 +128,8 @@ Route::controller(TeacherController::class)
 
         Route::get('/student-data/{lrn}/{section_id}', 'showRecord')->name('student.showRecord');
         Route::post('/student-data/store', 'store')->name('teacher.record.store');
+
+        Route::get('/student-data/{lrn}/{section_id}/{sy}', 'cardGen')->name('student.card');
     });
 
 Route::controller(ReportController::class)

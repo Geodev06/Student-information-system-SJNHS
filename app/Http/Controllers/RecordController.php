@@ -53,11 +53,9 @@ class RecordController extends Controller
     public function store(Request $request)
     {
 
-
         $learning_areas = [];
 
         $gen_ave = 0;
-
 
         // remedials
         $remedials = [];
