@@ -418,7 +418,7 @@
 
                             </tr>
                             <tr>
-                                <td class="fw-bold">Maka-Diyos</td>
+                                <td class="fw-bold" rowspan="2">Maka-Diyos</td>
                                 <td style="font-size: 12px;">Expresses one's spiritual beliefs while repecting spiritual beliefs of others
                                     <br>Show adherence to ethical principles by upholding truth
                                 </td>
@@ -459,16 +459,58 @@
                                     </select>
                                 </td>
                             </tr>
+
                             <tr>
-                                <td class="fw-bold">Makatao</td>
+
+                                <td style="font-size: 12px;">Show adherence to ethical principles by upholding truth
+                                </td>
+                                <td>
+                                    <select name="mk_d12" class="form-select">
+                                        <option value="{{$decoded_values[1]->makadiyos_2->q1}}">{{$decoded_values[1]->makadiyos_2->q1}}</option>
+                                        <option value="AO">AO</option>
+                                        <option value="SO">SO</option>
+                                        <option value="RO">RO</option>
+                                        <option value="NO">NO</option>
+                                    </select>
+                                </td>
+                                <td>
+                                    <select name="mk_d22" class="form-select">
+                                        <option value="{{$decoded_values[1]->makadiyos_2->q2}}">{{$decoded_values[1]->makadiyos_2->q2}}</option>
+                                        <option value="AO">AO</option>
+                                        <option value="SO">SO</option>
+                                        <option value="RO">RO</option>
+                                        <option value="NO">NO</option>
+                                    </select>
+                                </td>
+                                <td>
+                                    <select name="mk_d32" class="form-select">
+                                        <option value="{{$decoded_values[1]->makadiyos_2->q3}}">{{$decoded_values[1]->makadiyos_2->q3}}</option>
+                                        <option value="AO">AO</option>
+                                        <option value="SO">SO</option>
+                                        <option value="RO">RO</option>
+                                        <option value="NO">NO</option>
+                                    </select>
+                                </td>
+                                <td>
+                                    <select name="mk_d42" class="form-select">
+                                        <option value="{{$decoded_values[1]->makadiyos_2->q4}}">{{$decoded_values[1]->makadiyos_2->q4}}</option>
+                                        <option value="AO">AO</option>
+                                        <option value="SO">SO</option>
+                                        <option value="RO">RO</option>
+                                        <option value="NO">NO</option>
+                                    </select>
+                                </td>
+                            </tr>
+
+                            <tr>
+                                <td class="fw-bold" rowspan="2">Makatao</td>
                                 <td style="font-size: 12px;">
                                     Is sensitive to individual, social and cultural differences
-                                    <br>
-                                    Demonstrate contributions toward solidarity
+
                                 </td>
                                 <td>
                                     <select name="mk_t1" class="form-select">
-                                        <option value="{{$decoded_values[1]->makatao->q1}}">{{$decoded_values[1]->makatao->q1}}</option>
+                                        <option value="{{$decoded_values[2]->makatao->q1}}">{{$decoded_values[2]->makatao->q1}}</option>
                                         <option value="AO">AO</option>
                                         <option value="SO">SO</option>
                                         <option value="RO">RO</option>
@@ -477,7 +519,7 @@
                                 </td>
                                 <td>
                                     <select name="mk_t2" class="form-select">
-                                        <option value="{{$decoded_values[1]->makatao->q2}}">{{$decoded_values[1]->makatao->q2}}</option>
+                                        <option value="{{$decoded_values[2]->makatao->q2}}">{{$decoded_values[2]->makatao->q2}}</option>
                                         <option value="AO">AO</option>
                                         <option value="SO">SO</option>
                                         <option value="RO">RO</option>
@@ -486,7 +528,7 @@
                                 </td>
                                 <td>
                                     <select name="mk_t3" class="form-select">
-                                        <option value="{{$decoded_values[1]->makatao->q3}}">{{$decoded_values[1]->makatao->q3}}</option>
+                                        <option value="{{$decoded_values[2]->makatao->q3}}">{{$decoded_values[2]->makatao->q3}}</option>
                                         <option value="AO">AO</option>
                                         <option value="SO">SO</option>
                                         <option value="RO">RO</option>
@@ -495,7 +537,7 @@
                                 </td>
                                 <td>
                                     <select name="mk_t4" class="form-select">
-                                        <option value="{{$decoded_values[1]->makatao->q4}}">{{$decoded_values[1]->makatao->q4}}</option>
+                                        <option value="{{$decoded_values[2]->makatao->q4}}">{{$decoded_values[2]->makatao->q4}}</option>
                                         <option value="AO">AO</option>
                                         <option value="SO">SO</option>
                                         <option value="RO">RO</option>
@@ -503,12 +545,57 @@
                                     </select>
                                 </td>
                             </tr>
+
+                            <tr>
+
+                                <td style="font-size: 12px;">
+                                    Demonstrate contributions toward solidarity
+                                </td>
+                                <td>
+                                    <select name="mk_t12" class="form-select">
+                                        <option value="{{$decoded_values[3]->makatao_2->q1}}">{{$decoded_values[3]->makatao_2->q1}}</option>
+                                        <option value="AO">AO</option>
+                                        <option value="SO">SO</option>
+                                        <option value="RO">RO</option>
+                                        <option value="NO">NO</option>
+                                    </select>
+                                </td>
+                                <td>
+                                    <select name="mk_t22" class="form-select">
+                                        <option value="{{$decoded_values[3]->makatao_2->q2}}">{{$decoded_values[3]->makatao_2->q2}}</option>
+                                        <option value="AO">AO</option>
+                                        <option value="SO">SO</option>
+                                        <option value="RO">RO</option>
+                                        <option value="NO">NO</option>
+                                    </select>
+                                </td>
+                                <td>
+                                    <select name="mk_t32" class="form-select">
+                                        <option value="{{$decoded_values[3]->makatao_2->q3}}">{{$decoded_values[3]->makatao_2->q3}}</option>
+                                        <option value="AO">AO</option>
+                                        <option value="SO">SO</option>
+                                        <option value="RO">RO</option>
+                                        <option value="NO">NO</option>
+                                    </select>
+                                </td>
+                                <td>
+                                    <select name="mk_t42" class="form-select">
+                                        <option value="{{$decoded_values[3]->makatao_2->q4}}">{{$decoded_values[3]->makatao_2->q4}}</option>
+                                        <option value="AO">AO</option>
+                                        <option value="SO">SO</option>
+                                        <option value="RO">RO</option>
+                                        <option value="NO">NO</option>
+                                    </select>
+                                </td>
+                            </tr>
+
+
                             <tr>
                                 <td class="fw-bold">Maka-kalikasan</td>
                                 <td style="font-size: 12px;">Cares for the enviroment and utilizes resources wisely, judiciously, and economically</td>
                                 <td>
                                     <select name="mk_k1" class="form-select">
-                                        <option value="{{$decoded_values[2]->makakalikasan->q1}}">{{$decoded_values[2]->makakalikasan->q1}}</option>
+                                        <option value="{{$decoded_values[4]->makakalikasan->q1}}">{{$decoded_values[4]->makakalikasan->q1}}</option>
                                         <option value="AO">AO</option>
                                         <option value="SO">SO</option>
                                         <option value="RO">RO</option>
@@ -517,7 +604,7 @@
                                 </td>
                                 <td>
                                     <select name="mk_k2" class="form-select">
-                                        <option value="{{$decoded_values[2]->makakalikasan->q2}}">{{$decoded_values[2]->makakalikasan->q2}}</option>
+                                        <option value="{{$decoded_values[4]->makakalikasan->q2}}">{{$decoded_values[4]->makakalikasan->q2}}</option>
                                         <option value="AO">AO</option>
                                         <option value="SO">SO</option>
                                         <option value="RO">RO</option>
@@ -526,7 +613,7 @@
                                 </td>
                                 <td>
                                     <select name="mk_k3" class="form-select">
-                                        <option value="{{$decoded_values[2]->makakalikasan->q3}}">{{$decoded_values[2]->makakalikasan->q3}}</option>
+                                        <option value="{{$decoded_values[4]->makakalikasan->q3}}">{{$decoded_values[4]->makakalikasan->q3}}</option>
                                         <option value="AO">AO</option>
                                         <option value="SO">SO</option>
                                         <option value="RO">RO</option>
@@ -535,7 +622,7 @@
                                 </td>
                                 <td>
                                     <select name="mk_k4" class="form-select">
-                                        <option value="{{$decoded_values[2]->makakalikasan->q4}}">{{$decoded_values[2]->makakalikasan->q4}}</option>
+                                        <option value="{{$decoded_values[4]->makakalikasan->q4}}">{{$decoded_values[4]->makakalikasan->q4}}</option>
                                         <option value="AO">AO</option>
                                         <option value="SO">SO</option>
                                         <option value="RO">RO</option>
@@ -543,14 +630,14 @@
                                     </select>
                                 </td>
                             </tr>
+
                             <tr>
-                                <td class="fw-bold">Makabansa</td>
-                                <td style="font-size: 12px;">Demonstrate pride in being a filipino; execises rights and responsibilities of a filipino citizen <br>
-                                    Demonstrates appropriate behavior in carrying out activities in school, community and country.
+                                <td class="fw-bold" rowspan="2">Makabansa</td>
+                                <td style="font-size: 12px;">Demonstrate pride in being a filipino; execises rights and responsibilities of a filipino citizen
                                 </td>
                                 <td>
                                     <select name="mk_b1" class="form-select">
-                                        <option value="{{$decoded_values[3]->makabansa->q1}}">{{$decoded_values[3]->makabansa->q1}}</option>
+                                        <option value="{{$decoded_values[5]->makabansa->q1}}">{{$decoded_values[5]->makabansa->q1}}</option>
                                         <option value="AO">AO</option>
                                         <option value="SO">SO</option>
                                         <option value="RO">RO</option>
@@ -559,7 +646,7 @@
                                 </td>
                                 <td>
                                     <select name="mk_b2" class="form-select">
-                                        <option value="{{$decoded_values[3]->makabansa->q2}}">{{$decoded_values[3]->makabansa->q2}}</option>
+                                        <option value="{{$decoded_values[5]->makabansa->q2}}">{{$decoded_values[5]->makabansa->q2}}</option>
                                         <option value="AO">AO</option>
                                         <option value="SO">SO</option>
                                         <option value="RO">RO</option>
@@ -568,7 +655,7 @@
                                 </td>
                                 <td>
                                     <select name="mk_b3" class="form-select">
-                                        <option value="{{$decoded_values[3]->makabansa->q3}}">{{$decoded_values[3]->makabansa->q3}}</option>
+                                        <option value="{{$decoded_values[5]->makabansa->q3}}">{{$decoded_values[5]->makabansa->q3}}</option>
                                         <option value="AO">AO</option>
                                         <option value="SO">SO</option>
                                         <option value="RO">RO</option>
@@ -577,7 +664,51 @@
                                 </td>
                                 <td>
                                     <select name="mk_b4" class="form-select">
-                                        <option value="{{$decoded_values[3]->makabansa->q4}}">{{$decoded_values[3]->makabansa->q4}}</option>
+                                        <option value="{{$decoded_values[5]->makabansa->q4}}">{{$decoded_values[5]->makabansa->q4}}</option>
+                                        <option value="AO">AO</option>
+                                        <option value="SO">SO</option>
+                                        <option value="RO">RO</option>
+                                        <option value="NO">NO</option>
+                                    </select>
+                                </td>
+                            </tr>
+
+
+                            <tr>
+
+                                <td style="font-size: 12px;">
+                                    Demonstrates appropriate behavior in carrying out activities in school, community and country.
+                                </td>
+                                <td>
+                                    <select name="mk_b12" class="form-select">
+                                        <option value="{{$decoded_values[6]->makabansa_2->q1}}">{{$decoded_values[6]->makabansa_2->q1}}</option>
+                                        <option value="AO">AO</option>
+                                        <option value="SO">SO</option>
+                                        <option value="RO">RO</option>
+                                        <option value="NO">NO</option>
+                                    </select>
+                                </td>
+                                <td>
+                                    <select name="mk_b22" class="form-select">
+                                        <option value="{{$decoded_values[6]->makabansa_2->q2}}">{{$decoded_values[6]->makabansa_2->q2}}</option>
+                                        <option value="AO">AO</option>
+                                        <option value="SO">SO</option>
+                                        <option value="RO">RO</option>
+                                        <option value="NO">NO</option>
+                                    </select>
+                                </td>
+                                <td>
+                                    <select name="mk_b32" class="form-select">
+                                        <option value="{{$decoded_values[6]->makabansa_2->q3}}">{{$decoded_values[6]->makabansa_2->q3}}</option>
+                                        <option value="AO">AO</option>
+                                        <option value="SO">SO</option>
+                                        <option value="RO">RO</option>
+                                        <option value="NO">NO</option>
+                                    </select>
+                                </td>
+                                <td>
+                                    <select name="mk_b42" class="form-select">
+                                        <option value="{{$decoded_values[6]->makabansa_2->q4}}">{{$decoded_values[6]->makabansa_2->q4}}</option>
                                         <option value="AO">AO</option>
                                         <option value="SO">SO</option>
                                         <option value="RO">RO</option>
@@ -590,9 +721,8 @@
 
                             </tr>
                             <tr>
-                                <td class="fw-bold">Maka-Diyos</td>
+                                <td class="fw-bold" rowspan="2">Maka-Diyos</td>
                                 <td style="font-size: 12px;">Expresses one's spiritual beliefs while repecting spiritual beliefs of others
-                                    <br>Show adherence to ethical principles by upholding truth
                                 </td>
                                 <td>
                                     <select name="mk_d1" class="form-select">
@@ -627,12 +757,51 @@
                                     </select>
                                 </td>
                             </tr>
+
                             <tr>
-                                <td class="fw-bold">Makatao</td>
+
+                                <td style="font-size: 12px;">
+                                    Show adherence to ethical principles by upholding truth
+                                </td>
+                                <td>
+                                    <select name="mk_d12" class="form-select">
+                                        <option value="AO">AO</option>
+                                        <option value="SO">SO</option>
+                                        <option value="RO">RO</option>
+                                        <option value="NO">NO</option>
+                                    </select>
+                                </td>
+                                <td>
+                                    <select name="mk_d22" class="form-select">
+                                        <option value="AO">AO</option>
+                                        <option value="SO">SO</option>
+                                        <option value="RO">RO</option>
+                                        <option value="NO">NO</option>
+                                    </select>
+                                </td>
+                                <td>
+                                    <select name="mk_d32" class="form-select">
+                                        <option value="AO">AO</option>
+                                        <option value="SO">SO</option>
+                                        <option value="RO">RO</option>
+                                        <option value="NO">NO</option>
+                                    </select>
+                                </td>
+                                <td>
+                                    <select name="mk_d42" class="form-select">
+                                        <option value="AO">AO</option>
+                                        <option value="SO">SO</option>
+                                        <option value="RO">RO</option>
+                                        <option value="NO">NO</option>
+                                    </select>
+                                </td>
+                            </tr>
+
+
+                            <tr>
+                                <td class="fw-bold" rowspan="2">Makatao</td>
                                 <td style="font-size: 12px;">
                                     Is sensitive to individual, social and cultural differences
-                                    <br>
-                                    Demonstrate contributions toward solidarity
                                 </td>
                                 <td>
                                     <select name="mk_t1" class="form-select">
@@ -667,6 +836,46 @@
                                     </select>
                                 </td>
                             </tr>
+
+                            <tr>
+
+                                <td style="font-size: 12px;">
+                                    Demonstrate contributions toward solidarity
+                                </td>
+                                <td>
+                                    <select name="mk_t12" class="form-select">
+                                        <option value="AO">AO</option>
+                                        <option value="SO">SO</option>
+                                        <option value="RO">RO</option>
+                                        <option value="NO">NO</option>
+                                    </select>
+                                </td>
+                                <td>
+                                    <select name="mk_t22" class="form-select">
+                                        <option value="AO">AO</option>
+                                        <option value="SO">SO</option>
+                                        <option value="RO">RO</option>
+                                        <option value="NO">NO</option>
+                                    </select>
+                                </td>
+                                <td>
+                                    <select name="mk_t32" class="form-select">
+                                        <option value="AO">AO</option>
+                                        <option value="SO">SO</option>
+                                        <option value="RO">RO</option>
+                                        <option value="NO">NO</option>
+                                    </select>
+                                </td>
+                                <td>
+                                    <select name="mk_t42" class="form-select">
+                                        <option value="AO">AO</option>
+                                        <option value="SO">SO</option>
+                                        <option value="RO">RO</option>
+                                        <option value="NO">NO</option>
+                                    </select>
+                                </td>
+                            </tr>
+
                             <tr>
                                 <td class="fw-bold">Maka-kalikasan</td>
                                 <td style="font-size: 12px;">Cares for the enviroment and utilizes resources wisely, judiciously, and economically</td>
@@ -703,10 +912,10 @@
                                     </select>
                                 </td>
                             </tr>
+
                             <tr>
-                                <td class="fw-bold">Makabansa</td>
-                                <td style="font-size: 12px;">Demonstrate pride in being a filipino; execises rights and responsibilities of a filipino citizen <br>
-                                    Demonstrates appropriate behavior in carrying out activities in school, community and country.
+                                <td class="fw-bold" rowspan="2">Makabansa</td>
+                                <td style="font-size: 12px;">Demonstrate pride in being a filipino; execises rights and responsibilities of a filipino citizen
                                 </td>
                                 <td>
                                     <select name="mk_b1" class="form-select">
@@ -734,6 +943,45 @@
                                 </td>
                                 <td>
                                     <select name="mk_b4" class="form-select">
+                                        <option value="AO">AO</option>
+                                        <option value="SO">SO</option>
+                                        <option value="RO">RO</option>
+                                        <option value="NO">NO</option>
+                                    </select>
+                                </td>
+                            </tr>
+
+                            <tr>
+
+                                <td style="font-size: 12px;">
+                                    Demonstrates appropriate behavior in carrying out activities in school, community and country.
+                                </td>
+                                <td>
+                                    <select name="mk_b12" class="form-select">
+                                        <option value="AO">AO</option>
+                                        <option value="SO">SO</option>
+                                        <option value="RO">RO</option>
+                                        <option value="NO">NO</option>
+                                    </select>
+                                </td>
+                                <td>
+                                    <select name="mk_b22" class="form-select">
+                                        <option value="AO">AO</option>
+                                        <option value="SO">SO</option>
+                                        <option value="RO">RO</option>
+                                        <option value="NO">NO</option>
+                                    </select>
+                                </td>
+                                <td>
+                                    <select name="mk_b32" class="form-select">
+                                        <option value="AO">AO</option>
+                                        <option value="SO">SO</option>
+                                        <option value="RO">RO</option>
+                                        <option value="NO">NO</option>
+                                    </select>
+                                </td>
+                                <td>
+                                    <select name="mk_b42" class="form-select">
                                         <option value="AO">AO</option>
                                         <option value="SO">SO</option>
                                         <option value="RO">RO</option>

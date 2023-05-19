@@ -8,6 +8,7 @@ use App\Models\Section;
 use App\Models\SectionStudent;
 use App\Models\SectionSubject;
 use App\Models\Studentinfo;
+use App\Models\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Yajra\DataTables\DataTables;
@@ -212,11 +213,28 @@ class TeacherController extends Controller
                 ]
             ],
             [
+                'makadiyos_2' => [
+                    'q1' => $request->mk_d12,
+                    'q2' => $request->mk_d22,
+                    'q3' => $request->mk_d32,
+                    'q4' => $request->mk_d42
+                ]
+            ],
+            [
                 'makatao' => [
                     'q1' => $request->mk_t1,
                     'q2' => $request->mk_t2,
                     'q3' => $request->mk_t3,
                     'q4' => $request->mk_t4
+
+                ]
+            ],
+            [
+                'makatao_2' => [
+                    'q1' => $request->mk_t12,
+                    'q2' => $request->mk_t22,
+                    'q3' => $request->mk_t32,
+                    'q4' => $request->mk_t42
 
                 ]
             ],
@@ -235,6 +253,14 @@ class TeacherController extends Controller
                     'q2' => $request->mk_b2,
                     'q3' => $request->mk_b3,
                     'q4' => $request->mk_b4
+                ]
+            ],
+            [
+                'makabansa_2' => [
+                    'q1' => $request->mk_b12,
+                    'q2' => $request->mk_b22,
+                    'q3' => $request->mk_b32,
+                    'q4' => $request->mk_b42
                 ]
             ]
         ];
@@ -956,8 +982,32 @@ class TeacherController extends Controller
     {
         $record = Record::where('lrn', $lrn)
             ->where('section_id', $section_id)
-            ->where('school_year', $sy)->get();
+            ->where('school_year', $sy)
+            ->get();
 
-        return view('user-teacher.card', compact('record'));
+
+        $ob_val = Record::where('lrn', $lrn)
+            ->where('section_id', $section_id)
+            ->where('school_year', $sy)
+            ->select('observed_values')
+            ->get();
+
+        $student = Studentinfo::where('lrn', $lrn)->get();
+
+        $decoded_values = [];
+        if (count($ob_val) > 0) {
+            $decoded_values = json_decode($ob_val[0]->observed_values);
+        }
+
+        if (count($record) <= 0) {
+            return abort(404);
+        }
+
+        $schoolinfo = Otherinformation::select([
+            'school_name'
+        ])->get();
+
+
+        return view('user-teacher.card', compact('record', 'decoded_values', 'student'));
     }
 }
