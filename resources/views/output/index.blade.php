@@ -177,6 +177,7 @@
                             <th>REMARKS</th>
                         </tr>
                     </thead>
+
                     @foreach($record->data as $data)
                     <tbody>
                         <tr>

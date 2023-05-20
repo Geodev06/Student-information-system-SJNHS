@@ -37,8 +37,8 @@
         text-align: left;
         padding: 2px;
         font-weight: bold;
-        font-size: 10px;
-        height: 16px;
+        font-size: 8px;
+        height: 13px;
     }
 
     .table-data,
@@ -80,7 +80,7 @@
     <div class="container-fluid" id="body">
         <div class="row">
 
-            <div class="col-lg-8 mx-auto mt-3 mb-5">
+            <div class="col-lg-8 mx-auto  mb-5">
                 <span>SF10-JHS</span>
                 <div class="d-flex justify-content-around align-items-center">
                     <img src="{{ asset('./img/logo.png')}}" alt="logo" width="50px" height="50px">
@@ -110,7 +110,7 @@
                 <div class="text-center info-header">
                     <p class="text-uppercase">ELIGIBILITY FOR JHS</p>
                 </div>
-                <div class="border mt-2">
+                <div class="border mt-1">
                     <div class="d-flex justify-content-between mx-2">
                         <span>Elementary school completer</span>
                         <span>General average: <span class="text-decoration-underline">{{$student[0]->gen_ave}}</span></span>
@@ -145,15 +145,19 @@
                     </div>
                     <div class="d-flex justify-content-between mx-2">
                         <span>Date of Examination/Assessment (mm/dd/yyyy): _________________</span>
-                        <span>Name and Address of Testing Center: __________________________________</span>
+                        <span>Name and Address of Testing Center: ______________________________</span>
                     </div>
                 </div>
                 @endif
                 <div class="text-center info-header">
                     <p class="text-uppercase">SCHOLASTIC RECORD</p>
                 </div>
-                @foreach($student[0]->student_record as $record)
-                <div class="record-header mt-2">
+
+
+                @if(count($grade_7) > 0)
+
+                @foreach($grade_7 as $record)
+                <div class="record-header mt-1">
                     <div class="d-flex justify-content-between">
                         <span>School: <span class="text-decoration-underline">{{ $record->school }}</span></span>
                         <span>School ID: <span class="text-decoration-underline">{{ $record->school_id }}</span></span>
@@ -179,7 +183,10 @@
                             <th>REMARKS</th>
                         </tr>
                     </thead>
-                    @foreach($record->data as $data)
+
+
+                    <!-- grade 7 -->
+                    @foreach($grade_7[0]->data as $data)
                     <tbody>
                         <tr>
                             @foreach($data as $subject => $quarter)
@@ -198,7 +205,6 @@
 
                         </tr>
                         @endforeach
-
                         <tr>
                             <td></td>
                             <td></td>
@@ -271,22 +277,1480 @@
 
                 </table>
                 @endforeach
-                <div class="text-center info-header mt-2">
+
+                @else
+
+                <div class="record-header mt-1">
+                    <div class="d-flex justify-content-between">
+                        <span>School: <span class="text-decoration-underline">_______________</span></span>
+                        <span>School ID: <span class="text-decoration-underline">_______________</span></span>
+                        <span>District: <span class="text-decoration-underline text-uppercase">_______________</span></span>
+                        <span>Division: <span class="text-decoration-underline text-uppercase">_______________</span></span>
+                        <span>Region: <span class="text-decoration-underline text-uppercase">_______________</span></span>
+                    </div>
+                    <div class="d-flex justify-content-between">
+                        <span>Classified as Grade: <span class="text-decoration-underline">_______________</span></span>
+                        <span>Section: <span class="text-decoration-underline">_______________</span></span>
+                        <span>School year: <span class="text-decoration-underline text-uppercase">_______________</span></span>
+                        <span>Name of Adviser/teacher: <span class="text-decoration-underline text-uppercase">_______________</span></span>
+                        <span>Signature: _______________</span>
+                    </div>
+                </div>
+
+                <table class="table-data">
+                    <thead>
+                        <tr>
+                            <th>Learning Areas</th>
+                            <th colspan="4">Quarterly Rating</th>
+                            <th>FINAL RATING</th>
+                            <th>REMARKS</th>
+                        </tr>
+                    </thead>
+
+
+                    <!-- grade 7 -->
+
+                    <tbody>
+
+                        <tr>
+                            <td>Filipino</td>
+                            <td></td>
+                            <td></td>
+                            <td></td>
+                            <td></td>
+                            <td></td>
+                            <td></td>
+                        </tr>
+                        <tr>
+                            <td>English</td>
+                            <td></td>
+                            <td></td>
+                            <td></td>
+                            <td></td>
+                            <td></td>
+                            <td></td>
+                        </tr>
+                        <tr>
+                            <td>Mathematics</td>
+                            <td></td>
+                            <td></td>
+                            <td></td>
+                            <td></td>
+                            <td></td>
+                            <td></td>
+                        </tr>
+                        <tr>
+                            <td>Science</td>
+                            <td></td>
+                            <td></td>
+                            <td></td>
+                            <td></td>
+                            <td></td>
+                            <td></td>
+                        </tr>
+                        <tr>
+                            <td>Araling Panlipunan (AP)</td>
+                            <td></td>
+                            <td></td>
+                            <td></td>
+                            <td></td>
+                            <td></td>
+                            <td></td>
+                        </tr>
+                        <tr>
+                            <td>Edukasyon sa Pagpapakatao (Esp)</td>
+                            <td></td>
+                            <td></td>
+                            <td></td>
+                            <td></td>
+                            <td></td>
+                            <td></td>
+                        </tr>
+                        <tr>
+                            <td>Technology and Livelihood Education (TLE)</td>
+                            <td></td>
+                            <td></td>
+                            <td></td>
+                            <td></td>
+                            <td></td>
+                            <td></td>
+                        </tr>
+                        <tr>
+                            <td>MAPEH</td>
+                            <td></td>
+                            <td></td>
+                            <td></td>
+                            <td></td>
+                            <td></td>
+                            <td></td>
+                        </tr>
+                        <tr>
+                            <td><span class="mx-2 fw-light fst-italic">Music</span> </td>
+                            <td></td>
+                            <td></td>
+                            <td></td>
+                            <td></td>
+                            <td></td>
+                            <td></td>
+                        </tr>
+                        <tr>
+                            <td><span class="mx-2 fw-light fst-italic">Arts</span></td>
+                            <td></td>
+                            <td></td>
+                            <td></td>
+                            <td></td>
+                            <td></td>
+                            <td></td>
+                        </tr>
+                        <tr>
+                            <td><span class="mx-2 fw-light fst-italic">Physical Education</span></td>
+                            <td></td>
+                            <td></td>
+                            <td></td>
+                            <td></td>
+                            <td></td>
+                            <td></td>
+                        </tr>
+                        <tr>
+                            <td><span class="mx-2 fw-light fst-italic">Health</span></td>
+                            <td></td>
+                            <td></td>
+                            <td></td>
+                            <td></td>
+                            <td></td>
+                            <td></td>
+                        </tr>
+                        <tr>
+                            <td></td>
+                            <td></td>
+                            <td></td>
+                            <td></td>
+                            <td></td>
+                            <td></td>
+                            <td></td>
+                        </tr>
+                        <tr>
+                            <td></td>
+                            <td></td>
+                            <td></td>
+                            <td></td>
+                            <td></td>
+                            <td></td>
+                            <td></td>
+                        </tr>
+                        <tr class="f-12">
+                            <td></td>
+                            <td colspan="4"> General average : </td>
+                            <td colspan="2"></td>
+                        </tr>
+                        <tr>
+                            <td colspan="7 ">
+                                <div class="d-flex justify-content-center">
+                                    <span class="fw-light mx-2">Remedial Classes</span>
+                                    <span class="mx-5">Conducted from (mm/dd/yyyy): <span class="text-decoration-underline">_______________</span></span>
+                                    <span class="mx-5">To: (mm/dd/yyyy): <span class="text-decoration-underline">_______________</span></span>
+                                </div>
+                            </td>
+                        </tr>
+                    </tbody>
+                </table>
+
+                <table class="table-data">
+                    <tr>
+                        <th>Learning Areas</th>
+                        <th>Final rating</th>
+                        <th>Remedial class mark</th>
+                        <th>Final Recomputed grade</th>
+                        <th>Remarks</th>
+                    </tr>
+
+
+                    <tr>
+
+                        <td class="f-12 text-uppercase"></td>
+                        <td class="f-12 text-uppercase"></td>
+                        <td class="f-12 text-uppercase"></td>
+                        <td class="f-12 text-uppercase"></td>
+                        <td class="f-12 text-uppercase"></td>
+                    </tr>
+                    <tr>
+
+                        <td class="f-12 text-uppercase"></td>
+                        <td class="f-12 text-uppercase"></td>
+                        <td class="f-12 text-uppercase"></td>
+                        <td class="f-12 text-uppercase"></td>
+                        <td class="f-12 text-uppercase"></td>
+                    </tr>
+
+
+
+                </table>
+                @endif
+
+                <!-- end grade 7 -->
+                <!-- grade 8 -->
+
+                @if(count($grade_8) > 0)
+
+                @foreach($grade_8 as $record)
+                <div class="record-header mt-1">
+                    <div class="d-flex justify-content-between">
+                        <span>School: <span class="text-decoration-underline">{{ $record->school }}</span></span>
+                        <span>School ID: <span class="text-decoration-underline">{{ $record->school_id }}</span></span>
+                        <span>District: <span class="text-decoration-underline text-uppercase">{{ $record->district }}</span></span>
+                        <span>Division: <span class="text-decoration-underline text-uppercase">{{ $record->division }}</span></span>
+                        <span>Region: <span class="text-decoration-underline text-uppercase">{{ $record->region }}</span></span>
+                    </div>
+                    <div class="d-flex justify-content-between">
+                        <span>Classified as Grade: <span class="text-decoration-underline">{{ $record->classified_grade }}</span></span>
+                        <span>Section: <span class="text-decoration-underline">{{ $record->section }}</span></span>
+                        <span>School year: <span class="text-decoration-underline text-uppercase">{{ $record->school_year }}</span></span>
+                        <span>Name of Adviser/teacher: <span class="text-decoration-underline text-uppercase">{{ $record->adviser }}</span></span>
+                        <span>Signature: _______________</span>
+                    </div>
+                </div>
+
+                <table class="table-data">
+                    <thead>
+                        <tr>
+                            <th>Learning Areas</th>
+                            <th colspan="4">Quarterly Rating</th>
+                            <th>FINAL RATING</th>
+                            <th>REMARKS</th>
+                        </tr>
+                    </thead>
+
+
+                    <!-- grade 8 -->
+                    @foreach($grade_8[0]->data as $data)
+                    <tbody>
+                        <tr>
+                            @foreach($data as $subject => $quarter)
+                            <td class="{{ $subject == 'Music' ? 'fw-light px-2 fst-italic':''}} 
+                            {{ $subject == 'Arts' ? 'fw-light px-2 fst-italic':''}}
+                            {{ $subject == 'Physical Education' ? 'fw-light px-2 fst-italic':''}}
+                            {{ $subject == 'Health' ? 'fw-light px-2 fst-italic':''}}
+                            ">{{$subject}}</td>
+                            <td> {{ $quarter['quarter_1']}}</td>
+                            <td> {{ $quarter['quarter_2']}}</td>
+                            <td> {{ $quarter['quarter_3']}}</td>
+                            <td>{{ $quarter['quarter_4']}}</td>
+                            <td> {{ $quarter['final']}}</td>
+                            <td>{{ $quarter['remark']}}</td>
+                            @endforeach
+
+                        </tr>
+                        @endforeach
+                        <tr>
+                            <td></td>
+                            <td></td>
+                            <td></td>
+                            <td></td>
+                            <td></td>
+                            <td></td>
+                            <td></td>
+                        </tr>
+                        <tr>
+                            <td></td>
+                            <td></td>
+                            <td></td>
+                            <td></td>
+                            <td></td>
+                            <td></td>
+                            <td></td>
+                        </tr>
+                        <tr class="f-12">
+                            <td></td>
+                            <td colspan="4"> General average : {{$record->gen_ave}}</td>
+                            <td colspan="2"></td>
+                        </tr>
+                        <tr>
+                            <td colspan="7 ">
+                                <div class="d-flex justify-content-center">
+                                    <span class="fw-light mx-2">Remedial Classes</span>
+                                    <span class="mx-5">Conducted from (mm/dd/yyyy): <span class="text-decoration-underline">{{ $record->remedial_date_from }}</span></span>
+                                    <span class="mx-5">To: (mm/dd/yyyy): <span class="text-decoration-underline">{{ $record->remedial_date_to }}</span></span>
+                                </div>
+                            </td>
+                        </tr>
+                    </tbody>
+                </table>
+
+                <table class="table-data">
+                    <tr>
+                        <th>Learning Areas</th>
+                        <th>Final rating</th>
+                        <th>Remedial class mark</th>
+                        <th>Final Recomputed grade</th>
+                        <th>Remarks</th>
+                    </tr>
+
+                    @if(count($record->remedials) <= 0) <tr>
+
+                        <td class="f-12 text-uppercase"></td>
+                        <td class="f-12 text-uppercase"></td>
+                        <td class="f-12 text-uppercase"></td>
+                        <td class="f-12 text-uppercase"></td>
+                        <td class="f-12 text-uppercase"></td>
+                        </tr>
+                        <tr>
+
+                            <td class="f-12 text-uppercase"></td>
+                            <td class="f-12 text-uppercase"></td>
+                            <td class="f-12 text-uppercase"></td>
+                            <td class="f-12 text-uppercase"></td>
+                            <td class="f-12 text-uppercase"></td>
+                        </tr>
+                        @else
+                        @foreach($record->remedials as $data)
+                        <tr>
+                            @foreach($data as $dt)
+                            <td class="f-12 text-uppercase">{{ $dt }}</td>
+                            @endforeach
+                        </tr>
+                        @endforeach
+                        @endif
+
+                </table>
+                @endforeach
+
+                @else
+
+                <div class="record-header mt-1">
+                    <div class="d-flex justify-content-between">
+                        <span>School: <span class="text-decoration-underline">_______________</span></span>
+                        <span>School ID: <span class="text-decoration-underline">_______________</span></span>
+                        <span>District: <span class="text-decoration-underline text-uppercase">_______________</span></span>
+                        <span>Division: <span class="text-decoration-underline text-uppercase">_______________</span></span>
+                        <span>Region: <span class="text-decoration-underline text-uppercase">_______________</span></span>
+                    </div>
+                    <div class="d-flex justify-content-between">
+                        <span>Classified as Grade: <span class="text-decoration-underline">_______________</span></span>
+                        <span>Section: <span class="text-decoration-underline">_______________</span></span>
+                        <span>School year: <span class="text-decoration-underline text-uppercase">_______________</span></span>
+                        <span>Name of Adviser/teacher: <span class="text-decoration-underline text-uppercase">_______________</span></span>
+                        <span>Signature: _______________</span>
+                    </div>
+                </div>
+
+                <table class="table-data">
+                    <thead>
+                        <tr>
+                            <th>Learning Areas</th>
+                            <th colspan="4">Quarterly Rating</th>
+                            <th>FINAL RATING</th>
+                            <th>REMARKS</th>
+                        </tr>
+                    </thead>
+
+
+                    <!-- grade 7 -->
+
+                    <tbody>
+
+                        <tr>
+                            <td>Filipino</td>
+                            <td></td>
+                            <td></td>
+                            <td></td>
+                            <td></td>
+                            <td></td>
+                            <td></td>
+                        </tr>
+                        <tr>
+                            <td>English</td>
+                            <td></td>
+                            <td></td>
+                            <td></td>
+                            <td></td>
+                            <td></td>
+                            <td></td>
+                        </tr>
+                        <tr>
+                            <td>Mathematics</td>
+                            <td></td>
+                            <td></td>
+                            <td></td>
+                            <td></td>
+                            <td></td>
+                            <td></td>
+                        </tr>
+                        <tr>
+                            <td>Science</td>
+                            <td></td>
+                            <td></td>
+                            <td></td>
+                            <td></td>
+                            <td></td>
+                            <td></td>
+                        </tr>
+                        <tr>
+                            <td>Araling Panlipunan (AP)</td>
+                            <td></td>
+                            <td></td>
+                            <td></td>
+                            <td></td>
+                            <td></td>
+                            <td></td>
+                        </tr>
+                        <tr>
+                            <td>Edukasyon sa Pagpapakatao (Esp)</td>
+                            <td></td>
+                            <td></td>
+                            <td></td>
+                            <td></td>
+                            <td></td>
+                            <td></td>
+                        </tr>
+                        <tr>
+                            <td>Technology and Livelihood Education (TLE)</td>
+                            <td></td>
+                            <td></td>
+                            <td></td>
+                            <td></td>
+                            <td></td>
+                            <td></td>
+                        </tr>
+                        <tr>
+                            <td>MAPEH</td>
+                            <td></td>
+                            <td></td>
+                            <td></td>
+                            <td></td>
+                            <td></td>
+                            <td></td>
+                        </tr>
+                        <tr>
+                            <td><span class="mx-2 fw-light fst-italic">Music</span> </td>
+                            <td></td>
+                            <td></td>
+                            <td></td>
+                            <td></td>
+                            <td></td>
+                            <td></td>
+                        </tr>
+                        <tr>
+                            <td><span class="mx-2 fw-light fst-italic">Arts</span></td>
+                            <td></td>
+                            <td></td>
+                            <td></td>
+                            <td></td>
+                            <td></td>
+                            <td></td>
+                        </tr>
+                        <tr>
+                            <td><span class="mx-2 fw-light fst-italic">Physical Education</span></td>
+                            <td></td>
+                            <td></td>
+                            <td></td>
+                            <td></td>
+                            <td></td>
+                            <td></td>
+                        </tr>
+                        <tr>
+                            <td><span class="mx-2 fw-light fst-italic">Health</span></td>
+                            <td></td>
+                            <td></td>
+                            <td></td>
+                            <td></td>
+                            <td></td>
+                            <td></td>
+                        </tr>
+                        <tr>
+                            <td></td>
+                            <td></td>
+                            <td></td>
+                            <td></td>
+                            <td></td>
+                            <td></td>
+                            <td></td>
+                        </tr>
+                        <tr>
+                            <td></td>
+                            <td></td>
+                            <td></td>
+                            <td></td>
+                            <td></td>
+                            <td></td>
+                            <td></td>
+                        </tr>
+                        <tr class="f-12">
+                            <td></td>
+                            <td colspan="4"> General average : </td>
+                            <td colspan="2"></td>
+                        </tr>
+                        <tr>
+                            <td colspan="7 ">
+                                <div class="d-flex justify-content-center">
+                                    <span class="fw-light mx-2">Remedial Classes</span>
+                                    <span class="mx-5">Conducted from (mm/dd/yyyy): <span class="text-decoration-underline">_______________</span></span>
+                                    <span class="mx-5">To: (mm/dd/yyyy): <span class="text-decoration-underline">_______________</span></span>
+                                </div>
+                            </td>
+                        </tr>
+                    </tbody>
+                </table>
+
+                <table class="table-data">
+                    <tr>
+                        <th>Learning Areas</th>
+                        <th>Final rating</th>
+                        <th>Remedial class mark</th>
+                        <th>Final Recomputed grade</th>
+                        <th>Remarks</th>
+                    </tr>
+
+
+                    <tr>
+
+                        <td class="f-12 text-uppercase"></td>
+                        <td class="f-12 text-uppercase"></td>
+                        <td class="f-12 text-uppercase"></td>
+                        <td class="f-12 text-uppercase"></td>
+                        <td class="f-12 text-uppercase"></td>
+                    </tr>
+                    <tr>
+
+                        <td class="f-12 text-uppercase"></td>
+                        <td class="f-12 text-uppercase"></td>
+                        <td class="f-12 text-uppercase"></td>
+                        <td class="f-12 text-uppercase"></td>
+                        <td class="f-12 text-uppercase"></td>
+                    </tr>
+
+
+
+                </table>
+                @endif
+                <!-- end grade 8 -->
+
+
+
+                <!-- certification -->
+                <div class="text-center info-header mt-1">
                     <p class="text-uppercase">CERTIFICATION</p>
                 </div>
-                <div class="certification">
+                <div class="certification mb-5">
                     <p class="f-12 text-center mt-2">I CERTIFY that this is a true record of: <span class="text-decoration-underline">{{ $student[0]->lastname .' '. $student[0]->firstname. ' '. $student[0]->name_ext . ' '. $student[0]->middlename }}</span>
                         with LRN: <span class="text-decoration-underline">{{ $student[0]->lrn }} </span>
                         that he/she is eligible for admission to Grade ________
                     </p>
                     <p class="f-12 text-center">Name of School : <span class="text-decoration-underline fw-bold text-capitalize">{{ $name_of_school ?? '' }}</span> <span>School ID: <span class="text-decoration-underline fw-bold text-capitalize">{{ $school_id ?? '' }}</span></span> <span>Last school year Attended: _______________</span></p>
-                    <d class="d-flex justify-content-around mt-5 mb-3">
+                    <d class="d-flex justify-content-around mt-2 mb-3">
                         <div class="d-flex flex-column justify-content-center align-items-center">
                             <span class="text-decoration-underline fw-bold">{{ now()->format('M d. Y')}}</span>
                             <p class="pfooter">date</p>
                         </div>
                         <div class="d-flex flex-column justify-content-center align-items-center">
+                            <span class="text-center fw-bold admin_name">{{ $user->admin_name !=''? $user->admin_name : 'You can go to setting to set principal name' }}</span>
+                            <p class="pfooter">Signature of Principal/School Head over printed Name</p>
+                        </div>
+                        <div class="d-flex flex-column justify-content-center align-items-center">
+                            <span class="fw-bold"> </span>
+                            <p class="pfooter">(Affix School Seal Here)</p>
+                        </div>
 
+                    </d>
+                </div>
+
+
+                <br><br><br><br>
+
+                <!-- grade 9 -->
+                @if(count($grade_9) > 0)
+
+                @foreach($grade_9 as $record)
+                <div class="record-header">
+                    <div class="d-flex justify-content-between">
+                        <span>School: <span class="text-decoration-underline">{{ $record->school }}</span></span>
+                        <span>School ID: <span class="text-decoration-underline">{{ $record->school_id }}</span></span>
+                        <span>District: <span class="text-decoration-underline text-uppercase">{{ $record->district }}</span></span>
+                        <span>Division: <span class="text-decoration-underline text-uppercase">{{ $record->division }}</span></span>
+                        <span>Region: <span class="text-decoration-underline text-uppercase">{{ $record->region }}</span></span>
+                    </div>
+                    <div class="d-flex justify-content-between">
+                        <span>Classified as Grade: <span class="text-decoration-underline">{{ $record->classified_grade }}</span></span>
+                        <span>Section: <span class="text-decoration-underline">{{ $record->section }}</span></span>
+                        <span>School year: <span class="text-decoration-underline text-uppercase">{{ $record->school_year }}</span></span>
+                        <span>Name of Adviser/teacher: <span class="text-decoration-underline text-uppercase">{{ $record->adviser }}</span></span>
+                        <span>Signature: _______________</span>
+                    </div>
+                </div>
+
+                <table class="table-data">
+                    <thead>
+                        <tr>
+                            <th>Learning Areas</th>
+                            <th colspan="4">Quarterly Rating</th>
+                            <th>FINAL RATING</th>
+                            <th>REMARKS</th>
+                        </tr>
+                    </thead>
+
+
+                    <!-- grade 8 -->
+                    @foreach($grade_9[0]->data as $data)
+                    <tbody>
+                        <tr>
+                            @foreach($data as $subject => $quarter)
+                            <td class="{{ $subject == 'Music' ? 'fw-light px-2 fst-italic':''}} 
+                            {{ $subject == 'Arts' ? 'fw-light px-2 fst-italic':''}}
+                            {{ $subject == 'Physical Education' ? 'fw-light px-2 fst-italic':''}}
+                            {{ $subject == 'Health' ? 'fw-light px-2 fst-italic':''}}
+                            ">{{$subject}}</td>
+                            <td> {{ $quarter['quarter_1']}}</td>
+                            <td> {{ $quarter['quarter_2']}}</td>
+                            <td> {{ $quarter['quarter_3']}}</td>
+                            <td>{{ $quarter['quarter_4']}}</td>
+                            <td> {{ $quarter['final']}}</td>
+                            <td>{{ $quarter['remark']}}</td>
+                            @endforeach
+
+                        </tr>
+                        @endforeach
+                        <tr>
+                            <td></td>
+                            <td></td>
+                            <td></td>
+                            <td></td>
+                            <td></td>
+                            <td></td>
+                            <td></td>
+                        </tr>
+                        <tr>
+                            <td></td>
+                            <td></td>
+                            <td></td>
+                            <td></td>
+                            <td></td>
+                            <td></td>
+                            <td></td>
+                        </tr>
+                        <tr class="f-12">
+                            <td></td>
+                            <td colspan="4"> General average : {{$record->gen_ave}}</td>
+                            <td colspan="2"></td>
+                        </tr>
+                        <tr>
+                            <td colspan="7 ">
+                                <div class="d-flex justify-content-center">
+                                    <span class="fw-light mx-2">Remedial Classes</span>
+                                    <span class="mx-5">Conducted from (mm/dd/yyyy): <span class="text-decoration-underline">{{ $record->remedial_date_from }}</span></span>
+                                    <span class="mx-5">To: (mm/dd/yyyy): <span class="text-decoration-underline">{{ $record->remedial_date_to }}</span></span>
+                                </div>
+                            </td>
+                        </tr>
+                    </tbody>
+                </table>
+
+                <table class="table-data">
+                    <tr>
+                        <th>Learning Areas</th>
+                        <th>Final rating</th>
+                        <th>Remedial class mark</th>
+                        <th>Final Recomputed grade</th>
+                        <th>Remarks</th>
+                    </tr>
+
+                    @if(count($record->remedials) <= 0) <tr>
+
+                        <td class="f-12 text-uppercase"></td>
+                        <td class="f-12 text-uppercase"></td>
+                        <td class="f-12 text-uppercase"></td>
+                        <td class="f-12 text-uppercase"></td>
+                        <td class="f-12 text-uppercase"></td>
+                        </tr>
+                        <tr>
+
+                            <td class="f-12 text-uppercase"></td>
+                            <td class="f-12 text-uppercase"></td>
+                            <td class="f-12 text-uppercase"></td>
+                            <td class="f-12 text-uppercase"></td>
+                            <td class="f-12 text-uppercase"></td>
+                        </tr>
+                        @else
+                        @foreach($record->remedials as $data)
+                        <tr>
+                            @foreach($data as $dt)
+                            <td class="f-12 text-uppercase">{{ $dt }}</td>
+                            @endforeach
+                        </tr>
+                        @endforeach
+                        @endif
+
+                </table>
+                @endforeach
+
+                @else
+
+                <div class="record-header mt-1">
+                    <div class="d-flex justify-content-between">
+                        <span>School: <span class="text-decoration-underline">_______________</span></span>
+                        <span>School ID: <span class="text-decoration-underline">_______________</span></span>
+                        <span>District: <span class="text-decoration-underline text-uppercase">_______________</span></span>
+                        <span>Division: <span class="text-decoration-underline text-uppercase">_______________</span></span>
+                        <span>Region: <span class="text-decoration-underline text-uppercase">_______________</span></span>
+                    </div>
+                    <div class="d-flex justify-content-between">
+                        <span>Classified as Grade: <span class="text-decoration-underline">_______________</span></span>
+                        <span>Section: <span class="text-decoration-underline">_______________</span></span>
+                        <span>School year: <span class="text-decoration-underline text-uppercase">_______________</span></span>
+                        <span>Name of Adviser/teacher: <span class="text-decoration-underline text-uppercase">_______________</span></span>
+                        <span>Signature: _______________</span>
+                    </div>
+                </div>
+
+                <table class="table-data">
+                    <thead>
+                        <tr>
+                            <th>Learning Areas</th>
+                            <th colspan="4">Quarterly Rating</th>
+                            <th>FINAL RATING</th>
+                            <th>REMARKS</th>
+                        </tr>
+                    </thead>
+
+
+                    <!-- grade 7 -->
+
+                    <tbody>
+
+                        <tr>
+                            <td>Filipino</td>
+                            <td></td>
+                            <td></td>
+                            <td></td>
+                            <td></td>
+                            <td></td>
+                            <td></td>
+                        </tr>
+                        <tr>
+                            <td>English</td>
+                            <td></td>
+                            <td></td>
+                            <td></td>
+                            <td></td>
+                            <td></td>
+                            <td></td>
+                        </tr>
+                        <tr>
+                            <td>Mathematics</td>
+                            <td></td>
+                            <td></td>
+                            <td></td>
+                            <td></td>
+                            <td></td>
+                            <td></td>
+                        </tr>
+                        <tr>
+                            <td>Science</td>
+                            <td></td>
+                            <td></td>
+                            <td></td>
+                            <td></td>
+                            <td></td>
+                            <td></td>
+                        </tr>
+                        <tr>
+                            <td>Araling Panlipunan (AP)</td>
+                            <td></td>
+                            <td></td>
+                            <td></td>
+                            <td></td>
+                            <td></td>
+                            <td></td>
+                        </tr>
+                        <tr>
+                            <td>Edukasyon sa Pagpapakatao (Esp)</td>
+                            <td></td>
+                            <td></td>
+                            <td></td>
+                            <td></td>
+                            <td></td>
+                            <td></td>
+                        </tr>
+                        <tr>
+                            <td>Technology and Livelihood Education (TLE)</td>
+                            <td></td>
+                            <td></td>
+                            <td></td>
+                            <td></td>
+                            <td></td>
+                            <td></td>
+                        </tr>
+                        <tr>
+                            <td>MAPEH</td>
+                            <td></td>
+                            <td></td>
+                            <td></td>
+                            <td></td>
+                            <td></td>
+                            <td></td>
+                        </tr>
+                        <tr>
+                            <td><span class="mx-2 fw-light fst-italic">Music</span> </td>
+                            <td></td>
+                            <td></td>
+                            <td></td>
+                            <td></td>
+                            <td></td>
+                            <td></td>
+                        </tr>
+                        <tr>
+                            <td><span class="mx-2 fw-light fst-italic">Arts</span></td>
+                            <td></td>
+                            <td></td>
+                            <td></td>
+                            <td></td>
+                            <td></td>
+                            <td></td>
+                        </tr>
+                        <tr>
+                            <td><span class="mx-2 fw-light fst-italic">Physical Education</span></td>
+                            <td></td>
+                            <td></td>
+                            <td></td>
+                            <td></td>
+                            <td></td>
+                            <td></td>
+                        </tr>
+                        <tr>
+                            <td><span class="mx-2 fw-light fst-italic">Health</span></td>
+                            <td></td>
+                            <td></td>
+                            <td></td>
+                            <td></td>
+                            <td></td>
+                            <td></td>
+                        </tr>
+                        <tr>
+                            <td></td>
+                            <td></td>
+                            <td></td>
+                            <td></td>
+                            <td></td>
+                            <td></td>
+                            <td></td>
+                        </tr>
+                        <tr>
+                            <td></td>
+                            <td></td>
+                            <td></td>
+                            <td></td>
+                            <td></td>
+                            <td></td>
+                            <td></td>
+                        </tr>
+                        <tr class="f-12">
+                            <td></td>
+                            <td colspan="4"> General average : </td>
+                            <td colspan="2"></td>
+                        </tr>
+                        <tr>
+                            <td colspan="7 ">
+                                <div class="d-flex justify-content-center">
+                                    <span class="fw-light mx-2">Remedial Classes</span>
+                                    <span class="mx-5">Conducted from (mm/dd/yyyy): <span class="text-decoration-underline">_______________</span></span>
+                                    <span class="mx-5">To: (mm/dd/yyyy): <span class="text-decoration-underline">_______________</span></span>
+                                </div>
+                            </td>
+                        </tr>
+                    </tbody>
+                </table>
+
+                <table class="table-data">
+                    <tr>
+                        <th>Learning Areas</th>
+                        <th>Final rating</th>
+                        <th>Remedial class mark</th>
+                        <th>Final Recomputed grade</th>
+                        <th>Remarks</th>
+                    </tr>
+
+
+                    <tr>
+
+                        <td class="f-12 text-uppercase"></td>
+                        <td class="f-12 text-uppercase"></td>
+                        <td class="f-12 text-uppercase"></td>
+                        <td class="f-12 text-uppercase"></td>
+                        <td class="f-12 text-uppercase"></td>
+                    </tr>
+                    <tr>
+
+                        <td class="f-12 text-uppercase"></td>
+                        <td class="f-12 text-uppercase"></td>
+                        <td class="f-12 text-uppercase"></td>
+                        <td class="f-12 text-uppercase"></td>
+                        <td class="f-12 text-uppercase"></td>
+                    </tr>
+
+
+
+                </table>
+                @endif
+
+                <!-- end grade 9 -->
+
+                <!-- grade 9 -->
+                @if(count($grade_10) > 0)
+
+                @foreach($grade_10 as $record)
+                <div class="record-header mt-1">
+                    <div class="d-flex justify-content-between">
+                        <span>School: <span class="text-decoration-underline">{{ $record->school }}</span></span>
+                        <span>School ID: <span class="text-decoration-underline">{{ $record->school_id }}</span></span>
+                        <span>District: <span class="text-decoration-underline text-uppercase">{{ $record->district }}</span></span>
+                        <span>Division: <span class="text-decoration-underline text-uppercase">{{ $record->division }}</span></span>
+                        <span>Region: <span class="text-decoration-underline text-uppercase">{{ $record->region }}</span></span>
+                    </div>
+                    <div class="d-flex justify-content-between">
+                        <span>Classified as Grade: <span class="text-decoration-underline">{{ $record->classified_grade }}</span></span>
+                        <span>Section: <span class="text-decoration-underline">{{ $record->section }}</span></span>
+                        <span>School year: <span class="text-decoration-underline text-uppercase">{{ $record->school_year }}</span></span>
+                        <span>Name of Adviser/teacher: <span class="text-decoration-underline text-uppercase">{{ $record->adviser }}</span></span>
+                        <span>Signature: _______________</span>
+                    </div>
+                </div>
+
+                <table class="table-data">
+                    <thead>
+                        <tr>
+                            <th>Learning Areas</th>
+                            <th colspan="4">Quarterly Rating</th>
+                            <th>FINAL RATING</th>
+                            <th>REMARKS</th>
+                        </tr>
+                    </thead>
+
+
+                    <!-- grade 8 -->
+                    @foreach($grade_10[0]->data as $data)
+                    <tbody>
+                        <tr>
+                            @foreach($data as $subject => $quarter)
+                            <td class="{{ $subject == 'Music' ? 'fw-light px-2 fst-italic':''}} 
+                            {{ $subject == 'Arts' ? 'fw-light px-2 fst-italic':''}}
+                            {{ $subject == 'Physical Education' ? 'fw-light px-2 fst-italic':''}}
+                            {{ $subject == 'Health' ? 'fw-light px-2 fst-italic':''}}
+                            ">{{$subject}}</td>
+                            <td> {{ $quarter['quarter_1']}}</td>
+                            <td> {{ $quarter['quarter_2']}}</td>
+                            <td> {{ $quarter['quarter_3']}}</td>
+                            <td>{{ $quarter['quarter_4']}}</td>
+                            <td> {{ $quarter['final']}}</td>
+                            <td>{{ $quarter['remark']}}</td>
+                            @endforeach
+
+                        </tr>
+                        @endforeach
+                        <tr>
+                            <td></td>
+                            <td></td>
+                            <td></td>
+                            <td></td>
+                            <td></td>
+                            <td></td>
+                            <td></td>
+                        </tr>
+                        <tr>
+                            <td></td>
+                            <td></td>
+                            <td></td>
+                            <td></td>
+                            <td></td>
+                            <td></td>
+                            <td></td>
+                        </tr>
+                        <tr class="f-12">
+                            <td></td>
+                            <td colspan="4"> General average : {{$record->gen_ave}}</td>
+                            <td colspan="2"></td>
+                        </tr>
+                        <tr>
+                            <td colspan="7 ">
+                                <div class="d-flex justify-content-center">
+                                    <span class="fw-light mx-2">Remedial Classes</span>
+                                    <span class="mx-5">Conducted from (mm/dd/yyyy): <span class="text-decoration-underline">{{ $record->remedial_date_from }}</span></span>
+                                    <span class="mx-5">To: (mm/dd/yyyy): <span class="text-decoration-underline">{{ $record->remedial_date_to }}</span></span>
+                                </div>
+                            </td>
+                        </tr>
+                    </tbody>
+                </table>
+
+                <table class="table-data">
+                    <tr>
+                        <th>Learning Areas</th>
+                        <th>Final rating</th>
+                        <th>Remedial class mark</th>
+                        <th>Final Recomputed grade</th>
+                        <th>Remarks</th>
+                    </tr>
+
+                    @if(count($record->remedials) <= 0) <tr>
+
+                        <td class="f-12 text-uppercase"></td>
+                        <td class="f-12 text-uppercase"></td>
+                        <td class="f-12 text-uppercase"></td>
+                        <td class="f-12 text-uppercase"></td>
+                        <td class="f-12 text-uppercase"></td>
+                        </tr>
+                        <tr>
+
+                            <td class="f-12 text-uppercase"></td>
+                            <td class="f-12 text-uppercase"></td>
+                            <td class="f-12 text-uppercase"></td>
+                            <td class="f-12 text-uppercase"></td>
+                            <td class="f-12 text-uppercase"></td>
+                        </tr>
+                        @else
+                        @foreach($record->remedials as $data)
+                        <tr>
+                            @foreach($data as $dt)
+                            <td class="f-12 text-uppercase">{{ $dt }}</td>
+                            @endforeach
+                        </tr>
+                        @endforeach
+                        @endif
+
+                </table>
+                @endforeach
+
+                @else
+
+                <div class="record-header mt-1">
+                    <div class="d-flex justify-content-between">
+                        <span>School: <span class="text-decoration-underline">_______________</span></span>
+                        <span>School ID: <span class="text-decoration-underline">_______________</span></span>
+                        <span>District: <span class="text-decoration-underline text-uppercase">_______________</span></span>
+                        <span>Division: <span class="text-decoration-underline text-uppercase">_______________</span></span>
+                        <span>Region: <span class="text-decoration-underline text-uppercase">_______________</span></span>
+                    </div>
+                    <div class="d-flex justify-content-between">
+                        <span>Classified as Grade: <span class="text-decoration-underline">_______________</span></span>
+                        <span>Section: <span class="text-decoration-underline">_______________</span></span>
+                        <span>School year: <span class="text-decoration-underline text-uppercase">_______________</span></span>
+                        <span>Name of Adviser/teacher: <span class="text-decoration-underline text-uppercase">_______________</span></span>
+                        <span>Signature: _______________</span>
+                    </div>
+                </div>
+
+                <table class="table-data">
+                    <thead>
+                        <tr>
+                            <th>Learning Areas</th>
+                            <th colspan="4">Quarterly Rating</th>
+                            <th>FINAL RATING</th>
+                            <th>REMARKS</th>
+                        </tr>
+                    </thead>
+
+
+                    <!-- grade 7 -->
+
+                    <tbody>
+
+                        <tr>
+                            <td>Filipino</td>
+                            <td></td>
+                            <td></td>
+                            <td></td>
+                            <td></td>
+                            <td></td>
+                            <td></td>
+                        </tr>
+                        <tr>
+                            <td>English</td>
+                            <td></td>
+                            <td></td>
+                            <td></td>
+                            <td></td>
+                            <td></td>
+                            <td></td>
+                        </tr>
+                        <tr>
+                            <td>Mathematics</td>
+                            <td></td>
+                            <td></td>
+                            <td></td>
+                            <td></td>
+                            <td></td>
+                            <td></td>
+                        </tr>
+                        <tr>
+                            <td>Science</td>
+                            <td></td>
+                            <td></td>
+                            <td></td>
+                            <td></td>
+                            <td></td>
+                            <td></td>
+                        </tr>
+                        <tr>
+                            <td>Araling Panlipunan (AP)</td>
+                            <td></td>
+                            <td></td>
+                            <td></td>
+                            <td></td>
+                            <td></td>
+                            <td></td>
+                        </tr>
+                        <tr>
+                            <td>Edukasyon sa Pagpapakatao (Esp)</td>
+                            <td></td>
+                            <td></td>
+                            <td></td>
+                            <td></td>
+                            <td></td>
+                            <td></td>
+                        </tr>
+                        <tr>
+                            <td>Technology and Livelihood Education (TLE)</td>
+                            <td></td>
+                            <td></td>
+                            <td></td>
+                            <td></td>
+                            <td></td>
+                            <td></td>
+                        </tr>
+                        <tr>
+                            <td>MAPEH</td>
+                            <td></td>
+                            <td></td>
+                            <td></td>
+                            <td></td>
+                            <td></td>
+                            <td></td>
+                        </tr>
+                        <tr>
+                            <td><span class="mx-2 fw-light fst-italic">Music</span> </td>
+                            <td></td>
+                            <td></td>
+                            <td></td>
+                            <td></td>
+                            <td></td>
+                            <td></td>
+                        </tr>
+                        <tr>
+                            <td><span class="mx-2 fw-light fst-italic">Arts</span></td>
+                            <td></td>
+                            <td></td>
+                            <td></td>
+                            <td></td>
+                            <td></td>
+                            <td></td>
+                        </tr>
+                        <tr>
+                            <td><span class="mx-2 fw-light fst-italic">Physical Education</span></td>
+                            <td></td>
+                            <td></td>
+                            <td></td>
+                            <td></td>
+                            <td></td>
+                            <td></td>
+                        </tr>
+                        <tr>
+                            <td><span class="mx-2 fw-light fst-italic">Health</span></td>
+                            <td></td>
+                            <td></td>
+                            <td></td>
+                            <td></td>
+                            <td></td>
+                            <td></td>
+                        </tr>
+                        <tr>
+                            <td></td>
+                            <td></td>
+                            <td></td>
+                            <td></td>
+                            <td></td>
+                            <td></td>
+                            <td></td>
+                        </tr>
+                        <tr>
+                            <td></td>
+                            <td></td>
+                            <td></td>
+                            <td></td>
+                            <td></td>
+                            <td></td>
+                            <td></td>
+                        </tr>
+                        <tr class="f-12">
+                            <td></td>
+                            <td colspan="4"> General average : </td>
+                            <td colspan="2"></td>
+                        </tr>
+                        <tr>
+                            <td colspan="7 ">
+                                <div class="d-flex justify-content-center">
+                                    <span class="fw-light mx-2">Remedial Classes</span>
+                                    <span class="mx-5">Conducted from (mm/dd/yyyy): <span class="text-decoration-underline">_______________</span></span>
+                                    <span class="mx-5">To: (mm/dd/yyyy): <span class="text-decoration-underline">_______________</span></span>
+                                </div>
+                            </td>
+                        </tr>
+                    </tbody>
+                </table>
+
+                <table class="table-data">
+                    <tr>
+                        <th>Learning Areas</th>
+                        <th>Final rating</th>
+                        <th>Remedial class mark</th>
+                        <th>Final Recomputed grade</th>
+                        <th>Remarks</th>
+                    </tr>
+
+
+                    <tr>
+
+                        <td class="f-12 text-uppercase"></td>
+                        <td class="f-12 text-uppercase"></td>
+                        <td class="f-12 text-uppercase"></td>
+                        <td class="f-12 text-uppercase"></td>
+                        <td class="f-12 text-uppercase"></td>
+                    </tr>
+                    <tr>
+
+                        <td class="f-12 text-uppercase"></td>
+                        <td class="f-12 text-uppercase"></td>
+                        <td class="f-12 text-uppercase"></td>
+                        <td class="f-12 text-uppercase"></td>
+                        <td class="f-12 text-uppercase"></td>
+                    </tr>
+
+
+
+                </table>
+                @endif
+
+                <!-- end grade 9 -->
+
+                <div class="record-header mt-1">
+                    <div class="d-flex justify-content-between">
+                        <span>School: <span class="text-decoration-underline">_______________</span></span>
+                        <span>School ID: <span class="text-decoration-underline">_______________</span></span>
+                        <span>District: <span class="text-decoration-underline text-uppercase">_______________</span></span>
+                        <span>Division: <span class="text-decoration-underline text-uppercase">_______________</span></span>
+                        <span>Region: <span class="text-decoration-underline text-uppercase">_______________</span></span>
+                    </div>
+                    <div class="d-flex justify-content-between">
+                        <span>Classified as Grade: <span class="text-decoration-underline">_______________</span></span>
+                        <span>Section: <span class="text-decoration-underline">_______________</span></span>
+                        <span>School year: <span class="text-decoration-underline text-uppercase">_______________</span></span>
+                        <span>Name of Adviser/teacher: <span class="text-decoration-underline text-uppercase">_______________</span></span>
+                        <span>Signature: _______________</span>
+                    </div>
+                </div>
+
+                <table class="table-data">
+                    <thead>
+                        <tr>
+                            <th>Learning Areas</th>
+                            <th colspan="4">Quarterly Rating</th>
+                            <th>FINAL RATING</th>
+                            <th>REMARKS</th>
+                        </tr>
+                    </thead>
+
+
+                    <!-- grade 7 -->
+
+                    <tbody>
+
+                        <tr>
+                            <td>Filipino</td>
+                            <td></td>
+                            <td></td>
+                            <td></td>
+                            <td></td>
+                            <td></td>
+                            <td></td>
+                        </tr>
+                        <tr>
+                            <td>English</td>
+                            <td></td>
+                            <td></td>
+                            <td></td>
+                            <td></td>
+                            <td></td>
+                            <td></td>
+                        </tr>
+                        <tr>
+                            <td>Mathematics</td>
+                            <td></td>
+                            <td></td>
+                            <td></td>
+                            <td></td>
+                            <td></td>
+                            <td></td>
+                        </tr>
+                        <tr>
+                            <td>Science</td>
+                            <td></td>
+                            <td></td>
+                            <td></td>
+                            <td></td>
+                            <td></td>
+                            <td></td>
+                        </tr>
+                        <tr>
+                            <td>Araling Panlipunan (AP)</td>
+                            <td></td>
+                            <td></td>
+                            <td></td>
+                            <td></td>
+                            <td></td>
+                            <td></td>
+                        </tr>
+                        <tr>
+                            <td>Edukasyon sa Pagpapakatao (Esp)</td>
+                            <td></td>
+                            <td></td>
+                            <td></td>
+                            <td></td>
+                            <td></td>
+                            <td></td>
+                        </tr>
+                        <tr>
+                            <td>Technology and Livelihood Education (TLE)</td>
+                            <td></td>
+                            <td></td>
+                            <td></td>
+                            <td></td>
+                            <td></td>
+                            <td></td>
+                        </tr>
+                        <tr>
+                            <td>MAPEH</td>
+                            <td></td>
+                            <td></td>
+                            <td></td>
+                            <td></td>
+                            <td></td>
+                            <td></td>
+                        </tr>
+                        <tr>
+                            <td><span class="mx-2 fw-light fst-italic">Music</span> </td>
+                            <td></td>
+                            <td></td>
+                            <td></td>
+                            <td></td>
+                            <td></td>
+                            <td></td>
+                        </tr>
+                        <tr>
+                            <td><span class="mx-2 fw-light fst-italic">Arts</span></td>
+                            <td></td>
+                            <td></td>
+                            <td></td>
+                            <td></td>
+                            <td></td>
+                            <td></td>
+                        </tr>
+                        <tr>
+                            <td><span class="mx-2 fw-light fst-italic">Physical Education</span></td>
+                            <td></td>
+                            <td></td>
+                            <td></td>
+                            <td></td>
+                            <td></td>
+                            <td></td>
+                        </tr>
+                        <tr>
+                            <td><span class="mx-2 fw-light fst-italic">Health</span></td>
+                            <td></td>
+                            <td></td>
+                            <td></td>
+                            <td></td>
+                            <td></td>
+                            <td></td>
+                        </tr>
+                        <tr>
+                            <td></td>
+                            <td></td>
+                            <td></td>
+                            <td></td>
+                            <td></td>
+                            <td></td>
+                            <td></td>
+                        </tr>
+                        <tr>
+                            <td></td>
+                            <td></td>
+                            <td></td>
+                            <td></td>
+                            <td></td>
+                            <td></td>
+                            <td></td>
+                        </tr>
+                        <tr class="f-12">
+                            <td></td>
+                            <td colspan="4"> General average : </td>
+                            <td colspan="2"></td>
+                        </tr>
+                        <tr>
+                            <td colspan="7 ">
+                                <div class="d-flex justify-content-center">
+                                    <span class="fw-light mx-2">Remedial Classes</span>
+                                    <span class="mx-5">Conducted from (mm/dd/yyyy): <span class="text-decoration-underline">_______________</span></span>
+                                    <span class="mx-5">To: (mm/dd/yyyy): <span class="text-decoration-underline">_______________</span></span>
+                                </div>
+                            </td>
+                        </tr>
+                    </tbody>
+                </table>
+
+                <table class="table-data">
+                    <tr>
+                        <th>Learning Areas</th>
+                        <th>Final rating</th>
+                        <th>Remedial class mark</th>
+                        <th>Final Recomputed grade</th>
+                        <th>Remarks</th>
+                    </tr>
+
+
+                    <tr>
+
+                        <td class="f-12 text-uppercase"></td>
+                        <td class="f-12 text-uppercase"></td>
+                        <td class="f-12 text-uppercase"></td>
+                        <td class="f-12 text-uppercase"></td>
+                        <td class="f-12 text-uppercase"></td>
+                    </tr>
+                    <tr>
+
+                        <td class="f-12 text-uppercase"></td>
+                        <td class="f-12 text-uppercase"></td>
+                        <td class="f-12 text-uppercase"></td>
+                        <td class="f-12 text-uppercase"></td>
+                        <td class="f-12 text-uppercase"></td>
+                    </tr>
+
+
+
+                </table>
+
+                <!-- CERTIFICATION -->
+                <!-- certification -->
+                <div class="text-center info-header mt-1">
+                    <p class="text-uppercase">CERTIFICATION</p>
+                </div>
+                <div class="certification mb-5">
+                    <p class="f-12 text-center mt-2">I CERTIFY that this is a true record of: <span class="text-decoration-underline">{{ $student[0]->lastname .' '. $student[0]->firstname. ' '. $student[0]->name_ext . ' '. $student[0]->middlename }}</span>
+                        with LRN: <span class="text-decoration-underline">{{ $student[0]->lrn }} </span>
+                        that he/she is eligible for admission to Grade ________
+                    </p>
+                    <p class="f-12 text-center">Name of School : <span class="text-decoration-underline fw-bold text-capitalize">{{ $name_of_school ?? '' }}</span> <span>School ID: <span class="text-decoration-underline fw-bold text-capitalize">{{ $school_id ?? '' }}</span></span> <span>Last school year Attended: _______________</span></p>
+                    <d class="d-flex justify-content-around mt-2 mb-3">
+                        <div class="d-flex flex-column justify-content-center align-items-center">
+                            <span class="text-decoration-underline fw-bold">{{ now()->format('M d. Y')}}</span>
+                            <p class="pfooter">date</p>
+                        </div>
+                        <div class="d-flex flex-column justify-content-center align-items-center">
                             <span class="text-center fw-bold admin_name">{{ $user->admin_name !=''? $user->admin_name : 'You can go to setting to set principal name' }}</span>
                             <p class="pfooter">Signature of Principal/School Head over printed Name</p>
                         </div>
@@ -305,9 +1769,9 @@
 
 </body>
 <script>
-    setTimeout(() => {
-        window.print()
-    }, 1200);
+    // setTimeout(() => {
+    //     window.print()
+    // }, 1200);
 </script>
 
 </html>

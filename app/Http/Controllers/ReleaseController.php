@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Record;
 use App\Models\Release;
 use App\Models\Studentinfo;
 use Validator;
@@ -35,7 +36,22 @@ class ReleaseController extends Controller
         if (count($student) > 0) {
 
             $user = Auth::user();
-            return view('output.form137', compact('student', 'user', 'name_of_school', 'school_id'));
+            $grade_7 = Record::where('lrn', $lrn)->where('classified_grade', 7)->get();
+            $grade_8 = Record::where('lrn', $lrn)->where('classified_grade', 8)->get();
+            $grade_9 = Record::where('lrn', $lrn)->where('classified_grade', 9)->get();
+            $grade_10 = Record::where('lrn', $lrn)->where('classified_grade', 10)->get();
+
+
+            return view('output.form137', compact(
+                'student',
+                'user',
+                'name_of_school',
+                'school_id',
+                'grade_7',
+                'grade_8',
+                'grade_9',
+                'grade_10'
+            ));
         }
         abort(404);
     }
@@ -58,6 +74,7 @@ class ReleaseController extends Controller
         if (count($record) <= 0) {
             return response()->json(['status' => -1, 'error' => 'LRN does not exists!.']);
         }
+
         Release::create([
             'lrn' => $request->lrn,
             'school_id' => $request->school_id,
