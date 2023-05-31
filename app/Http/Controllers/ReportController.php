@@ -27,6 +27,12 @@ class ReportController extends Controller
                 ->groupBy('school_year', 'data', 'gen_ave')
                 ->get();
 
+            $records_2 = Record::select('school_year', 'data')
+                ->where('school_year', $request->school_year)
+                ->where('classified_grade', $request->grade_level)
+                ->groupBy('school_year', 'data', 'gen_ave')
+                ->get();
+
             $grade_7 = Record::where('classified_grade', 7)->where('school_year', $request->school_year)->count();
             $grade_8 = Record::where('classified_grade', 8)->where('school_year', $request->school_year)->count();
             $grade_9 = Record::where('classified_grade', 9)->where('school_year', $request->school_year)->count();
@@ -93,10 +99,44 @@ class ReportController extends Controller
                     }
                 }
             }
+
+            $male_perlevel = Record::where('school_year', $request->school_year)
+                ->where('classified_grade', $request->grade_level)
+                ->where('sex', 0)->count();
+
+            $female_perlevel = Record::where('school_year', $request->school_year)
+                ->where('classified_grade', $request->grade_level)
+                ->where('sex', 1)->count();
+
+            $stats_perlevel = Record::select(
+                DB::raw('MIN(gen_ave) as min'),
+                DB::raw('AVG(gen_ave) as avg'),
+                DB::raw('MAX(gen_ave) as max')
+            )
+                ->where('school_year', $request->school_year)
+                ->where('classified_grade', $request->grade_level)
+                ->get();
+
+
+            $subjects_perlevel = [];
+
+            for ($i = 0; $i < count($records_2); $i++) {
+                foreach ($records_2[$i]->data as $data) {
+                    foreach ($data as $key => $val) {
+
+                        if (!isset($subjects_perlevel[$key])) {
+                            $subjects_perlevel[$key] = array();
+                        }
+                        $subjects_perlevel[$key][] = $val['final'];
+                    }
+                }
+            }
+
             return response()->json([
                 'status' => 200,
                 'data' => $records,
                 'gender_count' => ['male' => $male, 'female' => $female],
+                'gender_count_per_level' => ['male' => $male_perlevel, 'female' => $female_perlevel],
                 'student_count' => [
                     'grade_7' => $grade_7,
                     'grade_8' => $grade_8,
@@ -111,7 +151,9 @@ class ReportController extends Controller
                 'grade_10_grades' => $grade_10_grades,
                 'grade_11_grades' => $grade_11_grades,
                 'grade_12_grades' => $grade_12_grades,
-                'subjects' => $subjects
+                'subjects' => $subjects,
+                'stats_perlevel' => $stats_perlevel,
+                'subjects_perlevel'=> $subjects_perlevel
             ]);
         }
     }

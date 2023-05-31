@@ -41,6 +41,8 @@ class ReleaseController extends Controller
             $grade_9 = Record::where('lrn', $lrn)->where('classified_grade', 9)->get();
             $grade_10 = Record::where('lrn', $lrn)->where('classified_grade', 10)->get();
 
+            $grade_11 = Record::where('lrn', $lrn)->where('classified_grade', 11)->get();
+            $grade_12 = Record::where('lrn', $lrn)->where('classified_grade', 12)->get();
 
             return view('output.form137', compact(
                 'student',
@@ -50,7 +52,9 @@ class ReleaseController extends Controller
                 'grade_7',
                 'grade_8',
                 'grade_9',
-                'grade_10'
+                'grade_10',
+                'grade_11',
+                'grade_12'
             ));
         }
         abort(404);

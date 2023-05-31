@@ -1526,6 +1526,258 @@
                 </table>
                 @endif
 
+
+                @if(count($grade_11) > 0)
+
+                @foreach($grade_11 as $record)
+                <div class="record-header mt-1">
+                    <div class="d-flex justify-content-between">
+                        <span>School: <span class="text-decoration-underline">{{ $record->school }}</span></span>
+                        <span>School ID: <span class="text-decoration-underline">{{ $record->school_id }}</span></span>
+                        <span>District: <span class="text-decoration-underline text-uppercase">{{ $record->district }}</span></span>
+                        <span>Division: <span class="text-decoration-underline text-uppercase">{{ $record->division }}</span></span>
+                        <span>Region: <span class="text-decoration-underline text-uppercase">{{ $record->region }}</span></span>
+                    </div>
+                    <div class="d-flex justify-content-between">
+                        <span>Classified as Grade: <span class="text-decoration-underline">{{ $record->classified_grade }}</span></span>
+                        <span>Section: <span class="text-decoration-underline">{{ $record->section }}</span></span>
+                        <span>School year: <span class="text-decoration-underline text-uppercase">{{ $record->school_year }}</span></span>
+                        <span>Name of Adviser/teacher: <span class="text-decoration-underline text-uppercase">{{ $record->adviser }}</span></span>
+                        <span>Signature: _______________</span>
+                    </div>
+                </div>
+
+                <table class="table-data">
+                    <thead>
+                        <tr>
+                            <th>Learning Areas</th>
+                            <th colspan="4">Quarterly Rating</th>
+                            <th>FINAL RATING</th>
+                            <th>REMARKS</th>
+                        </tr>
+                    </thead>
+
+
+                    <!-- grade 8 -->
+                    @foreach($grade_11[0]->data as $data)
+                    <tbody>
+                        <tr>
+                            @foreach($data as $subject => $quarter)
+                            <td class="{{ $subject == 'Music' ? 'fw-light px-2 fst-italic':''}} 
+                            {{ $subject == 'Arts' ? 'fw-light px-2 fst-italic':''}}
+                            {{ $subject == 'Physical Education' ? 'fw-light px-2 fst-italic':''}}
+                            {{ $subject == 'Health' ? 'fw-light px-2 fst-italic':''}}
+                            ">{{$subject}}</td>
+                            <td> {{ $quarter['quarter_1']}}</td>
+                            <td> {{ $quarter['quarter_2']}}</td>
+                            <td> {{ $quarter['quarter_3']}}</td>
+                            <td>{{ $quarter['quarter_4']}}</td>
+                            <td> {{ $quarter['final']}}</td>
+                            <td>{{ $quarter['remark']}}</td>
+                            @endforeach
+
+                        </tr>
+                        @endforeach
+                        <tr>
+                            <td></td>
+                            <td></td>
+                            <td></td>
+                            <td></td>
+                            <td></td>
+                            <td></td>
+                            <td></td>
+                        </tr>
+                        <tr>
+                            <td></td>
+                            <td></td>
+                            <td></td>
+                            <td></td>
+                            <td></td>
+                            <td></td>
+                            <td></td>
+                        </tr>
+                        <tr class="f-12">
+                            <td></td>
+                            <td colspan="4"> General average : {{$record->gen_ave}}</td>
+                            <td colspan="2"></td>
+                        </tr>
+                        <tr>
+                            <td colspan="7 ">
+                                <div class="d-flex justify-content-center">
+                                    <span class="fw-light mx-2">Remedial Classes</span>
+                                    <span class="mx-5">Conducted from (mm/dd/yyyy): <span class="text-decoration-underline">{{ $record->remedial_date_from }}</span></span>
+                                    <span class="mx-5">To: (mm/dd/yyyy): <span class="text-decoration-underline">{{ $record->remedial_date_to }}</span></span>
+                                </div>
+                            </td>
+                        </tr>
+                    </tbody>
+                </table>
+
+                <table class="table-data">
+                    <tr>
+                        <th>Learning Areas</th>
+                        <th>Final rating</th>
+                        <th>Remedial class mark</th>
+                        <th>Final Recomputed grade</th>
+                        <th>Remarks</th>
+                    </tr>
+
+                    @if(count($record->remedials) <= 0) <tr>
+
+                        <td class="f-12 text-uppercase"></td>
+                        <td class="f-12 text-uppercase"></td>
+                        <td class="f-12 text-uppercase"></td>
+                        <td class="f-12 text-uppercase"></td>
+                        <td class="f-12 text-uppercase"></td>
+                        </tr>
+                        <tr>
+
+                            <td class="f-12 text-uppercase"></td>
+                            <td class="f-12 text-uppercase"></td>
+                            <td class="f-12 text-uppercase"></td>
+                            <td class="f-12 text-uppercase"></td>
+                            <td class="f-12 text-uppercase"></td>
+                        </tr>
+                        @else
+                        @foreach($record->remedials as $data)
+                        <tr>
+                            @foreach($data as $dt)
+                            <td class="f-12 text-uppercase">{{ $dt }}</td>
+                            @endforeach
+                        </tr>
+                        @endforeach
+                        @endif
+
+                </table>
+                @endforeach
+                @endif
+
+
+                @if(count($grade_12) > 0)
+
+                @foreach($grade_12 as $record)
+                <div class="record-header mt-1">
+                    <div class="d-flex justify-content-between">
+                        <span>School: <span class="text-decoration-underline">{{ $record->school }}</span></span>
+                        <span>School ID: <span class="text-decoration-underline">{{ $record->school_id }}</span></span>
+                        <span>District: <span class="text-decoration-underline text-uppercase">{{ $record->district }}</span></span>
+                        <span>Division: <span class="text-decoration-underline text-uppercase">{{ $record->division }}</span></span>
+                        <span>Region: <span class="text-decoration-underline text-uppercase">{{ $record->region }}</span></span>
+                    </div>
+                    <div class="d-flex justify-content-between">
+                        <span>Classified as Grade: <span class="text-decoration-underline">{{ $record->classified_grade }}</span></span>
+                        <span>Section: <span class="text-decoration-underline">{{ $record->section }}</span></span>
+                        <span>School year: <span class="text-decoration-underline text-uppercase">{{ $record->school_year }}</span></span>
+                        <span>Name of Adviser/teacher: <span class="text-decoration-underline text-uppercase">{{ $record->adviser }}</span></span>
+                        <span>Signature: _______________</span>
+                    </div>
+                </div>
+
+                <table class="table-data">
+                    <thead>
+                        <tr>
+                            <th>Learning Areas</th>
+                            <th colspan="4">Quarterly Rating</th>
+                            <th>FINAL RATING</th>
+                            <th>REMARKS</th>
+                        </tr>
+                    </thead>
+
+
+                    <!-- grade 8 -->
+                    @foreach($grade_12[0]->data as $data)
+                    <tbody>
+                        <tr>
+                            @foreach($data as $subject => $quarter)
+                            <td class="{{ $subject == 'Music' ? 'fw-light px-2 fst-italic':''}} 
+                            {{ $subject == 'Arts' ? 'fw-light px-2 fst-italic':''}}
+                            {{ $subject == 'Physical Education' ? 'fw-light px-2 fst-italic':''}}
+                            {{ $subject == 'Health' ? 'fw-light px-2 fst-italic':''}}
+                            ">{{$subject}}</td>
+                            <td> {{ $quarter['quarter_1']}}</td>
+                            <td> {{ $quarter['quarter_2']}}</td>
+                            <td> {{ $quarter['quarter_3']}}</td>
+                            <td>{{ $quarter['quarter_4']}}</td>
+                            <td> {{ $quarter['final']}}</td>
+                            <td>{{ $quarter['remark']}}</td>
+                            @endforeach
+
+                        </tr>
+                        @endforeach
+                        <tr>
+                            <td></td>
+                            <td></td>
+                            <td></td>
+                            <td></td>
+                            <td></td>
+                            <td></td>
+                            <td></td>
+                        </tr>
+                        <tr>
+                            <td></td>
+                            <td></td>
+                            <td></td>
+                            <td></td>
+                            <td></td>
+                            <td></td>
+                            <td></td>
+                        </tr>
+                        <tr class="f-12">
+                            <td></td>
+                            <td colspan="4"> General average : {{$record->gen_ave}}</td>
+                            <td colspan="2"></td>
+                        </tr>
+                        <tr>
+                            <td colspan="7 ">
+                                <div class="d-flex justify-content-center">
+                                    <span class="fw-light mx-2">Remedial Classes</span>
+                                    <span class="mx-5">Conducted from (mm/dd/yyyy): <span class="text-decoration-underline">{{ $record->remedial_date_from }}</span></span>
+                                    <span class="mx-5">To: (mm/dd/yyyy): <span class="text-decoration-underline">{{ $record->remedial_date_to }}</span></span>
+                                </div>
+                            </td>
+                        </tr>
+                    </tbody>
+                </table>
+
+                <table class="table-data">
+                    <tr>
+                        <th>Learning Areas</th>
+                        <th>Final rating</th>
+                        <th>Remedial class mark</th>
+                        <th>Final Recomputed grade</th>
+                        <th>Remarks</th>
+                    </tr>
+
+                    @if(count($record->remedials) <= 0) <tr>
+
+                        <td class="f-12 text-uppercase"></td>
+                        <td class="f-12 text-uppercase"></td>
+                        <td class="f-12 text-uppercase"></td>
+                        <td class="f-12 text-uppercase"></td>
+                        <td class="f-12 text-uppercase"></td>
+                        </tr>
+                        <tr>
+
+                            <td class="f-12 text-uppercase"></td>
+                            <td class="f-12 text-uppercase"></td>
+                            <td class="f-12 text-uppercase"></td>
+                            <td class="f-12 text-uppercase"></td>
+                            <td class="f-12 text-uppercase"></td>
+                        </tr>
+                        @else
+                        @foreach($record->remedials as $data)
+                        <tr>
+                            @foreach($data as $dt)
+                            <td class="f-12 text-uppercase">{{ $dt }}</td>
+                            @endforeach
+                        </tr>
+                        @endforeach
+                        @endif
+
+                </table>
+                @endforeach
+                @endif
+
                 <!-- end grade 9 -->
 
                 <div class="record-header mt-1">
