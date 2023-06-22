@@ -12,6 +12,8 @@ class Record extends Model
     protected $fillable = [
         'lrn',
         'sex',
+        'age',
+        'type',
         'school',
         'school_id',
         'division',

@@ -2,12 +2,19 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\OtherStudentinfo;
 use App\Models\Record;
 use App\Models\Release;
 use App\Models\Studentinfo;
 use Validator;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\App;
 use Illuminate\Support\Facades\Auth;
+
+use PDF;
+use PhpParser\Node\Stmt\Return_;
+
+use function Termwind\render;
 
 class ReleaseController extends Controller
 {
@@ -24,38 +31,35 @@ class ReleaseController extends Controller
         return view('partials.release', compact('releases'));
     }
 
-    public function print($lrn, $name_of_school, $school_id)
+    public function print($lrn, $type, Request $request)
     {
         $student = Studentinfo::where('lrn', $lrn)
-            ->with(['student_record' => function ($query) {
-                $query->orderBy('school_year');
-                $query->orderBy('classified_grade');
-            }, 'otherinfo'])
             ->get();
+
+        $otherinfo = OtherStudentinfo::where('lrn', $lrn)->get();
 
         if (count($student) > 0) {
 
-            $user = Auth::user();
-            $grade_7 = Record::where('lrn', $lrn)->where('classified_grade', 7)->get();
-            $grade_8 = Record::where('lrn', $lrn)->where('classified_grade', 8)->get();
-            $grade_9 = Record::where('lrn', $lrn)->where('classified_grade', 9)->get();
-            $grade_10 = Record::where('lrn', $lrn)->where('classified_grade', 10)->get();
+            if ($type == "jhs") {
 
-            $grade_11 = Record::where('lrn', $lrn)->where('classified_grade', 11)->get();
-            $grade_12 = Record::where('lrn', $lrn)->where('classified_grade', 12)->get();
+                $GRADE_7 = Record::select('*')->where('lrn', $lrn)
+                    ->where('classified_grade', 7)
+                    ->get();
 
-            return view('output.form137', compact(
-                'student',
-                'user',
-                'name_of_school',
-                'school_id',
-                'grade_7',
-                'grade_8',
-                'grade_9',
-                'grade_10',
-                'grade_11',
-                'grade_12'
-            ));
+                $GRADE_8 = Record::select('*')->where('lrn', $lrn)
+                    ->where('classified_grade', 8)
+                    ->get();
+
+                return view('output.record', compact(
+                    'student',
+                    'otherinfo',
+                    'GRADE_7',
+                    'GRADE_8'
+                ));
+            }
+
+            if ($type == "shs") {
+            }
         }
         abort(404);
     }
@@ -85,6 +89,9 @@ class ReleaseController extends Controller
             'name_of_school' => strtoupper($request->name_of_school)
         ]);
 
-        return response()->json(['status' => 200, 'msg' => 'Release has been recorded']);
+        return response()->json([
+            'status' => 200, 'msg' => 'Release has been recorded',
+            'link' => route('release.print', [$request->lrn, $request->type])
+        ]);
     }
 }

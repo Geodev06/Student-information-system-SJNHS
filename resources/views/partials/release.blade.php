@@ -10,7 +10,6 @@
     <form id="releaseForm">
         <div class="row align-items-baseline">
             @csrf
-
             <div class="col-lg-6">
                 <div class="form-floating mb-3">
                     <input type="text" class="form-control" autocomplete="off" placeholder="LRN" name="lrn" id="txt_lrn" />
@@ -30,12 +29,22 @@
             <div class="col-lg-12">
                 <div class="form-floating mb-3">
                     <input type="text" class="form-control" autocomplete="off" placeholder="school" name="name_of_school" id="txt_nos" />
-                    <label for="">Name of institution requesting .</label>
+                    <label for="">Name of institution</label>
                     <span class="error_name_of_school text-danger error-text"></span>
                 </div>
             </div>
 
-            <div class="col-lg-12 ">
+            <div class="col-lg-6">
+                <div class="form-floating mb-3">
+                    <select name="type" id="level" class="form-select">
+                        <option value="jhs">Junior high</option>
+                        <option value="shs">Senior high</option>
+                    </select>
+                    <label for="select">Level category</label>
+                </div>
+            </div>
+
+            <div class="col-lg-6 ">
                 <button type="submit" class="btn btn-primary btn-sm float-end"><i class="bx bx-save"></i> Save</button>
             </div>
         </div>
@@ -49,7 +58,7 @@
             <tr>
                 <th style="font-weight:100;">Details</th>
                 <th style="font-weight:100;">Date</th>
-                <th style="font-weight:100;">option</th>
+
             </tr>
         </thead>
         <tbody>
@@ -64,9 +73,7 @@
                 <td>
                     <span class="fw-bold" style="font-size: 12px;"> {{ $release->created_at->format('m-d-Y')}}</span>
                 </td>
-                <td>
-                    <button data-link="{{ route('release.print',[$release->lrn,$release->name_of_school,$release->school_id]) }}" class="btn btn-primary btn-sm btn-v">view</button>
-                </td>
+
             </tr>
             @endforeach
         </tbody>
@@ -88,6 +95,7 @@
     }
 
     $('#releaseForm').on('submit', function(e) {
+
         e.preventDefault()
         $.ajax({
             url: "{{ route('release.store') }}",
@@ -121,11 +129,7 @@
 
             if (data.status === 200) {
                 showAlert(data.msg)
-                var route = "{{ route('release.print',[':lrn',':nos',':sid']) }}"
-                var route_1 = route.replace(':lrn', $('#txt_lrn').val())
-                var route_2 = route_1.replace(':nos', $('#txt_nos').val())
-                window.open(route_2.replace(':sid', $('#txt_school_id').val()))
-                window.location.reload()
+                window.open(data.link)
             }
 
         }).fail((err) => {

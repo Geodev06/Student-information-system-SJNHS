@@ -57,6 +57,13 @@ class RecordController extends Controller
 
         $gen_ave = 0;
 
+        $type = '';
+
+        if ($request->classified_grade <= 10) {
+            $type = 'jhs';
+        } else {
+            $type = 'shs';
+        }
         // remedials
         $remedials = [];
 
@@ -156,6 +163,7 @@ class RecordController extends Controller
             $data = [
                 'lrn' => $request->lrn,
                 'sex' => $gender[0]->sex,
+                'type' => $type,
                 'school' => $request->school,
                 'school_id' => $request->school_id,
                 'district' => $request->district,
@@ -422,6 +430,7 @@ class RecordController extends Controller
             $data = [
                 'lrn' => $request->lrn,
                 'sex' => $gender[0]->sex,
+                'type' => $type,
                 'school' => $request->school,
                 'school_id' => $request->school_id,
                 'district' => $request->district,
