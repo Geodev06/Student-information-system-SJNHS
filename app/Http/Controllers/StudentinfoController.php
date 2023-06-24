@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Models\OtherStudentinfo;
 use App\Models\Record;
 use App\Models\Studentinfo;
+use Carbon\Carbon;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\App;
 use Illuminate\Support\Facades\Auth;
@@ -76,7 +77,7 @@ class StudentinfoController extends Controller
                 'elem_school' => 'required',
                 'elem_school_id' => 'required',
                 'elem_school_address' => 'required',
-                'gen_ave' => 'required|regex:/^\d+(\.\d{1,2})?$/|min:1|not_in:0|numeric|between:75,100.00',
+                'gen_ave' => 'required|not_in:0|numeric|between:75,100.00',
                 'lrn' => 'required|min:12|max:12|unique:studentinfos',
             ],
             [
@@ -95,12 +96,12 @@ class StudentinfoController extends Controller
                 'middlename' => $request->middlename,
                 'lastname' => $request->lastname,
                 'name_ext' => $request->name_ext,
-                'birthdate' => $request->birthdate,
+                'birthdate' => Carbon::parse($request->birthdate)->format('m/d/Y'),
                 'sex' => $request->sex,
                 'elem_school' => $request->elem_school,
                 'elem_school_id' => $request->elem_school_id,
                 'elem_school_address' => $request->elem_school_address,
-                'gen_ave' => $request->gen_ave,
+                'gen_ave' => intval($request->gen_ave),
                 'lrn' => $request->lrn
             ]
         );

@@ -10,7 +10,7 @@
 </head>
 <style>
     * {
-        font-size: 12px;
+        font-size: 10px;
         font-family: 'Times New Roman', Times, serif;
         color: #4db8ff;
     }
@@ -25,7 +25,7 @@
     }
 
     .fs-14 {
-        font-size: 14px;
+        font-size: 12px;
     }
 
     #main {
@@ -57,7 +57,7 @@
 
     .table-grades th {
         padding: 5px;
-        font-size: 12px;
+        font-size: 10px;
         color: #007acc;
         background-color: #99d6ff;
     }
@@ -66,9 +66,9 @@
     td {
         border: 1px solid #4db8ff;
         padding: 5px;
-        font-size: 12px;
+        font-size: 10px;
         font-weight: 600;
-        height: 20px;
+        height: 15px;
     }
 
     .table-grades {
@@ -77,7 +77,7 @@
 
     .table-behavior th {
         padding: 5px;
-        font-size: 12px;
+        font-size: 10px;
         text-align: center;
     }
 
@@ -85,9 +85,9 @@
     td {
         border: 1px solid #4db8ff;
         padding: 5px;
-        font-size: 12px;
+        font-size: 10px;
         font-weight: 600;
-        height: 20px;
+        height: 15px;
     }
 
     .table-behavior {
@@ -123,9 +123,9 @@
 
     @if($student)
 
-    <div class="container mt-5 pb-5">
+    <div class="container mt-5 pb-5" style="page-break-after: always;">
         <div class="row">
-            <div class="col-lg-6 mx-auto  p-2">
+            <div class="col-lg-12 mx-auto  p-2">
                 <span class="fw-bold">SCHOOL FORM 9 - JHS</span>
                 <div class="text-center">
                     <p>Republic of the Philippines</p>
@@ -627,7 +627,7 @@
     @endif
 </body>
 <script>
-    window.print()
+    // window.print()
 </script>
 
 </html>

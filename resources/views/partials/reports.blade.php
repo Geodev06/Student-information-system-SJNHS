@@ -323,13 +323,11 @@
 
     function loadStudentChart(data) {
 
-        let labels = ['Grade 7', 'Grade 8', 'Grade 9', 'Grade 10', 'Grade 11', 'Grade 12'];
+        let labels = ['Grade 7', 'Grade 8', 'Grade 9', 'Grade 10'];
         let dataPoints = [data.student_count.grade_7,
             data.student_count.grade_8,
             data.student_count.grade_9,
-            data.student_count.grade_10,
-            data.student_count.grade_11,
-            data.student_count.grade_12,
+            data.student_count.grade_10
         ]
 
         var ctx = document.getElementById('chart_student')
@@ -376,38 +374,32 @@
 
     function loadStudentGradeChart(data) {
 
-        let labels = ['Grade 7', 'Grade 8', 'Grade 9', 'Grade 10', 'Grade 11', 'Grade 12'];
+        let labels = ['Grade 7', 'Grade 8', 'Grade 9', 'Grade 10'];
 
 
         let min_grades = [
             data.grade_7_grades[0].min_grade,
             data.grade_8_grades[0].min_grade,
             data.grade_9_grades[0].min_grade,
-            data.grade_10_grades[0].min_grade,
-            data.grade_11_grades[0].min_grade,
-            data.grade_12_grades[0].min_grade
+            data.grade_10_grades[0].min_grade
         ]
         let max_grades = [
             data.grade_7_grades[0].max_grade,
             data.grade_8_grades[0].max_grade,
             data.grade_9_grades[0].max_grade,
-            data.grade_10_grades[0].max_grade,
-            data.grade_11_grades[0].max_grade,
-            data.grade_12_grades[0].max_grade
+            data.grade_10_grades[0].max_grade
         ]
         let avg_grades = [
             data.grade_7_grades[0].avg_grade,
             data.grade_8_grades[0].avg_grade,
             data.grade_9_grades[0].avg_grade,
-            data.grade_10_grades[0].avg_grade,
-            data.grade_11_grades[0].avg_grade,
-            data.grade_12_grades[0].avg_grade
+            data.grade_10_grades[0].avg_grade
         ]
 
-        var ctx = document.getElementById('chart_grades')
+        var ctx_g = document.getElementById('chart_grades')
 
 
-        var chart = new Chart(ctx, {
+        var chart = new Chart(ctx_g, {
             type: 'bar',
             data: {
                 labels: labels,
@@ -452,8 +444,8 @@
                 plugins: {
                     datalabels: {
                         display: true,
-                        formatter: (value, ctx) => {
-                            return ctx.chart.data.datasets[0].data[ctx.dataIndex]
+                        formatter: (value, ctx_g) => {
+                            return parseInt(value).toFixed(0)
                         },
                         backgroundColor: '#6D28D9',
                         color: 'white',
@@ -676,7 +668,7 @@
         var element = document.querySelector('#print-body')
 
         var opt = {
-            margin: 1,
+            margin: 0.2,
             filename: 'report.pdf',
             image: {
                 type: 'jpeg',
@@ -687,8 +679,8 @@
             },
             jsPDF: {
                 unit: 'in',
-                format: 'letter',
-                orientation: 'landscape'
+                format: 'legal',
+                orientation: 'portrait'
             }
         }
 

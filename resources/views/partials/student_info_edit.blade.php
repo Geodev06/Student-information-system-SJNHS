@@ -51,7 +51,7 @@
 
                     <div class="col-lg-6">
                         <div class="form-floating mb-3">
-                            <input type="date" class="form-control" autocomplete="off" name="birthdate" value="{{ $student[0]->birthdate }}" />
+                            <input type="date" class="form-control" autocomplete="off" name="birthdate" value="{{  date('Y-m-d', strtotime($student[0]->birthdate)) }}" />
                             <label for="">Birthdate.</label>
                             <span class="error_birthdate text-danger error-text"></span>
                         </div>

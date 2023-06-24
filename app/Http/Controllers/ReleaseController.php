@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Otherinformation;
 use App\Models\OtherStudentinfo;
 use App\Models\Record;
 use App\Models\Release;
@@ -31,7 +32,7 @@ class ReleaseController extends Controller
         return view('partials.release', compact('releases'));
     }
 
-    public function print($lrn, $type, Request $request)
+    public function print($lrn, $nos, $nid, Request $request)
     {
         $student = Studentinfo::where('lrn', $lrn)
             ->get();
@@ -40,25 +41,61 @@ class ReleaseController extends Controller
 
         if (count($student) > 0) {
 
-            if ($type == "jhs") {
+            $records = Record::select('*')->where('lrn', $lrn)
+                ->orderBy('school_year', 'asc')
+                ->get()
+                ->toArray();
 
-                $GRADE_7 = Record::select('*')->where('lrn', $lrn)
-                    ->where('classified_grade', 7)
-                    ->get();
 
-                $GRADE_8 = Record::select('*')->where('lrn', $lrn)
-                    ->where('classified_grade', 8)
-                    ->get();
+            $requestdata = [
+                'school_req' => $nos,
+                'school_id_req' => $nid
+            ];
+
+
+            /**
+             * Full docu if the records is Less than five
+             */
+            if (count($records) < 5) {
+                $extendedRecords = [];
+                $extendedRecords = array_pad($records, 5, null);
+                $breakpoints = [1, 4];
+
 
                 return view('output.record', compact(
                     'student',
                     'otherinfo',
-                    'GRADE_7',
-                    'GRADE_8'
-                ));
-            }
+                    'extendedRecords',
+                    'breakpoints',
+                    'requestdata'
 
-            if ($type == "shs") {
+                ));
+            } else {
+                $length = 0;
+
+                for ($i = 5; $i < count($records); $i += 3) {
+                    # code...
+
+                    if (count($records) > $i && count($records) < ($i + 4)) {
+                        $length = $i + 3;
+                        break;
+                    }
+                }
+
+                $extendedRecords = [];
+                $extendedRecords = array_pad($records, $length, null);
+
+                $breakpoints = [1, 4, 7, 10, 13, 16, 19, 22, 25];
+
+
+                return view('output.record', compact(
+                    'student',
+                    'otherinfo',
+                    'extendedRecords',
+                    'breakpoints',
+                    'requestdata'
+
+                ));
             }
         }
         abort(404);
@@ -91,7 +128,7 @@ class ReleaseController extends Controller
 
         return response()->json([
             'status' => 200, 'msg' => 'Release has been recorded',
-            'link' => route('release.print', [$request->lrn, $request->type])
+            'link' => route('release.print', [$request->lrn, $request->name_of_school, $request->school_id])
         ]);
     }
 }

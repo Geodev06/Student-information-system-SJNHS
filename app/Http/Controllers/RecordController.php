@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Models\Record;
 use App\Models\Studentinfo;
 use App\Models\Subject;
+use Carbon\Carbon;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Validator;
@@ -57,13 +58,6 @@ class RecordController extends Controller
 
         $gen_ave = 0;
 
-        $type = '';
-
-        if ($request->classified_grade <= 10) {
-            $type = 'jhs';
-        } else {
-            $type = 'shs';
-        }
         // remedials
         $remedials = [];
 
@@ -163,7 +157,6 @@ class RecordController extends Controller
             $data = [
                 'lrn' => $request->lrn,
                 'sex' => $gender[0]->sex,
-                'type' => $type,
                 'school' => $request->school,
                 'school_id' => $request->school_id,
                 'district' => $request->district,
@@ -175,8 +168,8 @@ class RecordController extends Controller
                 'school_year' => $request->school_year,
                 'adviser' => $request->adviser,
                 'data' => $learning_areas,
-                'remedial_date_from' => $request->remedial_date_from,
-                'remedial_date_to' => $request->remedial_date_to,
+                'remedial_date_from' => Carbon::parse($request->remedial_date_from)->format('m/d/Y'),
+                'remedial_date_to' =>  Carbon::parse($request->remedial_date_to)->format('m/d/Y'),
                 'remedials' => $remedials,
                 'gen_ave' => round($gen_ave / count($request->select)),
                 'default' => 0
@@ -430,7 +423,6 @@ class RecordController extends Controller
             $data = [
                 'lrn' => $request->lrn,
                 'sex' => $gender[0]->sex,
-                'type' => $type,
                 'school' => $request->school,
                 'school_id' => $request->school_id,
                 'district' => $request->district,
@@ -442,8 +434,8 @@ class RecordController extends Controller
                 'school_year' => $request->school_year,
                 'adviser' => $request->adviser,
                 'data' => $learning_areas,
-                'remedial_date_from' => $request->remedial_date_from,
-                'remedial_date_to' => $request->remedial_date_to,
+                'remedial_date_from' =>  Carbon::parse($request->remedial_date_from)->format('m/d/Y'),
+                'remedial_date_to' =>  Carbon::parse($request->remedial_date_to)->format('m/d/Y'),
                 'remedials' => $remedials,
                 'gen_ave' => $gen_ave,
                 'default' => 1

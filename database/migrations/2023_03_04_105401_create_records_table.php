@@ -16,7 +16,6 @@ return new class extends Migration
             $table->string('lrn')->reference('lrn')->on('studentinfos');
             $table->integer('sex'); // 0 - male 1- female
             $table->string('age')->nullable(true);
-            $table->string('type');
             $table->string('school');
             $table->string('school_id');
             $table->string('district');

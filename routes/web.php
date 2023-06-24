@@ -55,7 +55,7 @@ Route::controller(ReleaseController::class)
     ->prefix('release')
     ->group(function () {
         Route::get('', 'release')->name('release');
-        Route::get('/print/{lrn}/{type}', 'print')->name('release.print');
+        Route::get('/print/{lrn}/{nos}/{nid}', 'print')->name('release.print');
         Route::post('release/store', 'store')->name('release.store');
     });
 

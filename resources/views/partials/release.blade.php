@@ -28,24 +28,15 @@
 
             <div class="col-lg-12">
                 <div class="form-floating mb-3">
-                    <input type="text" class="form-control" autocomplete="off" placeholder="school" name="name_of_school" id="txt_nos" />
+                    <input type="text" class="form-control" style="text-transform: uppercase;" autocomplete="off" placeholder="school" name="name_of_school" id="txt_nos" />
                     <label for="">Name of institution</label>
                     <span class="error_name_of_school text-danger error-text"></span>
                 </div>
             </div>
 
-            <div class="col-lg-6">
-                <div class="form-floating mb-3">
-                    <select name="type" id="level" class="form-select">
-                        <option value="jhs">Junior high</option>
-                        <option value="shs">Senior high</option>
-                    </select>
-                    <label for="select">Level category</label>
-                </div>
-            </div>
 
-            <div class="col-lg-6 ">
-                <button type="submit" class="btn btn-primary btn-sm float-end"><i class="bx bx-save"></i> Save</button>
+            <div class="col-lg-12 ">
+                <button type="submit" class="btn btn-primary btn-sm float-end"><i class="bx bx-download"></i> Download</button>
             </div>
         </div>
     </form>

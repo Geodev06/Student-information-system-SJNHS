@@ -66,7 +66,7 @@
     <div class="d-flex flex-column flex-shrink-0 p-3 bg-light shadow-lg" style="width: 280px;" id="sideBar">
       <a href="{{ route('dashboard') }}" class="d-flex align-items-center mb-3 mb-md-0 me-md-auto link-dark text-decoration-none">
         <img src="{{ asset('./img/logo.png') }}" alt="logo" height="40px" width="40px">
-        <span class="fs-4 m-4">SJNHS</span>
+        <span class="fs-4 m-4">SJIHS</span>
       </a>
       <hr>
       <ul class="nav nav-pills flex-column mb-auto">

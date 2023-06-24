@@ -25,7 +25,7 @@ return new class extends Migration
             $table->string('elem_school_id');
             $table->string('elem_school_citation')->nullable()->default('');
             $table->string('elem_school_address');
-            $table->decimal('gen_ave', 8, 2);
+            $table->integer('gen_ave');
 
 
             $table->timestamps();
