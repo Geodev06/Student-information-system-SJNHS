@@ -29,7 +29,7 @@ class StudentinfoController extends Controller
                 ->orderBy('created_at', 'desc')->get();
             return Datatables::of($data)
                 ->addColumn('fullname', function ($data) {
-                    $fullname = $data->lastname . ', ' . $data->firstname . ' ' . $data->middlename . '.';
+                    $fullname = $data->lastname . ', ' . $data->firstname . ' ' . $data->middlename;
                     return $fullname;
                 })
                 ->addColumn('sex', function ($data) {

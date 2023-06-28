@@ -34,7 +34,8 @@
                         <th>Adviser</th>
                         <th>Grade level</th>
                         <th>School year</th>
-                        <th>Using default</th>
+
+                        <th>Disable/Enable</th>
                         <th>Action</th>
                     </tr>
                 </thead>
@@ -390,8 +391,8 @@
                     name: 'school_year'
                 },
                 {
-                    data: 'using_default',
-                    name: 'using_default'
+                    data: 'disable_enable',
+                    name: 'disable_enable'
                 },
                 {
                     data: 'action',
@@ -602,6 +603,31 @@
         $('.error_lrn').text('');
         $("#select-student").removeClass('is-invalid')
         $('#addStudentModal').modal('show')
+    })
+
+    $('#table-section').on('click', 'td .btn-editable', function() {
+
+        let id = $(this)[0].dataset.id
+        let status = $(this)[0].dataset.status
+
+        let route = "{{ route('class.toggle',[':id',':status']) }}"
+        let route_2 = route.replace(':id', id)
+
+
+        $.ajax({
+            url: route_2.replace(':status', status),
+            type: 'get',
+            dataType: 'json',
+            beforeSend: function() {},
+            success: function(data) {
+                if (data) {
+                    window.location.reload()
+                }
+            },
+            error: function() {
+                showErrorAlert('Connection to server error.')
+            }
+        })
     })
 
     $('#table-section-subjects').on('click', 'td .btn-remove-subject', function(e) {

@@ -49,7 +49,7 @@
             <div class="modal-body p-5">
                 <h4 class="">User information</h4>
                 <p style="font-size: 12px;">Note: default password for account is
-                <pre class="p-2 rounded-2 bg-dark text-info" style="font-family: 'Courier New', Courier, monospace; font-size:12px"> 'sjnhs2023'</pre>
+                <pre class="p-2 rounded-2 bg-dark text-info" style="font-family: 'Courier New', Courier, monospace; font-size:12px"> 'SJIHS2023'</pre>
                 </p>
                 <form id="userForm">
                     @csrf
@@ -117,7 +117,7 @@
             <div class="modal-body p-5">
                 <h4 class="">User information</h4>
                 <p style="font-size: 12px;">Note: default password for account is
-                <pre class="p-2 rounded-2 bg-dark text-info" style="font-family: 'Courier New', Courier, monospace; font-size:12px"> 'sjnhs2023'</pre>
+                <pre class="p-2 rounded-2 bg-dark text-info" style="font-family: 'Courier New', Courier, monospace; font-size:12px"> 'SJIHS2023'</pre>
                 </p>
                 <form id="edituserForm">
                     @csrf

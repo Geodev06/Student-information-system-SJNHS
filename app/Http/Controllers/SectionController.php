@@ -150,11 +150,26 @@ class SectionController extends Controller
         return response()->json(['status' => 200, 'msg' => 'Class has been updated!']);
     }
 
+    public function toggle($id, $status, Request $request)
+    {
+        if ($request->ajax()) {
+
+            $section = Section::where('id', $id)->get();
+
+            if ($section) {
+                $new_status = $status == 1 ? 0 : 1;
+                Section::where('id', $id)->update(['editable' => $new_status]);
+                return response()->json(['success'], 200);
+            }
+
+            return response()->json([], 500);
+        }
+    }
     public function show(Request $request)
     {
 
         if ($request->ajax()) {
-            $data = Section::select('id', 'section', 'teacher_name', 'teacher_id', 'grade_level', 'school_year', 'using_default')
+            $data = Section::select('id', 'section', 'teacher_name', 'teacher_id', 'grade_level', 'school_year', 'using_default', 'editable')
                 ->orderBy('created_at', 'desc')
                 ->get();
             return DataTables::of($data)
@@ -173,8 +188,19 @@ class SectionController extends Controller
                 ->addColumn('school_year', function ($data) {
                     return $data->school_year;
                 })
-                ->addColumn('using_default', function ($data) {
-                    return $data->using_default;
+
+                ->addColumn('disable_enable', function ($data) {
+                    $btn_d = '';
+
+                    if ($data->editable == '1') {
+                        $btn_d = '<button class="text-white btn btn-sm btn-danger btn-editable" data-status="' . $data->editable . '"
+                         data-id="' . $data->id . '" >Disable</button>';
+                    } else {
+                        $btn_d = '<button class="text-white btn  btn-sm  btn-success btn-editable" data-status="' . $data->editable . '"
+                         data-id="' . $data->id . '">Enable</button>';
+                    }
+
+                    return $btn_d;
                 })
                 ->addColumn('action', function ($data) {
                     $btn = '<button class="text-white btn btn-success btn-edit" data-id="' . $data->id . '"
@@ -195,7 +221,7 @@ class SectionController extends Controller
                      data-section="' . $data->section . '"
                     ><i class="bx bx-male-female"></i></button>';
                     return $btn;
-                })->rawColumns(['action', 'section', 'teacher_name', 'grade_level', 'school_year', 'using_default'])
+                })->rawColumns(['action', 'section', 'teacher_name', 'grade_level', 'school_year', 'disable_enable'])
                 ->make(true);
         }
     }

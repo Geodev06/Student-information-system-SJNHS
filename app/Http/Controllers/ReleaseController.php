@@ -7,6 +7,7 @@ use App\Models\OtherStudentinfo;
 use App\Models\Record;
 use App\Models\Release;
 use App\Models\Studentinfo;
+use Carbon\Carbon;
 use Validator;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\App;
@@ -14,6 +15,7 @@ use Illuminate\Support\Facades\Auth;
 
 use PDF;
 use PhpParser\Node\Stmt\Return_;
+use Yajra\DataTables\DataTables;
 
 use function Termwind\render;
 
@@ -30,6 +32,20 @@ class ReleaseController extends Controller
         $releases = Release::all()->values()->reverse();
 
         return view('partials.release', compact('releases'));
+    }
+
+    public function index(Request $request)
+    {
+        if ($request->ajax()) {
+            $data = Release::select(['lrn', 'school_id', 'name_of_school', 'created_at'])
+                ->orderBy('created_at', 'desc')->get();
+            return DataTables::of($data)
+                ->addColumn('created_at', function ($data) {
+                    return Carbon::parse($data->created_at)->format('m-d-Y');
+                })
+                ->rawColumns(['lrn', 'school_id', 'name_of_school', 'created_at'])
+                ->make(true);
+        }
     }
 
     public function print($lrn, $nos, $nid, Request $request)

@@ -24,7 +24,10 @@ class TeacherController extends Controller
 
     public function show($id)
     {
-        $section = Section::where('id', $id)->where('teacher_id', Auth::user()->id)->get();
+        $section = Section::where('id', $id)
+            ->where('editable', 1)
+            ->where('teacher_id', Auth::user()->id)
+            ->get();
         if (count($section) > 0) {
             return view('user-teacher.section', compact('section'));
         }

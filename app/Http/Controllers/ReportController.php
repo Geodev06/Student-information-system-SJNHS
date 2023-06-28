@@ -132,6 +132,8 @@ class ReportController extends Controller
                 }
             }
 
+
+
             return response()->json([
                 'status' => 200,
                 'data' => $records,
@@ -153,7 +155,7 @@ class ReportController extends Controller
                 'grade_12_grades' => $grade_12_grades,
                 'subjects' => $subjects,
                 'stats_perlevel' => $stats_perlevel,
-                'subjects_perlevel'=> $subjects_perlevel
+                'subjects_perlevel' => $subjects_perlevel
             ]);
         }
     }

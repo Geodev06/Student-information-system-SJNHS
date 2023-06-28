@@ -39,7 +39,9 @@ class Dashboardcontroller extends Controller
         }
 
         if (Auth::user()->role === 1) {
-            $data = Section::where('teacher_id', Auth::user()->id)->get();
+            $data = Section::where('teacher_id', Auth::user()->id)
+                ->where('editable', 1)
+                ->get();
 
             $sections = [];
             for ($i = 0; $i < count($data); $i++) {

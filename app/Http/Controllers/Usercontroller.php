@@ -85,7 +85,7 @@ class Usercontroller extends Controller
             return response()->json(['status' => 0, 'error' => $validator->errors()->toArray()]);
         }
 
-        $password = 'sjnhs2023';
+        $password = 'SJIHS2023';
 
         User::create([
             'firstname' => $request->firstname,

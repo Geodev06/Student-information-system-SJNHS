@@ -54,6 +54,7 @@ Route::controller(Dashboardcontroller::class)->group(function () {
 Route::controller(ReleaseController::class)
     ->prefix('release')
     ->group(function () {
+        Route::get('releases/get', 'index')->name('release.get');
         Route::get('', 'release')->name('release');
         Route::get('/print/{lrn}/{nos}/{nid}', 'print')->name('release.print');
         Route::post('release/store', 'store')->name('release.store');
@@ -118,6 +119,8 @@ Route::controller(SectionController::class)
         Route::get('/class/student/get/{id}', 'getStudents')->name('class.student.get');
         Route::get('/class/student/destroy/{id}', 'destroyStudents')->name('class.student.destroy');
         Route::get('/class/student/destroy/all/{id}', 'destroyStudentAll')->name('class.student.destroy.all');
+
+        Route::get('/class/toggle/editable/{id}/{status}', 'toggle')->name('class.toggle');
     });
 
 Route::controller(TeacherController::class)

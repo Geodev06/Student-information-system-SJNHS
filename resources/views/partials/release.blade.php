@@ -1,7 +1,16 @@
 @extends('layouts.dashboard')
 
 @section('content')
+<link rel="stylesheet" href="{{ asset('./dataTables/dataTables.bootsrap5.min.css')}}">
+<script src="{{ asset('./dataTables/jquery.dataTables.min.js') }}"></script>
+<script src="{{ asset('./dataTables/dataTables.bootstrap5.min.js') }}"></script>
 
+<style>
+    #table-students tr th {
+        font-size: 12px;
+    }
+</style>
+<link rel="stylesheet" href="{{ asset('./css/table.css')}}">
 <div class="p-5">
     <div class="d-flex justify-content-between mb-3">
         <h6 class="fw-bold ">Release form 137</span></h6>
@@ -44,35 +53,60 @@
 
 <div class="row p-5">
     <h6 class="fw-bold">Releases</h6>
-    <table class="table" id="table-release">
-        <thead style="font-size: 12px;">
+    <table class="table" id="table-students">
+        <thead>
             <tr>
-                <th style="font-weight:100;">Details</th>
-                <th style="font-weight:100;">Date</th>
-
+                <th>Lrn</th>
+                <th>School Id</th>
+                <th>Name of institution</th>
+                <th>Created at</th>
             </tr>
         </thead>
         <tbody>
-            @foreach($releases as $release)
-            <tr>
-                <td>
-                    <div class="d-flex flex-column">
-                        <span class="fw-bold">LRN - [{{ $release->lrn}}]</span>
-                        <span class="text-muted" style="font-size: 12px;">{{ $release->name_of_school}}</span>
-                    </div>
-                </td>
-                <td>
-                    <span class="fw-bold" style="font-size: 12px;"> {{ $release->created_at->format('m-d-Y')}}</span>
-                </td>
 
-            </tr>
-            @endforeach
         </tbody>
     </table>
 </div>
 <x-message-alert />
 
 <script>
+    function loadData() {
+        var table = $('#table-students').DataTable({
+            destroy: true,
+            processing: true,
+            serverSide: true,
+            ajax: "{{ route('release.get') }}",
+            oLanguage: {
+                sSearch: 'Search LRN'
+            },
+            columns: [{
+                    data: 'lrn',
+                    name: 'lrn'
+                },
+                {
+                    data: 'school_id',
+                    name: 'school_id'
+                },
+                {
+                    data: 'name_of_school',
+                    name: 'name_of_school'
+                },
+                {
+                    data: 'created_at',
+                    name: 'created_at'
+                }
+
+            ],
+
+            'lengthMenu': [
+                [10, 10, 15, 20, 50, -1],
+                [10, 10, 15, 20, 50, 'All'],
+            ]
+        })
+    }
+
+    loadData()
+
     function showAlert(msg) {
         $('#msgAlert').modal('show')
         $('#msgAlert-msg').text(msg)

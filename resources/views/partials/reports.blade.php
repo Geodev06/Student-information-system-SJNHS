@@ -41,8 +41,7 @@
                     <option value="8">Grade 8</option>
                     <option value="9">Grade 9</option>
                     <option value="10">Grade 10</option>
-                    <option value="11">Grade 11</option>
-                    <option value="12">Grade 12</option>
+
                 </select>
                 <label for="select">Choose Grade level</label>
                 <span class="error_select_sy text-danger error-text"></span>
@@ -62,7 +61,7 @@
                 <h5 style="font-size: 12px;" class="fw-bold m-0">SCHOOLS DIVISION OF SAN PABLO CITY</h5>
                 <h6 style="font-size: 12px;" class="m-0">SAN JOSE INTEGRATED HIGHSCHOOL</h6>
                 <h6 style="font-size: 12px;" class="m-0">SAN JOSE, SAN PABLO CITY, LAGUNA</h6>
-                <hr>
+
             </div>
             <h2 class="syp fw-bold mb-3 ">Overall Report</h2>
             <div class="col-lg-6 mb-3">
@@ -111,6 +110,8 @@
                     </div>
                 </div>
             </div>
+
+
 
             <div class="col-lg-12 mb-3">
                 <div class="card p-3">
@@ -372,6 +373,8 @@
         })
     }
 
+
+
     function loadStudentGradeChart(data) {
 
         let labels = ['Grade 7', 'Grade 8', 'Grade 9', 'Grade 10'];
@@ -494,14 +497,17 @@
 
 
                         $('#chart_student').remove();
-                        $('.student-div').append('<canvas id="chart_student" style="max-height: 300px;"></canvas>')
+                        $('.student-div').append('<canvas id="chart_student" style="max-height: 200px; max-width: 90%;"></canvas>')
 
                         $('#chart_grades').remove();
-                        $('.student-grade-div').append('<canvas id="chart_grades" style="max-height: 300px;"></canvas>')
+                        $('.student-grade-div').append('<canvas id="chart_grades" style="max-height: 250px;max-width: 90%;"></canvas>')
+
 
                         loadGenderChart(data)
                         loadStudentChart(data)
                         loadStudentGradeChart(data)
+
+
                         let subjects = data.subjects
 
                         $('#table-subjects tbody').html('')
@@ -669,7 +675,7 @@
 
         var opt = {
             margin: 0.2,
-            filename: 'report.pdf',
+            filename: 'SJIHS-Report.pdf',
             image: {
                 type: 'jpeg',
                 quality: 0.98
