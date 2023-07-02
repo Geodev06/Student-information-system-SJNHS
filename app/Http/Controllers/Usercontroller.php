@@ -75,11 +75,13 @@ class Usercontroller extends Controller
 
     public function addUser(Request $request)
     {
+
         $validator = Validator::make($request->all(), [
             'firstname' => 'required|regex:/^[a-zA-Z ]+$/u',
             'lastname' => 'required|regex:/^[a-zA-Z ]+$/u',
             'email' => 'required|email|unique:users'
         ]);
+
 
         if (!$validator->passes()) {
             return response()->json(['status' => 0, 'error' => $validator->errors()->toArray()]);
@@ -93,7 +95,9 @@ class Usercontroller extends Controller
             'lastname' => $request->lastname,
             'email' => $request->email,
             'password' => Hash::make($password),
-            'role' => 1
+            'role' => 1,
+            'teacher_id' => $request->teacher_id,
+            'adviser' => $request->adviser != null ? 1 : 0
         ]);
 
         return response()->json(['status' => 200, 'msg' => 'User has been created!']);
@@ -126,7 +130,9 @@ class Usercontroller extends Controller
                 'firstname' => $request->e_firstname,
                 'middlename' => $request->e_middlename,
                 'lastname' => $request->e_lastname,
-                'email' => $request->e_email
+                'email' => $request->e_email,
+                'teacher_id' => $request->e_teacher_id,
+                'adviser' => $request->e_adviser != null ? 1 : 0
             ]);
         } catch (\Throwable $th) {
             return response()->json(['status' => 500, 'msg' => 'Email is already used!']);
@@ -177,7 +183,7 @@ class Usercontroller extends Controller
     public function showUsers(Request $request)
     {
         if ($request->ajax()) {
-            $data = User::select('id', 'firstname', 'lastname', 'middlename', 'email')
+            $data = User::select('id', 'firstname', 'lastname', 'middlename', 'email', 'adviser', 'teacher_id')
                 ->where('role', 1)
                 ->orderBy('created_at', 'desc')
                 ->get();
@@ -200,6 +206,8 @@ class Usercontroller extends Controller
                      data-middlename="' . $data->middlename . '"
                      data-lastname="' . $data->lastname . '"
                      data-email="' . $data->email . '"
+                    data-teacher_id="' . $data->teacher_id . '"
+                    data-adviser="' . $data->adviser . '"
                     ><i class="bx bx-edit"></i></button>
                      <button class="text-white btn btn-danger btn-delete" 
                      data-id="' . $data->id . '"

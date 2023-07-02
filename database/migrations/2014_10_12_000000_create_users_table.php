@@ -23,6 +23,8 @@ return new class extends Migration
             $table->text('security_answer', 500)->nullable(true);
             $table->string('admin_name')->default('')->nullable(true);
             $table->integer('role');
+            $table->boolean('adviser')->default(false);
+            $table->string('teacher_id')->default('N/A');
             $table->rememberToken();
             $table->timestamps();
         });

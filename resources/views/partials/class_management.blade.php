@@ -76,7 +76,7 @@
                                 <select name="" id="select-teacher-id" class="form-control">
                                     <option value="">Choose one</option>
                                     @foreach($teachers as $teacher)
-                                    <option value="{{ $teacher->id }}" class="text-capitalize">{{ $teacher->lastname .', '.$teacher->firstname .' '. $teacher->middlename }}</option>
+                                    <option value="{{ $teacher->teacher_id }}" class="text-capitalize">{{ $teacher->teacher_id .' - '.$teacher->lastname .', '.$teacher->firstname .' '. $teacher->middlename }}</option>
                                     @endforeach
                                 </select>
                                 <label for="">Teacher/Adviser</label>
@@ -92,8 +92,7 @@
                                     <option value="8">Grade 8</option>
                                     <option value="9">Grade 9</option>
                                     <option value="10">Grade 10</option>
-                                    <option value="11">Grade 11</option>
-                                    <option value="12">Grade 12</option>
+
                                 </select>
                                 <label for="">Grade level</label>
                             </div>
@@ -109,13 +108,6 @@
                             </div>
                         </div>
 
-                        <div class="col-lg-12 bg-dark p-2">
-                            <div class="form-check mx-2 form-switch">
-                                <input type="checkbox" class="form-check-input" id="useDefault" role="switch">
-                                <input type="hidden" name="default" id="default" value="0">
-                                <label for="useDefault" class="form-check-label text-white" style="font-size: 12px;">(this section uses default subjects)</label>
-                            </div>
-                        </div>
 
                     </div>
                     <div class="d-flex float-end">
@@ -159,7 +151,7 @@
                                 <select name="e_teacher_id" id="e-select-teacher-id" class="form-control">
                                     <option value="" id="e-teacher-default"></option>
                                     @foreach($teachers as $teacher)
-                                    <option value="{{ $teacher->id }}" class="text-capitalize">{{ $teacher->lastname .', '.$teacher->firstname .' '. $teacher->middlename }}</option>
+                                    <option value="{{ $teacher->teacher_id }}" class="text-capitalize">{{ $teacher->teacher_id .'-'.$teacher->lastname .', '.$teacher->firstname .' '. $teacher->middlename }}</option>
                                     @endforeach
                                 </select>
                                 <label for="">Teacher/Adviser</label>
@@ -175,8 +167,6 @@
                                     <option value="8">Grade 8</option>
                                     <option value="9">Grade 9</option>
                                     <option value="10">Grade 10</option>
-                                    <option value="11">Grade 11</option>
-                                    <option value="12">Grade 12</option>
                                 </select>
                                 <label for="">Grade level</label>
                             </div>
@@ -232,7 +222,7 @@
 </div>
 
 <!-- add subjects modal -->
-<div class="modal fade" id="addSubjectModal" data-bs-backdrop="static" tabindex="-1" aria-labelledby="x" aria-hidden="true">
+<!-- <div class="modal fade" id="addSubjectModal" data-bs-backdrop="static" tabindex="-1" aria-labelledby="x" aria-hidden="true">
     <div class="modal-dialog modal-lg">
         <div class="modal-content">
             <div class="modal-body p-5">
@@ -286,7 +276,7 @@
             </div>
         </div>
     </div>
-</div>
+</div> -->
 <!-- end modal -->
 
 <!-- add subjects modal -->
@@ -346,15 +336,6 @@
 <script src="{{ asset('./js/partials/settings.js')}}"></script>
 
 <script>
-    $('#useDefault').click(function() {
-        if ($(this).prop('checked')) {
-            $('#default').val(1)
-        } else {
-            $('#default').val(0)
-        }
-    })
-
-
     function showAlert(msg) {
         $('#msgAlert').modal('show')
         $('#msgAlert-msg').text(msg)

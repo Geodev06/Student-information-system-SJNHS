@@ -19,6 +19,7 @@ return new class extends Migration
             $table->string('subject_code');
             $table->string('subject');
             $table->integer('default')->default(0);
+            $table->string('teacher_id')->nullable(true);
             $table->timestamps();
         });
     }

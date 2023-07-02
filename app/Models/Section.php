@@ -15,7 +15,6 @@ class Section extends Model
         'teacher_name',
         'section',
         'grade_level',
-        'school_year',
-        'using_default'
+        'school_year'
     ];
 }

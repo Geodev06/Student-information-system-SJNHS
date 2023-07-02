@@ -87,6 +87,21 @@
                         </div>
 
                         <div class="col-lg-12">
+                            <div class="form-floating mb-3">
+                                <input type="text" class="form-control" placeholder="Teacher Id" autocomplete="off" name="teacher_id" />
+                                <label for="">Teacher Id</label>
+                                <span class="error_email text-danger error-text"></span>
+                            </div>
+                        </div>
+
+                        <div class="col-lg-12">
+                            <div class="form-check mb-3">
+                                <input type="checkbox" name="adviser" class="form-check-input" id="adviser">
+                                <label for="remember class=" form-check-label">Adviser <span style="font-size: 12px; font-style:italic"> (check this if user is class adviser)</span></label>
+                            </div>
+                        </div>
+
+                        <div class="col-lg-12">
                             <div class="d-flex">
 
 
@@ -152,6 +167,21 @@
                                 <input type="email" class="form-control" placeholder="Email address" autocomplete="off" name="e_email" id="e_email" />
                                 <label for="">Email address</label>
                                 <span class="error_e_email text-danger error-text"></span>
+                            </div>
+                        </div>
+
+                        <div class="col-lg-12">
+                            <div class="form-floating mb-3">
+                                <input type="text" class="form-control" id="e_teacher_id" placeholder="Teacher Id" autocomplete="off" name="e_teacher_id" />
+                                <label for="">Teacher Id</label>
+                                <span class="error_e_teacher_id text-danger error-text"></span>
+                            </div>
+                        </div>
+
+                        <div class="col-lg-12">
+                            <div class="form-check mb-3">
+                                <input type="checkbox" name="e_adviser" class="form-check-input" id="e_adviser">
+                                <label for="remember class=" form-check-label">Adviser <span style="font-size: 12px; font-style:italic"> (check this if user is class adviser)</span></label>
                             </div>
                         </div>
 
@@ -358,6 +388,12 @@
         $('#e_middlename').val($(this)[0].dataset.middlename)
         $('#e_lastname').val($(this)[0].dataset.lastname)
         $('#e_email').val($(this)[0].dataset.email)
+        $('#e_teacher_id').val($(this)[0].dataset.teacher_id)
+        if ($(this)[0].dataset.adviser == 1) {
+            $('#e_adviser').prop('checked', true)
+        } else {
+            $('#e_adviser').prop('checked', false)
+        }
 
         $('#btn-edit-submit').attr('data-id', $(this)[0].dataset.id)
         $('#btn-reset').attr('data-id', $(this)[0].dataset.id)

@@ -12,6 +12,7 @@ class SectionSubject extends Model
         'section_id',
         'subject_code',
         'subject',
-        'default'
+        'default',
+        'teacher_id'
     ];
 }
